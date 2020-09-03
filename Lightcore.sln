@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1145
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lightcore", "Lightcore\Lightcore.csproj", "{7B46F9C0-5F32-4664-9BBE-0E5E06E7614B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lightcore.Test", "Lightcore.Test\Lightcore.Test.csproj", "{D06D2CBD-AAB1-4F5A-B7C9-5958BE34630C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B46F9C0-5F32-4664-9BBE-0E5E06E7614B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B46F9C0-5F32-4664-9BBE-0E5E06E7614B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B46F9C0-5F32-4664-9BBE-0E5E06E7614B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B46F9C0-5F32-4664-9BBE-0E5E06E7614B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D06D2CBD-AAB1-4F5A-B7C9-5958BE34630C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D06D2CBD-AAB1-4F5A-B7C9-5958BE34630C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D06D2CBD-AAB1-4F5A-B7C9-5958BE34630C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D06D2CBD-AAB1-4F5A-B7C9-5958BE34630C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D3047EF-6EE5-4C15-8506-1C290F358E2A}
+	EndGlobalSection
+EndGlobal
