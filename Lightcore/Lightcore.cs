@@ -3,7 +3,6 @@
     using System;
     using System.Windows.Forms;
     using Lightcore.Common.Models;
-    using Lightcore.Debug;
     using Lightcore.Lighting;
     using Lightcore.View;
     using Lightcore.Viewer;
@@ -36,14 +35,14 @@
 
             //application.PreprocessorStack.Add(new LightMapProcessor()); // Enable this processor will render shadows
             application.PreprocessorStack.Add(new LightProcessor());
-            application.PreprocessorStack.Add(new NormalProcessor());
+            //application.PreprocessorStack.Add(new NormalProcessor());
 
             application.ProcessorStack.Add(new ShineProcessor());
             application.ProcessorStack.Add(new ProjectProcessor());
             application.ProcessorStack.Add(new ScaleProcessor());
             application.ProcessorStack.Add(new DarkProcessor());
             application.ProcessorStack.Add(new ViewProcessor(ViewPictureBox, 100));
-            application.ProcessorStack.Add(new StatisticsProcessor());
+            //application.ProcessorStack.Add(new StatisticsProcessor());
         }
 
         private void LightcoreForm_Shown(Object sender, EventArgs e)
