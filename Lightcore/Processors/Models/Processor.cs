@@ -29,7 +29,8 @@
 
                     for (int j = 0; j < args.World.Entities[i].Elements.Count(); j++)
                     {
-                        args.Status($"{Metadata.Name}: Processing entity {entityCount - i} of {entityCount}, polygon {j + 1} of {args.World.Entities[i].Elements.Count()} ...");
+                        if ((j + 1) % 100 == 0)
+                            args.Status($"{Metadata.Name}: Processing entity {entityCount - i} of {entityCount}, polygon {j + 1} of {args.World.Entities[i].Elements.Count()} ...");
 
                         for (int k = 0; k < args.World.Entities[i].Elements[j].Elements.Length; k++)
                         {

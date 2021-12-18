@@ -22,8 +22,7 @@
         {
             application = new Application();
             application.Camera = new World(Settings.CameraRererenceFrame);
-            application.Camera.ReferenceFrame.Passive = application.Camera.ReferenceFrame.Passive;
-            application.World = new SphereWorld().ToWorld();
+            application.World = new TorusWorld().ToWorld();
             application.StatusChanged += Status;
             application.SuspendChanged += Suspend;
 
@@ -35,14 +34,14 @@
 
             //application.PreprocessorStack.Add(new LightMapProcessor()); // Enable this processor will render shadows
             application.PreprocessorStack.Add(new LightProcessor());
-            //application.PreprocessorStack.Add(new NormalProcessor());
+            //application.PreprocessorStack.Add(new NormalProcessor()); // Used for debugging, will render normals
 
             application.ProcessorStack.Add(new ShineProcessor());
             application.ProcessorStack.Add(new ProjectProcessor());
             application.ProcessorStack.Add(new ScaleProcessor());
             application.ProcessorStack.Add(new DarkProcessor());
             application.ProcessorStack.Add(new ViewProcessor(ViewPictureBox, 100));
-            //application.ProcessorStack.Add(new StatisticsProcessor());
+            //application.ProcessorStack.Add(new StatisticsProcessor()); // Used for debugging, will output statistics
         }
 
         private void LightcoreForm_Shown(Object sender, EventArgs e)
@@ -52,7 +51,6 @@
 
         void Status(Object sender, string status)
         {
-            // You can increase performance a lot if you comment out this line
             TryInvoke(() => StripStatusLabel.Text = status);
         }
 

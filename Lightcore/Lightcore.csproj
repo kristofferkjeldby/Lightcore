@@ -153,6 +153,7 @@
     <Compile Include="Worlds\Enumerators\ColorEnumerator.cs" />
     <Compile Include="Worlds\TorusWorld.cs" />
     <Compile Include="Worlds\WorldUtils\SimpleSphere.cs" />
+    <Compile Include="Worlds\WorldUtils\SimplyTorus.cs" />
     <Compile Include="Worlds\WorldUtils\Torus.cs" />
     <Compile Include="Worlds\WorldUtils\Sphere.cs" />
     <Compile Include="Worlds\WorldUtils\Line.cs" />
