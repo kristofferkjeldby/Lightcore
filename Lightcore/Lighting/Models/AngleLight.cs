@@ -17,10 +17,17 @@
             return new AngleLight(Color, Position.Clone(), Direction.Clone(), Strength, Angle, PolygonId, Id, Generation);
         }
 
-        public override void Transform(Func<Vector, Vector> transformation)
+        public override Light Transform(Func<Vector, Vector> transformation)
         {
             Position = transformation(Position);
             Direction = transformation(Direction);
+
+            return this;
+        }
+
+        public override Light Transform(Matrix transformation)
+        {
+            return Transform(a => transformation * a);
         }
     }
 }

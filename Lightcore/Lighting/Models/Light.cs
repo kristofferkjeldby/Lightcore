@@ -4,7 +4,7 @@
     using System;
     using System.Collections.Generic;
 
-    public abstract class Light : IClonable<Light>, ITransformable, IIdentifiable
+    public abstract class Light : IClonable<Light>, ITransformable<Light>, IIdentifiable
     {
         public Light(Vector color, Vector position, double strength, Guid? polygonId = null, Guid? id = null, int generation = 0)
         {
@@ -22,7 +22,9 @@
 
         public abstract Light Clone();
 
-        public abstract void Transform(Func<Vector, Vector> transformation);
+        public abstract Light Transform(Func<Vector, Vector> transformation);
+
+        public abstract Light Transform(Matrix transformation);
 
         public virtual Vector Position { get; set; }
 
