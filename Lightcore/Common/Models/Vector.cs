@@ -42,6 +42,11 @@
             return transformation(this);
         }
 
+        public Vector Transform(Matrix transformation)
+        {
+            return Transform(v => transformation * v);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is Vector other)

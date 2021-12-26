@@ -4,7 +4,7 @@
     using System;
     using System.Linq;
 
-    public class Polygon : Indexable<Vector>, IClonable<Polygon>, ITransformable
+    public class Polygon : Indexable<Vector>, IClonable<Polygon>, ITransformable<Polygon>
     {
         public Polygon(Texture texture, Vector[] values, Guid? id = null) : base(values)
         {
@@ -33,12 +33,19 @@
             return new Polygon(Texture.Clone(), Elements.Select(vector => vector.Clone()).ToArray(), Id);
         }
 
-        public void Transform(Func<Vector, Vector> transformation)
+        public Polygon Transform(Func<Vector, Vector> transformation)
         {
             for (int i = 0; i < Elements.Count(); i++)
             {
                 Elements[i] = Elements[i].Transform(transformation);
             }
+
+            return this;
+        }
+
+        public Polygon Transform(Matrix transformation)
+        {
+            return Transform(p => transformation * p);
         }
     }
 }
