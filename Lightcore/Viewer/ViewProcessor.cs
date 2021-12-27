@@ -13,7 +13,7 @@
     {
         PictureBox pictureBox;
         readonly float maxX;
-        readonly float maxY;
+        float maxY;
         Vector transpose;
         Matrix scale;
 
@@ -23,7 +23,6 @@
         {
             this.pictureBox = pictureBox;
             this.maxX = maxX;
-            this.maxY = maxX * pictureBox.Height/pictureBox.Width;
             Clear();
             Resize();
         }
@@ -38,6 +37,7 @@
 
         public void Resize()
         {
+            this.maxY = maxX * pictureBox.Height / pictureBox.Width;
             transpose = new Vector(pictureBox.Width / 2, pictureBox.Height / 2, 0);
             scale = new Matrix(new Vector(pictureBox.Width / (2 * maxX), 0, 0), new Vector(0, -pictureBox.Height / (2 * maxY), 0), new Vector(0, 0, 1));
         }
@@ -45,7 +45,7 @@
         private PointF Transform(Vector vector)
         {
             var v = (scale * vector) + transpose;
-            return new PointF(v[0], v[1]);
+            return new PointF((float)v[0], (float)v[1]);
         }
 
         private bool IsInMargin(PointF point, int margin)
@@ -60,6 +60,8 @@
 
         public override void PostProcessor(RenderArgs args)
         {
+            Resize();
+
             using (Drawer d = new Drawer(pictureBox, args.RenderMetadata.Filename))
             {
                 foreach (var polygon in args.World.Entities.

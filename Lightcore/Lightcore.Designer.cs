@@ -40,6 +40,9 @@
             // 
             // ViewPictureBox
             // 
+            this.ViewPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ViewPictureBox.Location = new System.Drawing.Point(12, 12);
             this.ViewPictureBox.Name = "ViewPictureBox";
             this.ViewPictureBox.Size = new System.Drawing.Size(1213, 875);
@@ -48,6 +51,7 @@
             // 
             // RenderButton
             // 
+            this.RenderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RenderButton.Location = new System.Drawing.Point(1242, 12);
             this.RenderButton.Name = "RenderButton";
             this.RenderButton.Size = new System.Drawing.Size(75, 23);
@@ -57,6 +61,7 @@
             // 
             // CancelRenderButton
             // 
+            this.CancelRenderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelRenderButton.Location = new System.Drawing.Point(1242, 70);
             this.CancelRenderButton.Name = "CancelRenderButton";
             this.CancelRenderButton.Size = new System.Drawing.Size(75, 23);
@@ -82,6 +87,7 @@
             // 
             // AnimateButton
             // 
+            this.AnimateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.AnimateButton.Location = new System.Drawing.Point(1242, 41);
             this.AnimateButton.Name = "AnimateButton";
             this.AnimateButton.Size = new System.Drawing.Size(75, 23);

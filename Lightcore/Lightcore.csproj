@@ -221,10 +221,10 @@
     <Content Include="Textures\Images\Marble.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Textures\Images\MarsColor.jpg">
+    <Content Include="Textures\Images\MarsColor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Textures\Images\MarsHeight.jpg">
+    <Content Include="Textures\Images\MarsHeight.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Images\Moon.png">

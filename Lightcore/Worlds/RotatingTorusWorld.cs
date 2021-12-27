@@ -22,7 +22,7 @@
 
         public Tuple<float, Vector>[,] PreviewMap { get; set; }
 
-        public RotatingTorusWorld(int resolution = 500, int previewResolution = 20, int animateStep = 0) : base()
+        public RotatingTorusWorld(int resolution = 200, int previewResolution = 20, int animateStep = 0) : base()
         {
             Resolution = resolution;
             PreviewResolution = previewResolution;

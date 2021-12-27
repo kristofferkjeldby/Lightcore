@@ -33,7 +33,7 @@
                     Map[x, y] =
                         new Tuple<float, Vector>
                         (
-                            heightBitmap.GetPixel(x, y).GetBrightness() * 5,
+                            heightBitmap.GetPixel((x+130) % heightBitmap.Width, y).GetBrightness() * 5,
                             colorBitmap.GetPixel(x, y).ToVector()
                         );
                 }
