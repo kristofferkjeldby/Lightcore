@@ -7,7 +7,7 @@
     {
         public static ColorTexture Get(Vector color)
         {
-            return new ColorTexture(color, 0.2f, 0, 0);
+            return new ColorTexture(color, 0.2f, 0, 0.75f, 0);
         }
     }
 }
