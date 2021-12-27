@@ -3,6 +3,8 @@
     using Lightcore.Common.Extensions;
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
+    using Lightcore.Processors.Models;
+    using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
     using Lightcore.Worlds.Enumerators;
     using Lightcore.Worlds.Extensions;
@@ -22,6 +24,8 @@
         public int PreviewResolution { get; set; }
 
         public Tuple<float, Vector>[,] Map { get; set; }
+
+        public Tuple<float, Vector>[,] PreviewMap { get; set; }
 
         public FlatWorld(int width = 600, int height = 600, int resolution = 200, int previewResolution = 20) : base()
         {
@@ -52,12 +56,14 @@
                         );
                 }
             }
+
+            PreviewMap = Map.Reduce(PreviewResolution);
         }
 
-        public override void Create(List<Entity> entities, List<Light> lights, int animateStep = 0)
+        public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(WorldUtils.Surface(EntityType.World, new Vector(0, 0, 0), Width, Height, Map));
-            entities.Add(WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, 0), Width, Height, Map.Reduce(PreviewResolution)));
+            AddFiltered(entities, renderMode, EntityType.Preview, () => WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, 0), Width, Height, PreviewMap, ColorTextureStore.ColorTexture));
+            AddFiltered(entities, renderMode, EntityType.World, () => WorldUtils.Surface(EntityType.World, new Vector(0, 0, 0), Width, Height, Map, ColorTextureStore.ColorTexture));
 
             lights.Add(
                 new AmbientLight

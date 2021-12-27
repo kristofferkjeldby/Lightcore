@@ -1,12 +1,14 @@
 ﻿namespace Lightcore
 {
-    using System;
-    using System.Windows.Forms;
     using Lightcore.Common.Models;
     using Lightcore.Lighting;
+    using Lightcore.Processors.Models;
     using Lightcore.View;
     using Lightcore.Viewer;
     using Lightcore.Worlds;
+    using Lightcore.Worlds.Models;
+    using System;
+    using System.Windows.Forms;
     using Application = UI.Application;
 
     public partial class LightcoreForm : Form
@@ -24,7 +26,7 @@
             application.Camera = new World(Settings.CameraRererenceFrame);
             application.StatusChanged += Status;
             application.SuspendChanged += Suspend;
-            application.GetWorld = GetWorld;
+            application.GetWorldBuilder = GetWorldBuilder;
 
             this.KeyPreview = true;
             KeyDown += new KeyEventHandler(application.KeyboardService.OnKeyDown);
@@ -55,9 +57,9 @@
             application.Start();
         }
 
-        World GetWorld(int animateStep = 0)
+        public WorldBuilder GetWorldBuilder()
         {
-            return new RotatingTorusWorld().ToWorld(animateStep);
+            return new RotatingMarsWorld();
         }
 
         void Status(object sender, string status)

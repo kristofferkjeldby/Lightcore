@@ -3,6 +3,8 @@
     using Lightcore.Common;
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
+    using Lightcore.Processors.Models;
+    using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
     using Lightcore.Worlds.Extensions;
     using Lightcore.Worlds.Models;
@@ -19,6 +21,8 @@
         public int PreviewResolution { get; set; }
 
         public Tuple<float, Vector>[,] Map { get; set; }
+
+        public Tuple<float, Vector>[,] PreviewMap { get; set; }
 
         public ImageWorld(Image image, int previewResolution = 40)
         {
@@ -42,12 +46,14 @@
                         );
                 }
             }
+
+            PreviewMap = Map.Reduce(PreviewResolution);
         }
 
-        public override void Create(List<Entity> entities, List<Light> lights, int animateStep = 0)
+        public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(WorldUtils.Surface(EntityType.World, new Vector(0, 0, 0), 300, 300, Map));
-            entities.Add(WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, 0), 300, 300, Map.Reduce(PreviewResolution)));
+            AddFiltered(entities, renderMode, EntityType.Preview, () => WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, 0), 300, 300, PreviewMap, ColorTextureStore.ColorTexture));
+            AddFiltered(entities, renderMode, EntityType.World, () => WorldUtils.Surface(EntityType.World, new Vector(0, 0, 0), 300, 300, Map, ColorTextureStore.ColorTexture));
 
             lights.Add(
                 new AngleLight

@@ -4,6 +4,8 @@
     using Lightcore.Common.Cartesian.Extensions;
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
+    using Lightcore.Processors.Models;
+    using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
     using Lightcore.Textures.Gradients.Models;
     using Lightcore.Worlds.Extensions;
@@ -50,14 +52,14 @@
             PreviewMap = Map.Reduce(PreviewResolution);
         }
 
-        public override void Create(List<Entity> entities, List<Light> lights, int animateStep = 0)
+        public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
             // Setup rotation
             var angle = (Constants.PI2 / Settings.AnimateMaxSteps) * animateStep;
             var rotate = CartesianUtils.Rotate(new Vector(0, 1, 0).Unit(), angle);
 
-            entities.Add(WorldUtils.Torus(EntityType.Preview, new Vector(0, 0, 0), 90, 50, PreviewMap).Transform(rotate));
-            entities.Add(WorldUtils.Torus(EntityType.World, new Vector(0, 0, 0), 90, 50, Map).Transform(rotate));
+            AddFiltered(entities, renderMode, EntityType.Preview, () => WorldUtils.Torus(EntityType.Preview, new Vector(0, 0, 0), 90, 50, PreviewMap, ColorTextureStore.ShinyTexture).Transform(rotate));
+            AddFiltered(entities, renderMode, EntityType.World, () => WorldUtils.Torus(EntityType.World, new Vector(0, 0, 0), 90, 50, Map, ColorTextureStore.ShinyTexture).Transform(rotate));
 
             lights.Add
             (

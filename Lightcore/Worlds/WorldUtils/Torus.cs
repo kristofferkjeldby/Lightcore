@@ -3,13 +3,13 @@
     using Lightcore.Common.Cartesian;
     using Lightcore.Common.Cartesian.Extensions;
     using Lightcore.Common.Models;
-    using Lightcore.Textures;
+    using Lightcore.Textures.Models;
     using Lightcore.Worlds.Extensions;
     using System;
 
     public partial class WorldUtils
     {
-        public static Entity Torus(EntityType entityType, Vector origon, float radius1, float radius2, Tuple<float, Vector>[,] map)
+        public static Entity Torus(EntityType entityType, Vector origon, float radius1, float radius2, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture)
         {
             var polygons = new Polygon[map.Size() * 2];
             int p = 0;
@@ -45,7 +45,7 @@
                     polygons[p++] =
                         new Polygon
                         (
-                            ColorTextureStore.Get(map[c0, p0].Item2),
+                            texture(map[c0, p0].Item2),
                             new Vector[]
                             {
                                 vectorcc0pp0,
@@ -57,7 +57,7 @@
                     polygons[p++] =
                         new Polygon
                         (
-                            ColorTextureStore.Get(map[c0, p0].Item2),
+                            texture(map[c0, p0].Item2),
                             new Vector[]
                             {
                                 vectorcc1pp1,

@@ -2,6 +2,8 @@
 {
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
+    using Lightcore.Processors.Models;
+    using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
     using Lightcore.Worlds.Models;
     using System.Collections.Generic;
@@ -19,8 +21,11 @@
             PreviewResolution = previewResolution;
         }
 
-        public override void Create(List<Entity> entities, List<Light> lights, int animateStep = 0)
+        public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
+            AddFiltered(entities, renderMode, EntityType.Preview, () => WorldUtils.SimpleSphere(EntityType.Preview, Color.Red.ToVector(), new Vector(0, 0, 0), 150, PreviewResolution, ColorTextureStore.ShinyTexture));
+            AddFiltered(entities, renderMode, EntityType.World, () => WorldUtils.SimpleSphere(EntityType.World, Color.Red.ToVector(), new Vector(0, 0, 0), 150, Resolution, ColorTextureStore.ShinyTexture));
+
             lights.Add
             (
                 new AmbientLight
@@ -31,8 +36,6 @@
                 )
             );
 
-            entities.Add(WorldUtils.SimpleSphere(EntityType.Preview, Color.Red.ToVector(), new Vector(0, 0, 0), 150, PreviewResolution));
-            entities.Add(WorldUtils.SimpleSphere(EntityType.World, Color.Red.ToVector(), new Vector(0, 0, 0), 150, Resolution));
         }
     }
 }

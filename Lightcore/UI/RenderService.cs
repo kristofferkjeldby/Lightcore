@@ -18,11 +18,22 @@
             this.status = status;
         }
 
+        private bool BuildWorld(CancellationToken cancellationToken)
+        {
+            status("Building world ...");
+            application.WorldBuilder = application.GetWorldBuilder();
+            status($"Building world done");
+            return true;
+        }
+
         private bool Preprocess(CancellationToken cancellationToken, int animateStep)
         {
+            if (application.WorldBuilder == null)
+                BuildWorld(cancellationToken);
+
             status("Preprocessing world ...");
-            var worldToProcess = application.GetWorld(animateStep).Clone();
             var renderMode = RenderModeFactory.Create(false, Settings.Debug);
+            var worldToProcess = application.WorldBuilder.CreateWorld(renderMode, animateStep).Clone();
             var args = new RenderArgs(worldToProcess, application.Camera, renderMode, cancellationToken, status);
             application.PreprocessorStack.Process(args);
             application.PreprocessedWorld = args.World;
@@ -32,9 +43,12 @@
 
         public bool PreprocessPreview(CancellationToken cancellationToken, int animateStep)
         {
+            if (application.WorldBuilder == null)
+                BuildWorld(cancellationToken);
+
             status("Preprocessing preview world ...");
-            var worldToProcess = application.GetWorld(animateStep).Clone();
             var renderMode = RenderModeFactory.Create(true, Settings.Debug);
+            var worldToProcess = application.WorldBuilder.CreateWorld(renderMode, animateStep).Clone();
             var args = new RenderArgs(worldToProcess, application.Camera, renderMode, cancellationToken, status);
             application.PreprocessorStack.Process(args);
             application.PreprocessedPreviewWorld = args.World;
@@ -57,7 +71,7 @@
 
             application.ProcessorStack.Process(args);
 
-            status($"Processing world done {CommonUtils.ToInt(args.RenderMetadata.Statistics.Select(statistics => statistics.Time.TotalMilliseconds).Sum())}ms");
+            status($"Processing world done {CommonUtils.ToInt(args.RenderMetadata.Statistics.Select(statistics => statistics.Time.TotalMilliseconds).Sum())} ms");
 
             return true;
         }
@@ -67,11 +81,14 @@
             if (application.PreprocessedPreviewWorld == null || !Settings.StorePreprocessed)
                 PreprocessPreview(cancellationToken, animateStep);
 
+            status("Processing preview world ...");
             var worldToProcess = (Settings.StorePreprocessed) ? application.PreprocessedPreviewWorld.Clone() : application.PreprocessedPreviewWorld;
             var renderMode = RenderModeFactory.Create(true, Settings.Debug);
             var args = new RenderArgs(worldToProcess, application.Camera, renderMode, cancellationToken, status);
 
             application.ProcessorStack.Process(args);
+
+            status($"Processing preview done {CommonUtils.ToInt(args.RenderMetadata.Statistics.Select(statistics => statistics.Time.TotalMilliseconds).Sum())} ms");
 
             return true;
         }

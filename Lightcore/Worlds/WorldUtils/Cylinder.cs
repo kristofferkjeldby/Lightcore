@@ -2,15 +2,13 @@
 {
     using Lightcore.Common;
     using Lightcore.Common.Models;
-    using Lightcore.Textures;
-    using Lightcore.Textures.Extensions;
+    using Lightcore.Textures.Models;
     using System;
     using System.Collections.Generic;
-    using System.Drawing;
 
     public partial class WorldUtils
     {
-        public static Entity Cylinder(EntityType entityType, Vector origin, float radius, float height, Tuple<float, Vector>[,] map)
+        public static Entity Cylinder(EntityType entityType, Vector origin, float radius, float height, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture)
         {
             var polygons = new List<Polygon>();
 
@@ -52,7 +50,7 @@
                     polygons.AddRange(
                         Square
                         (
-                            ColorTextureStore.Get(Color.Red.ToVector()),
+                            texture(map[x,y].Item2),
                             entityType,
                             vector0,
                             vector1 - vector0,

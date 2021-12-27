@@ -3,6 +3,7 @@
     using Lightcore.Common.Cartesian;
     using Lightcore.Common.Models;
     using Lightcore.Processors;
+    using Lightcore.Worlds.Models;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -14,6 +15,7 @@
         public World PreprocessedPreviewWorld { get; set; }
         public World ProcessedPreviewWorld { get; set; }
         public World Camera { get; set; }
+        public WorldBuilder WorldBuilder { get; set; }
 
         public KeyboardService KeyboardService { get; set; }
         public RenderService RenderService { get; set; }
@@ -25,10 +27,10 @@
         public event EventHandler<string> StatusChanged;
         public event EventHandler<bool> SuspendChanged;
 
-        public Func<int, World> GetWorld;
-
         private Task<bool> task;
         private CancellationTokenSource CancellationTokenSource;
+
+        public Func<WorldBuilder> GetWorldBuilder { get; set; }
 
         public Application()
         {
@@ -91,7 +93,6 @@
 
         public bool OnSuspendChanged(bool suspended)
         {
-            System.Diagnostics.Debug.WriteLine("Suspending: " + suspended);
             SleepService.Suspend(suspended);
             KeyboardService.Suspend(suspended);
             SuspendChanged?.Invoke(this, suspended);

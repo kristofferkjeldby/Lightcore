@@ -2,14 +2,14 @@
 {
     using Lightcore.Common;
     using Lightcore.Common.Models;
-    using Lightcore.Textures;
+    using Lightcore.Textures.Models;
     using Lightcore.Worlds.Extensions;
     using System;
     using System.Collections.Generic;
 
     public partial class WorldUtils
     {
-        public static Entity Sphere(EntityType entityType, Vector origon, float radius, Tuple<float, Vector>[,] map)
+        public static Entity Sphere(EntityType entityType, Vector origon, float radius, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture)
         {
             var polygons = new List<Polygon>();
 
@@ -34,7 +34,7 @@
                     (
                         new Polygon
                         (
-                            ColorTextureStore.Get(splitedMap[p, t].Item2),
+                            texture(splitedMap[p, t].Item2),
                             new Vector[]
                             {
                                 vector00,
@@ -48,7 +48,7 @@
                     (
                         new Polygon
                         (
-                            ColorTextureStore.Get(splitedMap[p, t].Item2),
+                            texture(splitedMap[p, t].Item2),
                             new Vector[]
                             {
                                 vector11,

@@ -4,6 +4,8 @@
     using Lightcore.Common.Extensions;
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
+    using Lightcore.Processors.Models;
+    using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
     using Lightcore.Worlds.Enumerators;
     using Lightcore.Worlds.Extensions;
@@ -19,6 +21,8 @@
         public int PreviewResolution { get; set; }
 
         public Tuple<float, Vector>[,] Map { get; set; }
+
+        public Tuple<float, Vector>[,] PreviewMap { get; set; }
 
         public SurfaceWorld(int resolution = 200, int previewResolution = 40, int animateStep = 0) : base()
         {
@@ -42,13 +46,14 @@
                 }
             }
 
+            PreviewMap = Map.Reduce(PreviewResolution);
 
         }
 
-        public override void Create(List<Entity> entities, List<Light> lights, int animateStep = 0)
+        public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, 0), 400, 300, Map.Reduce(PreviewResolution)));
-            entities.Add(WorldUtils.Surface(EntityType.World, new Vector(0, 0, 0), 400, 300, Map));
+            AddFiltered(entities, renderMode, EntityType.Preview, () => WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, 0), 400, 300, PreviewMap, ColorTextureStore.ShinyTexture));
+            AddFiltered(entities, renderMode, EntityType.World, () => WorldUtils.Surface(EntityType.World, new Vector(0, 0, 0), 400, 300, Map, ColorTextureStore.ShinyTexture));
 
             lights.Add
             (

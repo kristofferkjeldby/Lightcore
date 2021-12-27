@@ -2,13 +2,13 @@
 {
     using Lightcore.Common;
     using Lightcore.Common.Models;
-    using Lightcore.Textures;
     using Lightcore.Textures.Models;
+    using System;
     using System.Collections.Generic;
 
     public partial class WorldUtils
     {
-        public static Entity SimpleSphere(EntityType entityType, Vector color, Vector origon, float radius, int segments)
+        public static Entity SimpleSphere(EntityType entityType, Vector color, Vector origon, float radius, int segments, Func<Vector, Texture> texture)
         {
             var polygons = new List<Polygon>();
 
@@ -32,7 +32,7 @@
                     (
                         new Polygon
                         (
-                            ColorTextureStore.Get(color),
+                            texture(color),
                             new Vector[]
                             {
                                 vector00,
@@ -46,7 +46,7 @@
                     (
                         new Polygon
                         (
-                            ColorTextureStore.Get(color),
+                            texture(color),
                             new Vector[]
                             {
                                 vector11,

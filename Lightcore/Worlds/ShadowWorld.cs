@@ -4,6 +4,8 @@
     using Lightcore.Common.Extensions;
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
+    using Lightcore.Processors.Models;
+    using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
     using Lightcore.Worlds.Enumerators;
     using Lightcore.Worlds.Models;
@@ -35,10 +37,11 @@
 
         }
 
-        public override void Create(List<Entity> entities, List<Light> lights, int animateStep = 0)
+        public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, -200), 700, 700, Map));
-            entities.Add(WorldUtils.SimpleSphere(EntityType.Preview, Color.Red.ToVector(), new Vector(0, 0, 100), 50, 20));
+
+            entities.Add(WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, -200), 700, 700, Map, ColorTextureStore.ShinyTexture));
+            entities.Add(WorldUtils.SimpleSphere(EntityType.Preview, Color.Red.ToVector(), new Vector(0, 0, 100), 50, 20, ColorTextureStore.ShinyTexture));
 
             lights.Add
             (

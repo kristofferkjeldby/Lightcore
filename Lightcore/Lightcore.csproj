@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Common\CommonUtils\Float.cs" />
     <Compile Include="Common\CommonUtils\Trigometry.cs" />
+    <Compile Include="Textures\ColorTextureStore.cs" />
     <Compile Include="Textures\Gradient\Models\ColorPoint.cs" />
     <Compile Include="Textures\Gradient\Models\Gradient.cs" />
     <Compile Include="Common\Cartesian\Extensions\PolygonExtensions.cs" />
@@ -106,7 +107,6 @@
     <Compile Include="Processors\Models\RenderMode.cs" />
     <Compile Include="Processors\Models\RenderStatistic.cs" />
     <Compile Include="Processors\RenderModeFactory.cs" />
-    <Compile Include="Textures\ColorTextureStore.cs" />
     <Compile Include="Textures\Models\SimpleTexture.cs" />
     <Compile Include="Textures\Models\LightableTexture.cs" />
     <Compile Include="Textures\TextureProcessor.cs" />

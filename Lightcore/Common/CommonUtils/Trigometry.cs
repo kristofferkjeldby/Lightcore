@@ -11,7 +11,7 @@
 
         public static float Cos(float angle)
         {
-            return (float)Math.Sin(angle);
+            return (float)Math.Cos(angle);
         }
     }
 }

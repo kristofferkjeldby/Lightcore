@@ -2,6 +2,7 @@
 {
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
+    using Lightcore.Processors.Models;
     using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
     using Lightcore.Worlds.Extensions;
@@ -14,7 +15,9 @@
     {
         public int PreviewResolution { get; set; }
 
-        public Tuple<float, Vector>[,] Map { get; set; } 
+        public Tuple<float, Vector>[,] Map { get; set; }
+
+        public Tuple<float, Vector>[,] PreviewMap { get; set; }
 
         public MoonWorld(int previewResolution = 40) : base()
         {
@@ -36,12 +39,14 @@
                         );
                 }
             }
+
+            PreviewMap = Map.Reduce(PreviewResolution);
         }
 
-        public override void Create(List<Entity> entities, List<Light> lights, int animateStep = 0)
+        public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(WorldUtils.Sphere(EntityType.Preview, new Vector(0, 0, 0), 200, Map.Reduce(PreviewResolution)));
-            entities.Add(WorldUtils.Sphere(EntityType.World, new Vector(0, 0, 0), 200, Map));
+            AddFiltered(entities, renderMode, EntityType.Preview, () => WorldUtils.Sphere(EntityType.Preview, new Vector(0, 0, 0), 200, PreviewMap, ColorTextureStore.ColorTexture));
+            AddFiltered(entities, renderMode, EntityType.World, () => WorldUtils.Sphere(EntityType.World, new Vector(0, 0, 0), 200, Map, ColorTextureStore.ColorTexture));
 
             lights.Add
             (

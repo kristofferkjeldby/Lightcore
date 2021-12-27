@@ -1,13 +1,13 @@
 ﻿namespace Lightcore.Worlds
 {
     using Lightcore.Common.Models;
-    using Lightcore.Textures;
+    using Lightcore.Textures.Models;
     using System;
     using System.Collections.Generic;
 
     public partial class WorldUtils
     {
-        public static Entity Surface(EntityType entityType, Vector origin, float width, float height, Tuple<float, Vector>[,] map)
+        public static Entity Surface(EntityType entityType, Vector origin, float width, float height, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture)
         {
             var polygons = new List<Polygon>();
 
@@ -25,7 +25,7 @@
                     polygons.Add(
                         new Polygon
                         (
-                            ColorTextureStore.Get(map[x, y].Item2),
+                            texture(map[x, y].Item2),
                             new Vector[] {
                             new Vector(xOffset + xStepSize * x, yOffset + yStepSize * y, zOffset + map[x, y].Item1),
                             new Vector(xOffset + xStepSize * (x+1), yOffset + yStepSize * y, zOffset + map[x+1, y].Item1),
@@ -37,7 +37,7 @@
                     polygons.Add(
                         new Polygon
                         (
-                            ColorTextureStore.Get(map[x, y].Item2),
+                            texture(map[x, y].Item2),
                             new Vector[] 
                             {
                                 new Vector(xOffset + xStepSize * (x+1), yOffset + yStepSize * (y+1), zOffset + map[x+1, y+1].Item1),
