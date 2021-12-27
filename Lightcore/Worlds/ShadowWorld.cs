@@ -33,13 +33,10 @@
                     Map[x, y] = new Tuple<float, Vector>(CommonUtils.Sin(x/20f) * 50f, color);
                 }
             }
-
-
         }
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-
             entities.Add(WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, -200), 700, 700, Map, ColorTextureStore.ShinyTexture));
             entities.Add(WorldUtils.SimpleSphere(EntityType.Preview, Color.Red.ToVector(), new Vector(0, 0, 100), 50, 20, ColorTextureStore.ShinyTexture));
 
