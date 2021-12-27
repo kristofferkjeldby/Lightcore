@@ -16,6 +16,11 @@
             application.Process();
         }
 
+        public void OnAnimateButton(object sender, EventArgs e)
+        {
+            application.Animate();
+        }
+
         public void OnCancelRenderButton(object sender, EventArgs e)
         {
             application.Cancel();

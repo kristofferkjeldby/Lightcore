@@ -43,5 +43,10 @@
 
             return splitedMap;
         }
+
+        public static int Size(this Tuple<double, Vector>[,] map)
+        {
+            return map.GetLength(0) * map.GetLength(1);
+        }
     }
 }

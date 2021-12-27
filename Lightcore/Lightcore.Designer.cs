@@ -33,6 +33,7 @@
             this.CancelRenderButton = new System.Windows.Forms.Button();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.StripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.AnimateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ViewPictureBox)).BeginInit();
             this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -56,7 +57,7 @@
             // 
             // CancelRenderButton
             // 
-            this.CancelRenderButton.Location = new System.Drawing.Point(1242, 41);
+            this.CancelRenderButton.Location = new System.Drawing.Point(1242, 70);
             this.CancelRenderButton.Name = "CancelRenderButton";
             this.CancelRenderButton.Size = new System.Drawing.Size(75, 23);
             this.CancelRenderButton.TabIndex = 2;
@@ -79,11 +80,21 @@
             this.StripStatusLabel.Size = new System.Drawing.Size(91, 17);
             this.StripStatusLabel.Text = "StripStatusLabel";
             // 
+            // AnimateButton
+            // 
+            this.AnimateButton.Location = new System.Drawing.Point(1242, 41);
+            this.AnimateButton.Name = "AnimateButton";
+            this.AnimateButton.Size = new System.Drawing.Size(75, 23);
+            this.AnimateButton.TabIndex = 4;
+            this.AnimateButton.Text = "Animate";
+            this.AnimateButton.UseVisualStyleBackColor = true;
+            // 
             // LightcoreForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1329, 921);
+            this.Controls.Add(this.AnimateButton);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.CancelRenderButton);
             this.Controls.Add(this.RenderButton);
@@ -107,6 +118,7 @@
         private System.Windows.Forms.Button CancelRenderButton;
         private System.Windows.Forms.StatusStrip StatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel StripStatusLabel;
+        private System.Windows.Forms.Button AnimateButton;
     }
 }
 

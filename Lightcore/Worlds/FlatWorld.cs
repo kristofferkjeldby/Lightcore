@@ -13,33 +13,38 @@
 
     public class FlatWorld : WorldBuilder
     {
+        public int Width { get; set; }
+
+        public int Height { get; set; }
+
+        public int Resolution { get; set; }
+
+        public int PreviewResolution { get; set; }
+
+        public Tuple<double, Vector>[,] Map { get; set; }
+
         public FlatWorld(int width = 600, int height = 600, int resolution = 200, int previewResolution = 20) : base()
         {
-            Lights = new List<Light>()
-            {
-                new AmbientLight
-                (
-                    Color.White.ToVector(),
-                    new Vector(0f, -0f, 400f),
-                    400
-                ),
-            };
+            Width = width;
+            Height = height;
+            Resolution = resolution;
+            PreviewResolution = previewResolution;
 
             var xColorEnumerator = new ColorEnumerator(resolution, new Vector(1, 0, 0), new Vector(-1, 0, 1)).GetEnumerator();
 
-            var map = new Tuple<double, Vector>[resolution, resolution];
+            Map = new Tuple<double, Vector>[resolution, resolution];
 
-            for (int x = 0; x < map.GetLength(0); x++)
+            for (int x = 0; x < Map.GetLength(0); x++)
             {
                 var xColor = xColorEnumerator.Get();
                 var yColorEnumerator = new ColorEnumerator(resolution, xColor, new Vector(0, 1, 0)).GetEnumerator();
 
-                for (int y = 0; y < map.GetLength(1); y++)
+                for (int y = 0; y < Map.GetLength(1); y++)
                 {
                     var yColor = yColorEnumerator.Get();
                     var distance = Math.Sqrt(Math.Pow(x - resolution / 2, 2) + Math.Pow(y - resolution / 2, 2)) / (resolution / 2);
 
-                    map[x, y] =
+                    Map[x, y] =
                         new Tuple<double, Vector>
                         (
                             0,
@@ -47,11 +52,21 @@
                         );
                 }
             }
+        }
 
-            var reducedMap = map.Reduce(previewResolution);
+        public override void Create(List<Entity> entities, List<Light> lights, int animateStep = 0)
+        {
+            entities.Add(WorldUtils.Surface(EntityType.World, new Vector(0, 0, 0), Width, Height, Map));
+            entities.Add(WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, 0), Width, Height, Map.Reduce(PreviewResolution)));
 
-            Entities.Add(WorldUtils.Surface(EntityType.World, new Vector(0, 0, 0), width, height, map));
-            Entities.Add(WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, 0), width, height, reducedMap));
+            lights.Add(
+                new AmbientLight
+                (
+                    Color.White.ToVector(),
+                    new Vector(0f, -0f, 400f),
+                    400
+                )
+            );
         }
     }
 }

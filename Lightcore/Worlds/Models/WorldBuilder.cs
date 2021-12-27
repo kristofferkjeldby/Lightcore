@@ -4,26 +4,28 @@
     using System.Collections.Generic;
     using Lightcore.Lighting.Models;
 
-    public class WorldBuilder
+    public abstract class WorldBuilder
     {
         public WorldBuilder()
         {
-            Entities = new List<Entity>();
-            Lights = new List<Light>();
+
         }
 
-        public List<Entity> Entities{ get; set; }
-        public List<Light> Lights { get; set; }
+        public abstract void Create(List<Entity> entities, List<Light> lights, int animateStep = 0);
 
-        public World ToWorld()
+        public World ToWorld(int animateStep = 0)
         {
+            var entities = new List<Entity>();
+            var lights = new List<Light>();
+
+            Create(entities, lights, animateStep);
+
             return new World
             (
                 Settings.WorldReferenceFrame,
-                Entities,
-                Lights
+                entities,
+                lights
             );
         }
-
     }
 }

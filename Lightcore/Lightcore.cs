@@ -22,26 +22,32 @@
         {
             application = new Application();
             application.Camera = new World(Settings.CameraRererenceFrame);
-            application.World = new TorusWorld().ToWorld();
             application.StatusChanged += Status;
             application.SuspendChanged += Suspend;
-
+            application.GetWorld = GetWorld;
 
             this.KeyPreview = true;
             KeyDown += new KeyEventHandler(application.KeyboardService.OnKeyDown);
             RenderButton.Click += new EventHandler(application.ButtonService.OnRenderButton);
+            AnimateButton.Click += new EventHandler(application.ButtonService.OnAnimateButton);
             CancelRenderButton.Click += new EventHandler(application.ButtonService.OnCancelRenderButton);
 
-            //application.PreprocessorStack.Add(new LightMapProcessor()); // Enable this processor will render shadows
+            // Enable this processor will render shadows
+            // application.PreprocessorStack.Add(new LightMapProcessor()); 
+
             application.PreprocessorStack.Add(new LightProcessor());
-            //application.PreprocessorStack.Add(new NormalProcessor()); // Used for debugging, will render normals
+            
+            // Used for debugging, will render normals
+            // application.PreprocessorStack.Add(new NormalProcessor()); 
 
             application.ProcessorStack.Add(new ShineProcessor());
             application.ProcessorStack.Add(new ProjectProcessor());
             application.ProcessorStack.Add(new ScaleProcessor());
             application.ProcessorStack.Add(new DarkProcessor());
             application.ProcessorStack.Add(new ViewProcessor(ViewPictureBox, 100));
-            //application.ProcessorStack.Add(new StatisticsProcessor()); // Used for debugging, will output statistics
+
+            // Used for debugging, will output statistics
+            // application.ProcessorStack.Add(new StatisticsProcessor()); 
         }
 
         private void LightcoreForm_Shown(Object sender, EventArgs e)
@@ -49,14 +55,20 @@
             application.Start();
         }
 
-        void Status(Object sender, string status)
+        World GetWorld(int animateStep = 0)
+        {
+            return new RotatingTorusWorld().ToWorld(animateStep);
+        }
+
+        void Status(object sender, string status)
         {
             TryInvoke(() => StripStatusLabel.Text = status);
         }
 
-        void Suspend(Object sender, bool suspended)
+        void Suspend(object sender, bool suspended)
         {
             TryInvoke(() => RenderButton.Enabled = !suspended);
+            TryInvoke(() => AnimateButton.Enabled = !suspended);
             TryInvoke(() => CancelRenderButton.Enabled = suspended);
         }
 

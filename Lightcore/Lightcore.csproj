@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Textures\Gradient\Models\ColorPoint.cs" />
+    <Compile Include="Textures\Gradient\Models\Gradient.cs" />
     <Compile Include="Common\Cartesian\Extensions\PolygonExtensions.cs" />
     <Compile Include="Common\CommonUtils\Normalize.cs" />
     <Compile Include="Common\Models\IIdentifiable.cs" />
@@ -142,16 +144,15 @@
     <Compile Include="Viewer\ViewProcessor.cs" />
     <Compile Include="Worlds\Extensions\MapExtensions.cs" />
     <Compile Include="Worlds\Models\WorldBuilder.cs" />
-    <Compile Include="Worlds\AnimateWorld.cs" />
+    <Compile Include="Worlds\RotatingMarsWorld.cs" />
     <Compile Include="Worlds\SurfaceWorld.cs" />
     <Compile Include="Worlds\ShadowWorld.cs" />
     <Compile Include="Worlds\MoonWorld.cs" />
     <Compile Include="Worlds\SphereWorld.cs" />
-    <Compile Include="Worlds\TestWorld.cs" />
     <Compile Include="Worlds\ImageWorld.cs" />
     <Compile Include="Worlds\FlatWorld.cs" />
     <Compile Include="Worlds\Enumerators\ColorEnumerator.cs" />
-    <Compile Include="Worlds\TorusWorld.cs" />
+    <Compile Include="Worlds\RotatingTorusWorld.cs" />
     <Compile Include="Worlds\WorldUtils\SimpleSphere.cs" />
     <Compile Include="Worlds\WorldUtils\SimplyTorus.cs" />
     <Compile Include="Worlds\WorldUtils\Torus.cs" />
@@ -216,6 +217,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Images\Marble.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Images\MarsColor.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Images\MarsHeight.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Images\Moon.png">

@@ -11,6 +11,8 @@
 
         public Image Image { get; set; }
 
+        public Bitmap Bitmap => new Bitmap(Image);
+
         public double MaxLength { get; set; }
     }
 }

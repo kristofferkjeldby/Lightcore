@@ -3,6 +3,7 @@
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
     using Lightcore.Textures.Extensions;
+    using Lightcore.Worlds.Extensions;
     using Lightcore.Worlds.Models;
     using System;
     using System.Collections.Generic;
@@ -10,13 +11,44 @@
 
     public class ImageWorld : WorldBuilder
     {
-        public ImageWorld(Image image)
+        public Bitmap Image { get; set; }
+
+        public int Resolution { get; set; }
+
+        public int PreviewResolution { get; set; }
+
+        public Tuple<double, Vector>[,] Map { get; set; }
+
+        public ImageWorld(Image image, int previewResolution = 40)
         {
+            Image = new Bitmap(image);
+            Resolution = Math.Min(image.Width, image.Height);
+            PreviewResolution = previewResolution;
 
-            var bitmap = new Bitmap(image);
+            var colorStepSize = (double)byte.MaxValue / Resolution;
 
-            Lights = new List<Light>()
+            Map = new Tuple<double, Vector>[Resolution, Resolution];
+
+            for (int x = 0; x < Map.GetLength(0); x++)
             {
+                for (int y = 0; y < Map.GetLength(1); y++)
+                {
+                    Map[x, y] =
+                        new Tuple<double, Vector>
+                        (
+                            Math.Sin(x / 20) * 20,
+                            Image.GetPixel(x, Resolution - y - 1).ToVector()
+                        );
+                }
+            }
+        }
+
+        public override void Create(List<Entity> entities, List<Light> lights, int animateStep = 0)
+        {
+            entities.Add(WorldUtils.Surface(EntityType.World, new Vector(0, 0, 0), 300, 300, Map));
+            entities.Add(WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, 0), 300, 300, Map.Reduce(PreviewResolution)));
+
+            lights.Add(
                 new AngleLight
                 (
                     Color.White.ToVector(),
@@ -24,42 +56,8 @@
                     new Vector(1, 1, -5),
                     400,
                     Constants.PI
-                ),
-            };
-
-            var resolution = Math.Min(image.Width, image.Height);
-
-            var colorStepSize = (double)byte.MaxValue / resolution;
-
-            var map = new Tuple<double, Vector>[resolution, resolution];
-
-            for (int x = 0; x < map.GetLength(0); x++)
-            {
-                for (int y = 0; y < map.GetLength(1); y++)
-                {
-                    map[x, y] =
-                        new Tuple<double, Vector>
-                        (
-                            Math.Sin(x / 20) * 20,
-                            bitmap.GetPixel(x, resolution - y - 1).ToVector()
-                        );
-                }
-            }
-
-            int previewResolution = 10;
-            var stepSize = resolution / 10;
-            var reducedMap = new Tuple<double, Vector>[previewResolution, previewResolution];
-
-            for (int x = 0; x < reducedMap.GetLength(0); x++)
-            {
-                for (int y = 0; y < reducedMap.GetLength(1); y++)
-                {
-                    reducedMap[x, y] = map[x * stepSize, y * stepSize];
-                }
-            }
-
-            Entities.Add(WorldUtils.Surface(EntityType.World, new Vector(0, 0, 0), 300, 300, map));
-            Entities.Add(WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, 0), 300, 300, reducedMap));
+                )
+            );
         }
     }
 }

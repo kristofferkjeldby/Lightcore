@@ -6,7 +6,6 @@
     using System;
     using System.Linq;
     using System.Threading;
-    using System.Threading.Tasks;
 
     public class RenderService
     {
@@ -19,35 +18,37 @@
             this.status = status;
         }
 
-        private void Preprocess(CancellationToken cancellationToken)
+        private bool Preprocess(CancellationToken cancellationToken, int animateStep)
         {
             status("Preprocessing world ...");
-            var worldToProcess = application.World.Clone();
+            var worldToProcess = application.GetWorld(animateStep).Clone();
             var renderMode = RenderModeFactory.Create(false, Settings.Debug);
             var args = new RenderArgs(worldToProcess, application.Camera, renderMode, cancellationToken, status);
             application.PreprocessorStack.Process(args);
             application.PreprocessedWorld = args.World;
             status($"Preprocessing world done {args.RenderMetadata.Statistics.Select(statistics => statistics.Time.TotalMilliseconds).Sum()}ms)");
+            return true;
         }
 
-        private void PreprocessPreview(CancellationToken cancellationToken)
+        public bool PreprocessPreview(CancellationToken cancellationToken, int animateStep)
         {
             status("Preprocessing preview world ...");
-            var worldToProcess = application.World.Clone();
+            var worldToProcess = application.GetWorld(animateStep).Clone();
             var renderMode = RenderModeFactory.Create(true, Settings.Debug);
             var args = new RenderArgs(worldToProcess, application.Camera, renderMode, cancellationToken, status);
             application.PreprocessorStack.Process(args);
             application.PreprocessedPreviewWorld = args.World;
             status($"Preprocessing preview world done {args.RenderMetadata.Statistics.Select(statistics => statistics.Time.TotalMilliseconds).Sum()}ms");
+            return true;
         }
 
-        private void Process(CancellationToken cancellationToken, string filename = null)
+        public bool Process(CancellationToken cancellationToken, int animateStep, string filename = null)
         {
             if (application.PreprocessedWorld == null || !Settings.StorePreprocessed)
-                Preprocess(cancellationToken);
+                Preprocess(cancellationToken, animateStep);
 
             if (cancellationToken.IsCancellationRequested)
-                return;
+                return false;
 
             status("Processing world ...");
             var worldToProcess = (Settings.StorePreprocessed) ? application.PreprocessedWorld.Clone() : application.PreprocessedWorld;
@@ -60,18 +61,20 @@
             application.ProcessorStack.Process(args);
 
             if (cancellationToken.IsCancellationRequested)
-                return;
+                return false;
 
             status($"Processing world done {CommonUtils.ToInt(args.RenderMetadata.Statistics.Select(statistics => statistics.Time.TotalMilliseconds).Sum())}ms");
+
+            return true;
         }
 
-        private void ProcessPreview(CancellationToken cancellationToken)
+        public bool ProcessPreview(CancellationToken cancellationToken, int animateStep)
         {
             if (application.PreprocessedPreviewWorld == null || !Settings.StorePreprocessed)
-                PreprocessPreview(cancellationToken);
+                PreprocessPreview(cancellationToken, animateStep);
 
             if (cancellationToken.IsCancellationRequested)
-                return;
+                return false;
 
             var worldToProcess = (Settings.StorePreprocessed) ? application.PreprocessedPreviewWorld.Clone() : application.PreprocessedPreviewWorld;
             var renderMode = RenderModeFactory.Create(true, Settings.Debug);
@@ -80,23 +83,11 @@
             application.ProcessorStack.Process(args);
 
             if (cancellationToken.IsCancellationRequested)
-                return;
+                return false;
 
             status("Previewing, press Render to process");
-        }
 
-        public Task ProcessAsync(CancellationToken cancellationToken, string filename = null)
-        {
-            var task = new Task(() => Process(cancellationToken, filename), TaskCreationOptions.LongRunning);
-            task.Start();
-            return task;
-        }
-
-        public Task ProcessPreviewAsync(CancellationToken cancellationToken)
-        {
-            var task = new Task(() => ProcessPreview(cancellationToken), TaskCreationOptions.LongRunning);
-            task.Start();
-            return task;
+            return true;
         }
     }
 }
