@@ -50,7 +50,7 @@
 
         public static bool StorePreprocessed = false;
 
-        public static int AnimateMaxSteps = 10;
+        public static int AnimateMaxSteps = 100;
 
         public static string AnimateFilename = "animate_";
     }

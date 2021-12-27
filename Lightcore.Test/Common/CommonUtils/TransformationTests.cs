@@ -69,8 +69,8 @@
 
             var transformation = CommonUtils.Transformation(source, destination);
 
-            Assert.AreEqual(new Vector(1, Math.PI / 2, 0), transformation(new Vector(1, 0, 1)));
-            Assert.AreEqual(new Vector(1, Math.PI, 0), transformation(new Vector(0, 0, 0)));
+            Assert.AreEqual(new Vector(1, Constants.PI / 2, 0), transformation(new Vector(1, 0, 1)));
+            Assert.AreEqual(new Vector(1, Constants.PI, 0), transformation(new Vector(0, 0, 0)));
         }
     }
 }

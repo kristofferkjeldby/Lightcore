@@ -14,10 +14,10 @@
         public void AreaTest()
         {
             var northPole = new Vector(1, 0, 0);
-            var equator = new Vector(1, Math.PI / 2, 0);
-            var north = new Vector(1, Math.PI / 4, Math.PI / 2);
-            var west = new Vector(1, Math.PI / 2, Math.PI / 2);
-            var middlewest = new Vector(1, Math.PI / 2, 1d / 4 * Math.PI);
+            var equator = new Vector(1, Constants.PI / 2, 0);
+            var north = new Vector(1, Constants.PI / 4, Constants.PI / 2);
+            var west = new Vector(1, Constants.PI / 2, Constants.PI / 2);
+            var middlewest = new Vector(1, Constants.PI / 2, 1f / 4 * Constants.PI);
 
             Assert.AreEqual(4d / 16 * Math.PI, new SphericalTriangle(northPole, equator, north).Area(), Constants.Delta);
             Assert.AreEqual(4d / 16 * Math.PI, new SphericalTriangle(equator, north, west).Area(), Constants.Delta);
@@ -40,7 +40,7 @@
 
             Assert.IsTrue(triangle.Includes(new Vector(1, Constants.PI / 2, 0)));
             Assert.IsFalse(triangle.Includes(new Vector(1, Constants.PI, 0)));
-            Assert.IsTrue(triangle.Includes(new Vector(1, (Constants.PI / 2) - 0.5d, (Constants.PI / 2) - 0.5d)));
+            Assert.IsTrue(triangle.Includes(new Vector(1, (Constants.PI / 2) - 0.5f, (Constants.PI / 2) - 0.5f)));
         }
 
         [TestMethod]

@@ -99,8 +99,8 @@
 
         public bool Includes(Angle angle)
         {
-            //if (angle.Value == StartAngle.Value || angle.Value == EndAngle.Value)
-            //    return true;
+            if (angle.Value == StartAngle.Value || angle.Value == EndAngle.Value)
+                return true;
 
             var ls = angle > StartAngle;
             var le = angle > EndAngle;

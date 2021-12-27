@@ -20,12 +20,14 @@
             var t1 = t.ToSpherical();
             var t2 = (-t).ToSpherical();
 
-            if ((a.Phi.Includes(t1[Axis.Phi]) && b.Phi.Includes(t1[Axis.Phi])))
-                result.Add(t1);
+            if (a.Phi.Includes(t1[Axis.Phi]) && b.Phi.Includes(t1[Axis.Phi]))
+                if (a.Theta.Includes(t1[Axis.Theta]) && b.Theta.Includes(t1[Axis.Theta]))
+                    result.Add(t1);
 
 
-            if ((a.Phi.Includes(t2[Axis.Phi]) && b.Phi.Includes(t2[Axis.Phi])))
-                result.Add(t2);
+            if (a.Phi.Includes(t2[Axis.Phi]) && b.Phi.Includes(t2[Axis.Phi]))
+                if (a.Theta.Includes(t2[Axis.Theta]) && b.Theta.Includes(t2[Axis.Theta]))
+                    result.Add(t2);
 
             return result.ToArray();
         }

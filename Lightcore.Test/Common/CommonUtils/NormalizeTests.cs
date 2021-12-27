@@ -45,7 +45,7 @@
             );
 
             Assert.AreEqual(new Vector(2, 0, 0), CommonUtils.Normalize(source, new Vector(1, 0, 0)));
-            Assert.AreEqual(new Vector(Math.Sqrt(2), Math.PI/4, 0), CommonUtils.Normalize(source, new Vector(1, Math.PI/2, 0)));
+            Assert.AreEqual(new Vector((float)Math.Sqrt(2), Constants.PI/4, 0), CommonUtils.Normalize(source, new Vector(1, Constants.PI/2, 0)));
         }
 
         [TestMethod]
@@ -63,7 +63,7 @@
                 ReferenceFrameType.Spherical
             );
 
-            Assert.AreEqual(new Vector(2, Math.PI / 2, 0), CommonUtils.Normalize(source, new Vector(1, Math.PI/2, 0)));
+            Assert.AreEqual(new Vector(2, Constants.PI / 2, 0), CommonUtils.Normalize(source, new Vector(1, Constants.PI/2, 0)));
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@
                 ReferenceFrameType.Spherical
             );
 
-            Assert.AreEqual(new Vector(1, Math.PI / 2, (3f/2*Math.PI)), CommonUtils.Normalize(source, new Vector(1, Math.PI/2, Math.PI/2)));
+            Assert.AreEqual(new Vector(1, Constants.PI / 2, (3f/2* Constants.PI)), CommonUtils.Normalize(source, new Vector(1, Constants.PI/2, Constants.PI/2)));
         }
     }
 }

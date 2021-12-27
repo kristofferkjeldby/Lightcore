@@ -12,11 +12,11 @@
         [TestMethod]
         public void NormalThetaTest()
         {
-            var northPole = new Orthodrome(new Vector(1, Math.PI / 2, 0), new Vector(1, 0, 0));
-            var equator = new Orthodrome(new Vector(1, Math.PI / 2, 0), new Vector(1, Math.PI / 2, Math.PI / 2));
-            var north = new Orthodrome(new Vector(1, Math.PI / 2, 0), new Vector(1, 1d / 4 * Math.PI, Math.PI / 2));
-            var south = new Orthodrome(new Vector(1, Math.PI / 2, 0), new Vector(1, 3d / 4 * Math.PI, Math.PI / 2));
-            var southPole = new Orthodrome(new Vector(1, Math.PI / 2, 0), new Vector(1, Math.PI, 0));
+            var northPole = new Orthodrome(new Vector(1, Constants.PI / 2, 0), new Vector(1, 0, 0));
+            var equator = new Orthodrome(new Vector(1, Constants.PI / 2, 0), new Vector(1, Constants.PI / 2, Constants.PI / 2));
+            var north = new Orthodrome(new Vector(1, Constants.PI / 2, 0), new Vector(1, 1f / 4 * Constants.PI, Constants.PI / 2));
+            var south = new Orthodrome(new Vector(1, Constants.PI / 2, 0), new Vector(1, 3f / 4 * Constants.PI, Constants.PI / 2));
+            var southPole = new Orthodrome(new Vector(1, Constants.PI / 2, 0), new Vector(1, Constants.PI, 0));
 
             Assert.AreEqual(0, CartesianUtils.Angle(northPole.Normal, northPole.Normal), Constants.Delta);
             Assert.AreEqual(Math.PI / 2, CartesianUtils.Angle(northPole.Normal, equator.Normal), Constants.Delta);
@@ -31,9 +31,9 @@
         [TestMethod]
         public void NormalPhiTest()
         {
-            var middle = new Orthodrome(new Vector(1, Math.PI / 2, 0), new Vector(1, 0, 0));
-            var east = new Orthodrome(new Vector(1, Math.PI / 2, 1d / 4 * Math.PI), new Vector(1, 0, 0));
-            var west = new Orthodrome(new Vector(1, Math.PI / 2, -1d / 4 * Math.PI), new Vector(1, 0, 0));
+            var middle = new Orthodrome(new Vector(1, Constants.PI / 2, 0), new Vector(1, 0, 0));
+            var east = new Orthodrome(new Vector(1, Constants.PI / 2, 1f / 4 * Constants.PI), new Vector(1, 0, 0));
+            var west = new Orthodrome(new Vector(1, Constants.PI / 2, -1f / 4 * Constants.PI), new Vector(1, 0, 0));
 
             Assert.AreEqual(Math.PI / 4, CartesianUtils.Angle(middle.Normal, east.Normal), Constants.Delta);
             Assert.AreEqual(Math.PI / 4, CartesianUtils.Angle(west.Normal, middle.Normal), Constants.Delta);
