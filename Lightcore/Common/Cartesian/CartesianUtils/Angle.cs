@@ -9,7 +9,7 @@
     {
         public static Angle Angle(Vector a, Vector b)
         {
-            return new Angle(Math.Atan2((a % b).Length(), a * b));
+            return new Angle((float)Math.Atan2((a % b).Length(), a * b));
         }
 
         public static Angle Angle(Line a, Line b)

@@ -10,7 +10,7 @@
 
     public static partial class LightUtils
     {
-        public static Light Apply(Polygon polygon, LightableTexture texture, Light light, double reflectionThreadshold, double visibility)
+        public static Light Apply(Polygon polygon, LightableTexture texture, Light light, float reflectionThreadshold, float visibility)
         {
             var direction = polygon.Midpoint() - light.Position;
 
@@ -31,7 +31,7 @@
                     polygon.Midpoint(),
                     CartesianUtils.Reflect(direction, polygon.Normal()),
                     factor * texture.Reflection,
-                    Math.PI / 6d,
+                    Constants.PI / 6f,
                     polygon.Id,
                     null,
                     light.Generation + 1
@@ -42,7 +42,7 @@
 
         }
 
-        public static double GetDirectFactor(Vector position, Light light)
+        public static float GetDirectFactor(Vector position, Light light)
         {
             if (!(light is DirectLight directLight))
                 return 1;
@@ -61,17 +61,17 @@
             return 1;
         }
 
-        public static double GetAmbientFactor(Polygon polygon, Light light)
+        public static float GetAmbientFactor(Polygon polygon, Light light)
         {
             var direction = polygon.Midpoint() - light.Position;
 
             if (direction.Length() == 0)
                 return 0;
 
-            return (1 / Math.Pow(direction.Length() / light.Strength, 2) * (polygon.Normal().Unit() * -direction.Unit()));
+            return (1 / (float)Math.Pow(direction.Length() / light.Strength, 2) * (polygon.Normal().Unit() * -direction.Unit()));
         }
 
-        public static double GetFactor(Polygon polygon, Light light)
+        public static float GetFactor(Polygon polygon, Light light)
         {
             return GetAmbientFactor(polygon, light) * GetDirectFactor(polygon.Midpoint(), light);
         }

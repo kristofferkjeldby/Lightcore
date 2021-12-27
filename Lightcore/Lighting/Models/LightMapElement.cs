@@ -25,8 +25,8 @@
         public AngleSpan Phi { get; set; }
         public Guid PolygonId { get; }
         public Guid LightId { get; }
-        public double Visibility { get; set; }
-        public double Hidden => 1 - Visibility;
+        public float Visibility { get; set; }
+        public float Hidden => 1 - Visibility;
         public bool Debug { get; set; }
     }
 }

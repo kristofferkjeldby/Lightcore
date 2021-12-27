@@ -1,5 +1,6 @@
 ﻿namespace Lightcore.Worlds
 {
+    using Lightcore.Common;
     using Lightcore.Common.Models;
     using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
@@ -9,11 +10,11 @@
 
     public partial class WorldUtils
     {
-        public static Entity Cylinder(EntityType entityType, Vector origin, double radius, double height, Tuple<double, Vector>[,] map)
+        public static Entity Cylinder(EntityType entityType, Vector origin, float radius, float height, Tuple<float, Vector>[,] map)
         {
             var polygons = new List<Polygon>();
 
-            var xAngleStepSize = 2 * Math.PI / map.GetLength(0);
+            var xAngleStepSize = 2 * Constants.PI / map.GetLength(0);
             var yStepSize = height / map.GetLength(1);
 
             var xOffset = origin[0];
@@ -26,11 +27,11 @@
                 {
                     var nextX = (x == map.GetLength(0)-1) ?  0 : x;
 
-                    var x0Factor = Math.Cos(xAngleStepSize * x);
-                    var z0Factor = Math.Sin(xAngleStepSize * x);
+                    var x0Factor = CommonUtils.Cos(xAngleStepSize * x);
+                    var z0Factor = CommonUtils.Sin(xAngleStepSize * x);
 
-                    var x1Factor = Math.Cos(xAngleStepSize * (x + 1));
-                    var z1Factor = Math.Sin(xAngleStepSize * (x + 1));
+                    var x1Factor = CommonUtils.Cos(xAngleStepSize * (x + 1));
+                    var z1Factor = CommonUtils.Sin(xAngleStepSize * (x + 1));
 
                     var vector0 = new Vector(
                                 x0Factor * (radius+map[x,y].Item1) + xOffset,

@@ -5,9 +5,9 @@
 
     public class AngleSpan
     {
-        private double determinant;
+        private float determinant;
 
-        public AngleSpan(double startAngle, double endAngle, AngleSpanDirection? angleSpanDirection = null) : this (new Angle(startAngle), new Angle(endAngle), angleSpanDirection)
+        public AngleSpan(float startAngle, float endAngle, AngleSpanDirection? angleSpanDirection = null) : this (new Angle(startAngle), new Angle(endAngle), angleSpanDirection)
         {
 
         }
@@ -37,7 +37,7 @@
             return new AngleSpan(Math.Min(a.StartAngle, b.StartAngle), Math.Max(a.EndAngle, b.EndAngle));
         }
 
-        public double Length
+        public float Length
         {
             get
             {
@@ -47,7 +47,7 @@
             }
         }
 
-        public double Width => Math.Abs(Length);
+        public float Width => Math.Abs(Length);
 
         public Angle StartAngle { get; set; }
 
@@ -92,7 +92,7 @@
             return false;
         }
 
-        public bool Includes(double angle)
+        public bool Includes(float angle)
         {
             return Includes(new Angle(angle));
         }

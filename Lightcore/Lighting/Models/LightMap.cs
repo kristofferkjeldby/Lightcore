@@ -4,7 +4,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class LightMap : SortedDictionary<Tuple<Guid, Guid>, double>
+    public class LightMap : SortedDictionary<Tuple<Guid, Guid>, float>
     { 
         public void Add(LightMapSearchList lightMapElements)
         {
@@ -14,7 +14,7 @@
             }
         }
 
-        public double GetVisibility(Light light, Polygon polygon)
+        public float GetVisibility(Light light, Polygon polygon)
         {
             var key = new Tuple<Guid, Guid>(light.Id, polygon.Id);
 

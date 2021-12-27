@@ -5,7 +5,7 @@
 
     public class AmbientLight : Light
     {
-        public AmbientLight(Vector color, Vector position, double strength, Guid? origin = null, Guid? id = null, int generation = 0) : base(color, position, strength, origin, id, generation)
+        public AmbientLight(Vector color, Vector position, float strength, Guid? origin = null, Guid? id = null, int generation = 0) : base(color, position, strength, origin, id, generation)
         {
         }
 

@@ -5,13 +5,13 @@
 
     public class BeamLight : DirectLight
     {
-        public BeamLight(Vector color, Vector position, Vector direction, double strength, double width, Guid? origin = null, Guid? id = null, int generation = 0) 
+        public BeamLight(Vector color, Vector position, Vector direction, float strength, float width, Guid? origin = null, Guid? id = null, int generation = 0) 
             : base (color, position, direction, strength, origin, id, generation)
         {
             Width = width;
         }
 
-        public double Width { get; set; }
+        public float Width { get; set; }
 
         public override Light Clone()
         {

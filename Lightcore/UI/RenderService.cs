@@ -47,9 +47,6 @@
             if (application.PreprocessedWorld == null || !Settings.StorePreprocessed)
                 Preprocess(cancellationToken, animateStep);
 
-            if (cancellationToken.IsCancellationRequested)
-                return false;
-
             status("Processing world ...");
             var worldToProcess = (Settings.StorePreprocessed) ? application.PreprocessedWorld.Clone() : application.PreprocessedWorld;
             var renderMode = RenderModeFactory.Create(false, Settings.Debug);
@@ -59,9 +56,6 @@
                 args.RenderMetadata.Filename = filename;
 
             application.ProcessorStack.Process(args);
-
-            if (cancellationToken.IsCancellationRequested)
-                return false;
 
             status($"Processing world done {CommonUtils.ToInt(args.RenderMetadata.Statistics.Select(statistics => statistics.Time.TotalMilliseconds).Sum())}ms");
 
@@ -73,19 +67,11 @@
             if (application.PreprocessedPreviewWorld == null || !Settings.StorePreprocessed)
                 PreprocessPreview(cancellationToken, animateStep);
 
-            if (cancellationToken.IsCancellationRequested)
-                return false;
-
             var worldToProcess = (Settings.StorePreprocessed) ? application.PreprocessedPreviewWorld.Clone() : application.PreprocessedPreviewWorld;
             var renderMode = RenderModeFactory.Create(true, Settings.Debug);
             var args = new RenderArgs(worldToProcess, application.Camera, renderMode, cancellationToken, status);
 
             application.ProcessorStack.Process(args);
-
-            if (cancellationToken.IsCancellationRequested)
-                return false;
-
-            status("Previewing, press Render to process");
 
             return true;
         }

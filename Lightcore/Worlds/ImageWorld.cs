@@ -1,5 +1,6 @@
 ﻿namespace Lightcore.Worlds
 {
+    using Lightcore.Common;
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
     using Lightcore.Textures.Extensions;
@@ -17,7 +18,7 @@
 
         public int PreviewResolution { get; set; }
 
-        public Tuple<double, Vector>[,] Map { get; set; }
+        public Tuple<float, Vector>[,] Map { get; set; }
 
         public ImageWorld(Image image, int previewResolution = 40)
         {
@@ -25,18 +26,18 @@
             Resolution = Math.Min(image.Width, image.Height);
             PreviewResolution = previewResolution;
 
-            var colorStepSize = (double)byte.MaxValue / Resolution;
+            var colorStepSize = (float)byte.MaxValue / Resolution;
 
-            Map = new Tuple<double, Vector>[Resolution, Resolution];
+            Map = new Tuple<float, Vector>[Resolution, Resolution];
 
             for (int x = 0; x < Map.GetLength(0); x++)
             {
                 for (int y = 0; y < Map.GetLength(1); y++)
                 {
                     Map[x, y] =
-                        new Tuple<double, Vector>
+                        new Tuple<float, Vector>
                         (
-                            Math.Sin(x / 20) * 20,
+                            CommonUtils.Sin(x / 20) * 20,
                             Image.GetPixel(x, Resolution - y - 1).ToVector()
                         );
                 }

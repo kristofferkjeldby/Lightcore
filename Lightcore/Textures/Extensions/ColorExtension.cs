@@ -12,7 +12,7 @@
             return new Vector(color.R, color.G, color.B)/byte.MaxValue;
         }
 
-        public static Color ToColor(this Vector vector, double transparency = 0)
+        public static Color ToColor(this Vector vector, float transparency = 0)
         {
             var limited = byte.MaxValue * vector.Limit(0, 1);
             var alpha = byte.MaxValue - CommonUtils.Limit(transparency, 0, 1) * byte.MaxValue;

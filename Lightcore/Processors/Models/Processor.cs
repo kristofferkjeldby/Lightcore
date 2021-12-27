@@ -18,6 +18,8 @@
 
             args.Status($"{Metadata.Name}: Preprocessing ...");
 
+            args.CancellationToken.ThrowIfCancellationRequested();
+
             PreProcessor(args);
 
             if (RunProcessors())
@@ -29,7 +31,7 @@
 
                     for (int j = 0; j < args.World.Entities[i].Elements.Count(); j++)
                     {
-                        if ((j + 1) % 100 == 0)
+                        if ((j + 1) % 1000 == 0)
                             args.Status($"{Metadata.Name}: Processing entity {entityCount - i} of {entityCount}, polygon {j + 1} of {args.World.Entities[i].Elements.Count()} ...");
 
                         for (int k = 0; k < args.World.Entities[i].Elements[j].Elements.Length; k++)
@@ -38,14 +40,15 @@
                             statistic.Vectors++;
                         }
 
-                        if (args.CancellationToken.IsCancellationRequested)
-                            return;
+                        args.CancellationToken.ThrowIfCancellationRequested();
 
                         args.World.Entities[i].Elements[j] = PolygonProcessor(args.World.Entities[i].Elements[j], args);
                         statistic.Polygons++;
                     }
                 }
             }
+
+            args.CancellationToken.ThrowIfCancellationRequested();
 
             args.Status($"{Metadata.Name}: Postprocessing ...");
 

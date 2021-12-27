@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommonUtils\Float.cs" />
+    <Compile Include="Common\CommonUtils\Trigometry.cs" />
     <Compile Include="Textures\Gradient\Models\ColorPoint.cs" />
     <Compile Include="Textures\Gradient\Models\Gradient.cs" />
     <Compile Include="Common\Cartesian\Extensions\PolygonExtensions.cs" />

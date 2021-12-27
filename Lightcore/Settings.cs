@@ -3,7 +3,6 @@
     using Lightcore.Common.Models;
     using Lightcore.Textures.Extensions;
     using Lightcore.Textures.Models;
-    using System;
     using System.Drawing;
 
     public static class Settings 
@@ -33,15 +32,15 @@
 
         public static Vector Origon => new Vector(0, 0, 0);
 
-        public static double R = Math.PI/100;
+        public static float R = Constants.PI / 100f;
 
-        public static double DistanceFromScreen => 100;
+        public static float DistanceFromScreen => 100;
 
-        public static double ViewDistance => 500;
+        public static float ViewDistance => 500;
 
-        public static double ReflectionTreadshold => 0f;
+        public static float ReflectionTreadshold => 0f;
 
-        public static double ReflectionAngle => Math.PI / 6d;
+        public static float ReflectionAngle => Constants.PI / 6f;
 
         public static int ViewMargin => 5000;
 

@@ -1,5 +1,6 @@
 ﻿namespace Lightcore.Worlds
 {
+    using Lightcore.Common;
     using Lightcore.Common.Extensions;
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
@@ -12,11 +13,11 @@
 
     public class ShadowWorld : WorldBuilder
     {
-        public Tuple<double, Vector>[,] Map { get; set; }
+        public Tuple<float, Vector>[,] Map { get; set; }
 
         public ShadowWorld() : base()
         {
-            Map = new Tuple<double, Vector>[20, 20];
+            Map = new Tuple<float, Vector>[20, 20];
 
             var surfaceXColor = new ColorEnumerator(Map.GetLength(0), new Vector(1, 0, 0), new Vector(-1, 0, 1)).GetEnumerator();
             var surfaceYColor = new ColorEnumerator(Map.GetLength(1), new Vector(0, 0, 0), new Vector(0, 1, 0)).GetEnumerator();
@@ -27,7 +28,7 @@
                 for (int y = 0; y < Map.GetLength(1); y++)
                 {
                     var color = surfaceYColor.Get() + xColor;
-                    Map[x, y] = new Tuple<double, Vector>(Math.Sin(x/20f) * 50f, color);
+                    Map[x, y] = new Tuple<float, Vector>(CommonUtils.Sin(x/20f) * 50f, color);
                 }
             }
 

@@ -15,6 +15,6 @@
 
         public AngleSpan Phi => new AngleSpan(Elements[0][Axis.Phi], Elements[1][Axis.Phi]);
 
-        public double Angle => CartesianUtils.Angle(Elements[0].ToCartesian(), Elements[1].ToCartesian());
+        public float Angle => CartesianUtils.Angle(Elements[0].ToCartesian(), Elements[1].ToCartesian());
     }
 }

@@ -9,7 +9,7 @@
 
     public partial class WorldUtils
     {
-        public static Entity Sphere(EntityType entityType, Vector origon, double radius, Tuple<double, Vector>[,] map)
+        public static Entity Sphere(EntityType entityType, Vector origon, float radius, Tuple<float, Vector>[,] map)
         {
             var polygons = new List<Polygon>();
 

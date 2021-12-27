@@ -27,8 +27,8 @@
 
         public Func<int, World> GetWorld;
 
-        private Task task;
-        private CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
+        private Task<bool> task;
+        private CancellationTokenSource CancellationTokenSource;
 
         public Application()
         {
@@ -58,37 +58,40 @@
 
         public void Process(int animateStep = 0, string filename = null)
         {
+            CancellationTokenSource = new CancellationTokenSource();
             OnSuspendChanged(true);
-            task = new Task(() => RenderService.Process(CancellationTokenSource.Token, animateStep, filename), CancellationTokenSource.Token);
+            task = Task.Run(() => RenderService.Process(CancellationTokenSource.Token, animateStep, filename), CancellationTokenSource.Token);
             task.ContinueWith(t => OnSuspendChanged(false));
-            task.Start();
         }
 
         public void Animate()
         {
+            CancellationTokenSource = new CancellationTokenSource();
             OnSuspendChanged(true);
-            task = new Task(() =>
+            task = Task.Run(() =>
             {
-                for (int animateStep = 1; animateStep < Settings.AnimateMaxSteps; animateStep++)
+                var result = false;
+                for (int animateStep = 0; animateStep < Settings.AnimateMaxSteps; animateStep++)
                 {
                     var filename = string.Concat(Settings.AnimateFilename, animateStep, ".jpg");
-                    RenderService.Process(CancellationTokenSource.Token, animateStep, filename);
+                    result = RenderService.Process(CancellationTokenSource.Token, animateStep, filename);
                 }
+                return result;
             }, CancellationTokenSource.Token);
             task.ContinueWith(t => OnSuspendChanged(false));
-            task.Start();
         }
 
         public void ProcessPreview(int animateStep)
         {
+            CancellationTokenSource = new CancellationTokenSource();
             OnSuspendChanged(true);
-            task = new Task(() => RenderService.ProcessPreview(CancellationTokenSource.Token, animateStep));
+            task = Task.Run(() => RenderService.ProcessPreview(CancellationTokenSource.Token, animateStep));
             task.ContinueWith(t => OnSuspendChanged(false));
-            task.Start();
         }
 
         public bool OnSuspendChanged(bool suspended)
         {
+            System.Diagnostics.Debug.WriteLine("Suspending: " + suspended);
             SleepService.Suspend(suspended);
             KeyboardService.Suspend(suspended);
             SuspendChanged?.Invoke(this, suspended);
@@ -106,9 +109,7 @@
             {
                 CancellationTokenSource.Cancel();
                 OnStatusChanged("Cancelling ...");
-                OnSuspendChanged(false);
-                OnStatusChanged("Cancelled");
-
+                task.ContinueWith(t => OnStatusChanged("Cancelled ..."));
             }
         }
     }

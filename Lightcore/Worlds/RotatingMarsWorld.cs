@@ -16,7 +16,7 @@
     {
         public int PreviewResolution { get; set; }
 
-        public Tuple<double, Vector>[,] Map { get; set; }
+        public Tuple<float, Vector>[,] Map { get; set; }
 
         public RotatingMarsWorld(int previewResolution = 40, int step = 0) : base()
         {
@@ -24,14 +24,14 @@
             var colorBitmap = ImageTextureStore.Get("MarsColor").ImageTextureType.Bitmap;
             var heightBitmap = ImageTextureStore.Get("MarsHeight").ImageTextureType.Bitmap;
 
-            Map = new Tuple<double, Vector>[colorBitmap.Width, colorBitmap.Height];
+            Map = new Tuple<float, Vector>[colorBitmap.Width, colorBitmap.Height];
 
             for (int x = 0; x < Map.GetLength(0); x++)
             {
                 for (int y = 0; y < Map.GetLength(1); y++)
                 {
                     Map[x, y] =
-                        new Tuple<double, Vector>
+                        new Tuple<float, Vector>
                         (
                             heightBitmap.GetPixel(x, y).GetBrightness() * 5,
                             colorBitmap.GetPixel(x, y).ToVector()
@@ -44,7 +44,7 @@
         {
             var angle = (Constants.PI2 / Settings.AnimateMaxSteps) * animateStep;
 
-            var rotateLight = CartesianUtils.Rotate(new Vector(0, 1, 0.2).Unit(), -angle * 2);
+            var rotateLight = CartesianUtils.Rotate(new Vector(0, 1, 0.2f).Unit(), -angle * 2);
             var rotateMars = CartesianUtils.Rotate(new Vector(0, 1, 0).Unit(), angle);
 
             entities.Add(WorldUtils.Sphere(EntityType.Preview, new Vector(0, 0, 0), 150, Map.Reduce(PreviewResolution)).Transform(rotateMars));

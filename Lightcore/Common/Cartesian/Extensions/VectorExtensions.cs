@@ -6,9 +6,9 @@
 
     public static class VectorExtensions
     {
-        public static double Length(this Vector vector)
+        public static float Length(this Vector vector)
         {
-            return Math.Sqrt(vector.Elements.Sum(value => Math.Pow(value, 2)));
+            return (float)Math.Sqrt(vector.Elements.Sum(value => Math.Pow(value, 2)));
         }
 
         public static Vector Unit(this Vector vector)

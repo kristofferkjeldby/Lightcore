@@ -14,9 +14,7 @@
             foreach (var processor in processors.Where(processor => ProcessorPredicate(processor, args.RenderMode)))
             {
                 processor.Process(args);
-
-                if (args.CancellationToken.IsCancellationRequested)
-                    return;
+                args.CancellationToken.ThrowIfCancellationRequested();
             }
         }
 

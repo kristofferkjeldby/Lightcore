@@ -13,7 +13,7 @@
             if (!(polygon.Texture is LightableTexture lightableTexture))
                 return polygon;
 
-            lightableTexture.Dark(1 - Math.Pow(polygon.Midpoint()[2] / Settings.ViewDistance, 2));
+            lightableTexture.Dark(1 - (float)Math.Pow(polygon.Midpoint()[2] / Settings.ViewDistance, 2));
             return polygon;
         }
 

@@ -5,15 +5,15 @@
 
     public static class MapExtensions
     {
-        public static Tuple<double, Vector>[,] Reduce(this Tuple<double, Vector>[,] map, int width)
+        public static Tuple<float, Vector>[,] Reduce(this Tuple<float, Vector>[,] map, int width)
         {
-            var height = (int)(map.GetLength(1) * ((double)width / map.GetLength(0)));
+            var height = (int)(map.GetLength(1) * ((float)width / map.GetLength(0)));
 
             var xStepSize = map.GetLength(0) / width;
 
             var yStepSize = (int)map.GetLength(1) / height;
 
-            var reducedMap = new Tuple<double, Vector>[width, height];
+            var reducedMap = new Tuple<float, Vector>[width, height];
 
             for (int x = 0; x < reducedMap.GetLength(0); x++)
             {
@@ -26,10 +26,10 @@
             return reducedMap;
         }
 
-        public static Tuple<double, Vector>[,] Split(this Tuple<double, Vector>[,] map)
+        public static Tuple<float, Vector>[,] Split(this Tuple<float, Vector>[,] map)
         {
 
-            var splitedMap = new Tuple<double, Vector>[map.GetLength(0), map.GetLength(1)];
+            var splitedMap = new Tuple<float, Vector>[map.GetLength(0), map.GetLength(1)];
 
             for (int x = 0; x < map.GetLength(0); x++)
             {
@@ -44,7 +44,7 @@
             return splitedMap;
         }
 
-        public static int Size(this Tuple<double, Vector>[,] map)
+        public static int Size(this Tuple<float, Vector>[,] map)
         {
             return map.GetLength(0) * map.GetLength(1);
         }

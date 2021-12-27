@@ -6,11 +6,11 @@
     {
         public Vector Color { get; set; }
 
-        public double Value { get; set; }
+        public float Value { get; set; }
 
         public bool Locked { get; set; }
 
-        public ColorPoint(Vector color, double value, bool locked)
+        public ColorPoint(Vector color, float value, bool locked)
         {
             Color = color;
             Value = value;

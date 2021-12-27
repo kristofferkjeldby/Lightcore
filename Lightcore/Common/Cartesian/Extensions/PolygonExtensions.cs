@@ -6,7 +6,7 @@
 
     public static class PolygonExtensions
     {
-        public static double Distance(this Polygon polygon)
+        public static float Distance(this Polygon polygon)
         {
             return polygon.Elements.Min(vector => vector.Length());
         }

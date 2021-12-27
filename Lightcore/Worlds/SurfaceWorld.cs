@@ -1,5 +1,6 @@
 ﻿namespace Lightcore.Worlds
 {
+    using Lightcore.Common;
     using Lightcore.Common.Extensions;
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
@@ -17,14 +18,14 @@
 
         public int PreviewResolution { get; set; }
 
-        public Tuple<double, Vector>[,] Map { get; set; }
+        public Tuple<float, Vector>[,] Map { get; set; }
 
         public SurfaceWorld(int resolution = 200, int previewResolution = 40, int animateStep = 0) : base()
         {
             Resolution = resolution;
             PreviewResolution = previewResolution;
 
-            Map = new Tuple<double, Vector>[Resolution, Resolution];
+            Map = new Tuple<float, Vector>[Resolution, Resolution];
 
             var surfaceXColor = new ColorEnumerator(Map.GetLength(0), new Vector(1, 0, 0), new Vector(-1, 0, 1)).GetEnumerator();
             var surfaceYColor = new ColorEnumerator(Map.GetLength(1), new Vector(0, 0, 0), new Vector(0, 1, 0)).GetEnumerator();
@@ -37,7 +38,7 @@
                     var color = new Vector(0, 0, 0);
                         color = surfaceYColor.Get() + xColor;
 
-                    Map[x, y] = new Tuple<double, Vector>(Math.Sin(x/20d) * 50d + Math.Sin(y/70d) * 8d, color);
+                    Map[x, y] = new Tuple<float, Vector>(CommonUtils.Sin(x/20f) * 50f + CommonUtils.Sin(y/70f) * 8f, color);
                 }
             }
 

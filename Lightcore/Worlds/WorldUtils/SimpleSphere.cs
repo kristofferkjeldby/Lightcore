@@ -8,7 +8,7 @@
 
     public partial class WorldUtils
     {
-        public static Entity SimpleSphere(EntityType entityType, Vector color, Vector origon, double radius, int segments)
+        public static Entity SimpleSphere(EntityType entityType, Vector color, Vector origon, float radius, int segments)
         {
             var polygons = new List<Polygon>();
 

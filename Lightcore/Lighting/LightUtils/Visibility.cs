@@ -31,7 +31,7 @@
             }
         }
 
-        public static double Visibility(LightMapElement thisLightMapElement, LightMapElement otherLightMapElement)
+        public static float Visibility(LightMapElement thisLightMapElement, LightMapElement otherLightMapElement)
         {
             if (thisLightMapElement.PolygonId.Equals(otherLightMapElement.PolygonId))
                 return 1;

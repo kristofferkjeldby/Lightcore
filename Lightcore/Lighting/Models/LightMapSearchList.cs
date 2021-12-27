@@ -1,7 +1,6 @@
 ﻿namespace Lightcore.Lighting.Models
 {
     using Lightcore.Common.Models;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -16,7 +15,7 @@
         public LightMapSearchList(int resolution = 100000, int threadshold = 50)
         {
             this.threadshold = threadshold;
-            var stepSize = (Math.PI * 2) / resolution;
+            var stepSize = (Constants.PI2) / resolution;
 
             for (int i = 0; i < resolution; i ++)
             {

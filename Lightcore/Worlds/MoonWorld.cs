@@ -14,7 +14,7 @@
     {
         public int PreviewResolution { get; set; }
 
-        public Tuple<double, Vector>[,] Map { get; set; } 
+        public Tuple<float, Vector>[,] Map { get; set; } 
 
         public MoonWorld(int previewResolution = 40) : base()
         {
@@ -22,14 +22,14 @@
 
             var bitmap = ImageTextureStore.Get("Moon").ImageTextureType.Bitmap;
 
-            Map = new Tuple<double, Vector>[bitmap.Width, bitmap.Height];
+            Map = new Tuple<float, Vector>[bitmap.Width, bitmap.Height];
 
             for (int x = 0; x < Map.GetLength(0); x++)
             {
                 for (int y = 0; y < Map.GetLength(1); y++)
                 {
                     Map[x, y] =
-                        new Tuple<double, Vector>
+                        new Tuple<float, Vector>
                         (
                             bitmap.GetPixel(x, y).GetBrightness() * 5,
                             bitmap.GetPixel(x, y).ToVector()

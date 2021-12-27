@@ -30,7 +30,7 @@
             return new Line(Origin, Origin + Direction.Unit());
         }
 
-        public double Length
+        public float Length
         {
             get {
                 return Direction.Length();

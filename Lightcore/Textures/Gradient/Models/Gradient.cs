@@ -15,7 +15,7 @@
             ColorPoints.Add(new ColorPoint(endColor, 1, true));
         }
 
-        public Vector GetColor(double value)
+        public Vector GetColor(float value)
         {
             var match = ColorPoints.FirstOrDefault(c => c.Value.Equals(value));
             if (match != null)

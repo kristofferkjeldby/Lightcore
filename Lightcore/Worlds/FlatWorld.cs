@@ -21,7 +21,7 @@
 
         public int PreviewResolution { get; set; }
 
-        public Tuple<double, Vector>[,] Map { get; set; }
+        public Tuple<float, Vector>[,] Map { get; set; }
 
         public FlatWorld(int width = 600, int height = 600, int resolution = 200, int previewResolution = 20) : base()
         {
@@ -32,7 +32,7 @@
 
             var xColorEnumerator = new ColorEnumerator(resolution, new Vector(1, 0, 0), new Vector(-1, 0, 1)).GetEnumerator();
 
-            Map = new Tuple<double, Vector>[resolution, resolution];
+            Map = new Tuple<float, Vector>[resolution, resolution];
 
             for (int x = 0; x < Map.GetLength(0); x++)
             {
@@ -45,7 +45,7 @@
                     var distance = Math.Sqrt(Math.Pow(x - resolution / 2, 2) + Math.Pow(y - resolution / 2, 2)) / (resolution / 2);
 
                     Map[x, y] =
-                        new Tuple<double, Vector>
+                        new Tuple<float, Vector>
                         (
                             0,
                             yColor

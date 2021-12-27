@@ -6,7 +6,7 @@
 
     public abstract class Light : IClonable<Light>, ITransformable<Light>, IIdentifiable
     {
-        public Light(Vector color, Vector position, double strength, Guid? polygonId = null, Guid? id = null, int generation = 0)
+        public Light(Vector color, Vector position, float strength, Guid? polygonId = null, Guid? id = null, int generation = 0)
         {
             Color = color;
             Position = position;
@@ -16,7 +16,7 @@
             Id = id.GetValueOrDefault(Guid.Empty);
         }
 
-        public double Strength { get; set; }
+        public float Strength { get; set; }
 
         public Vector Color { get; set; }
 

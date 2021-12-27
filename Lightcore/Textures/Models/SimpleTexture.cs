@@ -6,7 +6,7 @@
 
     public class SimpleTexture : Texture
     {
-        public SimpleTexture(Vector color, double transparency = 0)
+        public SimpleTexture(Vector color, float transparency = 0)
         {
             Color = color;
             Transparency = transparency;
@@ -24,6 +24,6 @@
             return new SolidBrush(Color.ToColor(Transparency));
         }
 
-        public double Transparency { get; set; }
+        public float Transparency { get; set; }
     }
 }

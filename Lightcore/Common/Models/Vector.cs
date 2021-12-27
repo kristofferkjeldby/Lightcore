@@ -3,14 +3,14 @@
     using System;
     using System.Collections.Generic;
 
-    public class Vector : Indexable<double>, IClonable<Vector>, ITransformable<Vector>, IIdentifiable, IEquatable<Vector>
+    public class Vector : Indexable<float>, IClonable<Vector>, ITransformable<Vector>, IIdentifiable, IEquatable<Vector>
     {
-        public Vector(double[] elements, Guid? id = null) : base (elements)
+        public Vector(float[] elements, Guid? id = null) : base (elements)
         {
             Id = id.GetValueOrDefault(Guid.NewGuid());
         }
 
-        public Vector(double a, double b, double c, Guid? id = null) : base(a, b, c)
+        public Vector(float a, float b, float c, Guid? id = null) : base(a, b, c)
         {
             Id = id.GetValueOrDefault(Guid.NewGuid());
         }
@@ -18,10 +18,10 @@
         public static Vector operator +(Vector a, Vector b) => new Vector(a[0] + b[0], a[1] + b[1], a[2] + b[2]);
         public static Vector operator -(Vector a, Vector b) => new Vector(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
         public static Vector operator -(Vector a) => new Vector(-a[0], -a[1], -a[2]);
-        public static Vector operator *(double a, Vector b) => new Vector(a * b[0], a * b[1], a * b[2]);
-        public static Vector operator *(Vector a, double b) => b * a;
-        public static Vector operator /(Vector a, double b) => new Vector(a[0] / b, a[1] / b, a[2] / b);
-        public static double operator *(Vector a, Vector b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+        public static Vector operator *(float a, Vector b) => new Vector(a * b[0], a * b[1], a * b[2]);
+        public static Vector operator *(Vector a, float b) => b * a;
+        public static Vector operator /(Vector a, float b) => new Vector(a[0] / b, a[1] / b, a[2] / b);
+        public static float operator *(Vector a, Vector b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
         public static Vector operator &(Vector a, Vector b) => new Vector(a[0] * b[0], a[1] * b[1], a[2] * b[2]);
         public static Vector operator %(Vector a, Vector b) => new Vector((a[1] * b[2]) - (b[1] * a[2]), (a[2] * b[0]) - (b[2] * a[0]), (a[0] * b[1]) - (b[0] * a[1]));
 

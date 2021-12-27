@@ -69,14 +69,14 @@
             };
         }
 
-        public static double Area(this SphericalTriangle a)
+        public static float Area(this SphericalTriangle a)
         {
             var orthodromes = a.ToOrthodromes();
-            var angle0 = (Math.PI) - CartesianUtils.Angle(orthodromes[2].Normal, orthodromes[0].Normal);
-            var angle1 = (Math.PI) - CartesianUtils.Angle(orthodromes[0].Normal, orthodromes[1].Normal);
-            var angle2 = (Math.PI) - CartesianUtils.Angle(orthodromes[1].Normal, orthodromes[2].Normal);
+            var angle0 = (Constants.PI) - CartesianUtils.Angle(orthodromes[2].Normal, orthodromes[0].Normal);
+            var angle1 = (Constants.PI) - CartesianUtils.Angle(orthodromes[0].Normal, orthodromes[1].Normal);
+            var angle2 = (Constants.PI) - CartesianUtils.Angle(orthodromes[1].Normal, orthodromes[2].Normal);
 
-            return (angle0 + angle1 + angle2 - Math.PI);
+            return (angle0 + angle1 + angle2 - Constants.PI);
         }
 
     }

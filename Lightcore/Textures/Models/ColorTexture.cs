@@ -10,13 +10,13 @@
 
         public Vector Color { get; set; }
 
-        public double Transparency { get; set; }
+        public float Transparency { get; set; }
 
-        public double Metallicity { get; set; }
+        public float Metallicity { get; set; }
 
-        public double Shiny { get; set; }
+        public float Shiny { get; set; }
 
-        public ColorTexture(Vector color, double reflection, double transparency, double metallicity, double shiny, Vector processedColor = null) : base(reflection)
+        public ColorTexture(Vector color, float reflection, float transparency, float metallicity, float shiny, Vector processedColor = null) : base(reflection)
         {
             Color = color;
             Reflection = reflection;
@@ -35,17 +35,17 @@
             return new SolidBrush(ProcessedColor.ToColor(Transparency));
         }
 
-        public override void Light(Vector otherColor, double factor)
+        public override void Light(Vector otherColor, float factor)
         {
             ProcessedColor = ProcessedColor + (factor * (1-Metallicity) * otherColor & Color) + (factor * otherColor * Metallicity) ;
         }
 
-        public override void Dark(double factor)
+        public override void Dark(float factor)
         {
             ProcessedColor = factor * ProcessedColor;
         }
 
-        public override void Shine(Vector otherColor, double factor)
+        public override void Shine(Vector otherColor, float factor)
         {
             ProcessedColor = (factor * otherColor * Shiny) + ProcessedColor;
         }

@@ -12,14 +12,14 @@
     public class ViewProcessor : Processor
     {
         PictureBox pictureBox;
-        readonly double maxX;
-        readonly double maxY;
+        readonly float maxX;
+        readonly float maxY;
         Vector transpose;
         Matrix scale;
 
         public override ProcessorMetadata Metadata => new ProcessorMetadata("View processor", false, EntityType.Debug, EntityType.Preview, EntityType.World);
 
-        public ViewProcessor(PictureBox pictureBox, double maxX)
+        public ViewProcessor(PictureBox pictureBox, float maxX)
         {
             this.pictureBox = pictureBox;
             this.maxX = maxX;
@@ -45,7 +45,7 @@
         private PointF Transform(Vector vector)
         {
             var v = (scale * vector) + transpose;
-            return new PointF((float)v[0], (float)v[1]);
+            return new PointF(v[0], v[1]);
         }
 
         private bool IsInMargin(PointF point, int margin)

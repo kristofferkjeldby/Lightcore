@@ -9,7 +9,7 @@
 
     public partial class WorldUtils
     {
-        public static Entity Torus(EntityType entityType, Vector origon, double radius1, double radius2, Tuple<double, Vector>[,] map)
+        public static Entity Torus(EntityType entityType, Vector origon, float radius1, float radius2, Tuple<float, Vector>[,] map)
         {
             var polygons = new Polygon[map.Size() * 2];
             int p = 0;
@@ -21,8 +21,8 @@
             {
                 var c1 = (c0 == map.GetLength(0) - 1) ? 0 : c0 + 1;
 
-                var cc0 = new Vector(Math.Cos(c0 * cStepSize), Math.Sin(c0 * cStepSize), 0);
-                var cc1 = new Vector(Math.Cos(c1 * cStepSize), Math.Sin(c1 * cStepSize), 0);
+                var cc0 = new Vector((float)Math.Cos(c0 * cStepSize), (float)Math.Sin(c0 * cStepSize), 0);
+                var cc1 = new Vector((float)Math.Cos(c1 * cStepSize), (float)Math.Sin(c1 * cStepSize), 0);
 
                 var cc0r = CartesianUtils.Rotate(cc0 % Settings.Unit[Axis.Z], pStepSize);
                 var cc1r = CartesianUtils.Rotate(cc1 % Settings.Unit[Axis.Z], pStepSize);

@@ -17,7 +17,7 @@
                 );
         }
 
-        public static Vector Limit(this Vector vector, double min, double max)
+        public static Vector Limit(this Vector vector, float min, float max)
         {
             return new Vector(
                 CommonUtils.Limit(vector[0], min, max),
@@ -26,7 +26,7 @@
             );
         }
 
-        public static double Average(this Vector vector)
+        public static float Average(this Vector vector)
         {
             return (vector[0] + vector[1] + vector[2]) / 3;
         }
@@ -34,9 +34,9 @@
         public static Vector ToCartesian(this Vector vector)
         {
             return new Vector(
-                (vector[Axis.R] * Math.Sin(vector[Axis.Theta]) * Math.Cos(vector[Axis.Phi])),
-                (vector[Axis.R] * Math.Sin(vector[Axis.Theta]) * Math.Sin(vector[Axis.Phi])),
-                (vector[Axis.R] * Math.Cos(vector[Axis.Theta]))
+                (vector[Axis.R] * CommonUtils.Sin(vector[Axis.Theta]) * CommonUtils.Cos(vector[Axis.Phi])),
+                (vector[Axis.R] * CommonUtils.Sin(vector[Axis.Theta]) * CommonUtils.Sin(vector[Axis.Phi])),
+                (vector[Axis.R] * CommonUtils.Cos(vector[Axis.Theta]))
             );
         }
 
@@ -44,8 +44,8 @@
         {
             return new Vector(
                 vector.Length(),
-                CommonUtils.Limit(Angle.ToCyclicAngle(Math.Acos(vector[Axis.Z] / vector.Length())), 0, Math.PI),
-                CommonUtils.Limit(Angle.ToCyclicAngle(Math.Atan2(vector[Axis.Y], vector[Axis.X])), 0, Math.PI * 2)
+                CommonUtils.Limit(Angle.ToCyclicAngle((float)Math.Acos(vector[Axis.Z] / vector.Length())), 0, Constants.PI),
+                CommonUtils.Limit(Angle.ToCyclicAngle((float)Math.Atan2(vector[Axis.Y], vector[Axis.X])), 0, Constants.PI2)
             );
         }
     }

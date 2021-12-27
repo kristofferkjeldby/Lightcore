@@ -7,7 +7,7 @@
 
     public partial class WorldUtils
     {
-        public static Entity Surface(EntityType entityType, Vector origin, double width, double height, Tuple<double, Vector>[,] map)
+        public static Entity Surface(EntityType entityType, Vector origin, float width, float height, Tuple<float, Vector>[,] map)
         {
             var polygons = new List<Polygon>();
 

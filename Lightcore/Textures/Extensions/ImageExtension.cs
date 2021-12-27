@@ -7,7 +7,7 @@
     public static class ImageExtensions
     {
 
-        public static Bitmap Crop(this Image image, double scale)
+        public static Bitmap Crop(this Image image, float scale)
         {
             Bitmap src = image as Bitmap;
 
@@ -16,7 +16,7 @@
             return new Bitmap(cropRect.Width, cropRect.Height);
         }
 
-        public static Bitmap Darken(Image image, double factor)
+        public static Bitmap Darken(Image image, float factor)
         {
             ColorMatrix cm = new ColorMatrix(new float[][]
                 {

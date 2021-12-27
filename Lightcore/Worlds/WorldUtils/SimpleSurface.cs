@@ -7,7 +7,7 @@
 
     public partial class WorldUtils
     {
-        public static Entity SimpleSurface(EntityType entityType, Vector color, Vector origin, double width, double height, int resolution)
+        public static Entity SimpleSurface(EntityType entityType, Vector color, Vector origin, float width, float height, int resolution)
         {
             var polygons = new List<Polygon>();
 

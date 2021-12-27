@@ -6,7 +6,7 @@
 
     public static partial class CartesianUtils
     {
-        public static double Distance(Line a, Vector point)
+        public static float Distance(Line a, Vector point)
         {
             return (a.Direction % (point - a.Origin)).Length() / a.Direction.Length();
         }

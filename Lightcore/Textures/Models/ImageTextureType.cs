@@ -13,6 +13,6 @@
 
         public Bitmap Bitmap => new Bitmap(Image);
 
-        public double MaxLength { get; set; }
+        public float MaxLength { get; set; }
     }
 }

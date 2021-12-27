@@ -2,7 +2,7 @@
 {
     public class Angle
     {
-        public Angle(double value)
+        public Angle(float value)
         {
             Value = ToCyclicAngle(value);
         }
@@ -16,9 +16,9 @@
         public static bool operator ==(Angle a, Angle b) => a.Value == b.Value;
         public static bool operator !=(Angle a, Angle b) => a.Value != b.Value;
 
-        public static implicit operator double(Angle a) => a.Value;
+        public static implicit operator float(Angle a) => a.Value;
 
-        public double Value { get; }
+        public float Value { get; }
 
         public Angle Opposite => new Angle(Constants.PI2 - Value);
 
@@ -44,12 +44,12 @@
             return -1937169414 + Value.GetHashCode();
         }
 
-        public static bool IsReflectAngle(double angle)
+        public static bool IsReflectAngle(float angle)
         {
             return angle > Constants.PI;
         }
 
-        public static double ToCyclicAngle(double angle)
+        public static float ToCyclicAngle(float angle)
         {
             if (angle >= 0)
                 return angle % Constants.PI2;

@@ -9,7 +9,7 @@
 
     public partial class WorldUtils
     {
-        public static Entity SimpleTorus(EntityType entityType, Vector color, Vector origon, double radius1, double radius2, int segments1, int segments2)
+        public static Entity SimpleTorus(EntityType entityType, Vector color, Vector origon, float radius1, float radius2, int segments1, int segments2)
         {
             var polygons = new List<Polygon>();
 
@@ -20,8 +20,8 @@
             {
                 var c1 = (c0 == segments1 - 1) ? 0 :  c0 + 1;
 
-                var cc0 = new Vector(Math.Cos(c0 * cStepSize), Math.Sin(c0 * cStepSize), 0);
-                var cc1 = new Vector(Math.Cos(c1 * cStepSize), Math.Sin(c1 * cStepSize), 0);
+                var cc0 = new Vector((float)Math.Cos(c0 * cStepSize), (float)Math.Sin(c0 * cStepSize), 0);
+                var cc1 = new Vector((float)Math.Cos(c1 * cStepSize), (float)Math.Sin(c1 * cStepSize), 0);
 
                 var cc0r = CartesianUtils.Rotate(cc0 % Settings.Unit[Axis.Z], pStepSize);
                 var cc1r = CartesianUtils.Rotate(cc1 % Settings.Unit[Axis.Z], pStepSize);
