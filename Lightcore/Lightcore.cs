@@ -52,8 +52,7 @@
             application.ProcessorStack.Add(new DarkProcessor());
             application.ProcessorStack.Add(new ViewProcessor(ViewPictureBox, 100));
 
-            // Used for debugging, will output statistics
-            
+            // Used for debugging, will output statistics           
             // application.ProcessorStack.Add(new StatisticsProcessor()); 
         }
 
@@ -65,7 +64,7 @@
         public WorldBuilder GetWorldBuilder()
         {
             // Register your worldbuilder here
-            return new ImageWorld(ImageTextureStore.Get("Cat").ImageTextureType.Image);
+            return new RotatingTorusWorld();
         }
 
         void Status(object sender, string status)
