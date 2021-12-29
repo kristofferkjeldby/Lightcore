@@ -6,6 +6,7 @@
     using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
     using Lightcore.Worlds.Extensions;
+    using Lightcore.Worlds.Helper;
     using Lightcore.Worlds.Models;
     using System;
     using System.Collections.Generic;
@@ -25,28 +26,19 @@
 
             var bitmap = ImageTextureStore.Get("Moon").ImageTextureType.Bitmap;
 
-            Map = new Tuple<float, Vector>[bitmap.Width, bitmap.Height];
-
-            for (int x = 0; x < Map.GetLength(0); x++)
-            {
-                for (int y = 0; y < Map.GetLength(1); y++)
-                {
-                    Map[x, y] =
-                        new Tuple<float, Vector>
-                        (
-                            bitmap.GetPixel(x, y).GetBrightness() * 5,
-                            bitmap.GetPixel(x, y).ToVector()
-                        );
-                }
-            }
+            Map = MapHelper.CreateMap(
+                bitmap.Width,
+                bitmap.Height,
+                (x, y) => bitmap.GetPixel(x, y).GetBrightness() * 5,
+                (x, y) => bitmap.GetPixel(x, y).ToVector()
+            );
 
             PreviewMap = Map.Reduce(PreviewResolution);
         }
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            AddFiltered(entities, renderMode, EntityType.Preview, () => WorldUtils.Sphere(EntityType.Preview, new Vector(0, 0, 0), 200, PreviewMap, ColorTextureStore.ColorTexture));
-            AddFiltered(entities, renderMode, EntityType.World, () => WorldUtils.Sphere(EntityType.World, new Vector(0, 0, 0), 200, Map, ColorTextureStore.ColorTexture));
+            entities.Add(Shapes.Sphere(renderMode, new Vector(0, 0, 0), 100, Map, ColorTextureStore.ColorTexture));
 
             lights.Add
             (

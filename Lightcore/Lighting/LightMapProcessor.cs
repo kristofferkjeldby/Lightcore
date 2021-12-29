@@ -10,7 +10,7 @@
 
     public class LightMapProcessor : Processor
     {
-        public override ProcessorMetadata Metadata => new ProcessorMetadata("Lightmap processor", false, EntityType.Preview, EntityType.World);
+        public override ProcessorMetadata Metadata => new ProcessorMetadata("Lightmap processor", false, EntityType.World);
 
         public override void PreProcessor(RenderArgs args)
         {

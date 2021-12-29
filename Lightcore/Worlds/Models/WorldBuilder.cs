@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using Lightcore.Lighting.Models;
     using Lightcore.Processors.Models;
-    using System;
 
     public abstract class WorldBuilder
     {
@@ -28,12 +27,6 @@
                 entities,
                 lights
             );
-        }
-
-        public static void AddFiltered<T>(List<T> entities, RenderMode renderMode, EntityType entityType, Func<T> func)
-        {
-            if (renderMode.EntityTypeFilter.Contains(entityType))
-                entities.Add(func());
         }
     }
 }

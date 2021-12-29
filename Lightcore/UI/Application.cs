@@ -11,7 +11,6 @@
     public class Application
     {
         public World PreprocessedWorld { get; set; }
-        public World ProcessedWorld { get; set; }
         public World PreprocessedPreviewWorld { get; set; }
         public World ProcessedPreviewWorld { get; set; }
         public World Camera { get; set; }
@@ -63,7 +62,7 @@
             CancellationTokenSource = new CancellationTokenSource();
             OnSuspendChanged(true);
             task = Task.Run(() => RenderService.Process(CancellationTokenSource.Token, animateStep, filename), CancellationTokenSource.Token);
-            task.ContinueWith(t => OnSuspendChanged(false));
+            task.ContinueWith(t => OnSuspendChanged(false, t));
         }
 
         public void Animate()
@@ -73,14 +72,14 @@
             task = Task.Run(() =>
             {
                 var result = false;
-                for (int animateStep = 0; animateStep < Settings.AnimateMaxSteps; animateStep++)
+                for (int animateStep = 258; animateStep < Settings.AnimateMaxSteps; animateStep++)
                 {
                     var filename = string.Concat(Settings.AnimateFilename, animateStep, ".jpg");
                     result = RenderService.Process(CancellationTokenSource.Token, animateStep, filename);
                 }
                 return result;
             }, CancellationTokenSource.Token);
-            task.ContinueWith(t => OnSuspendChanged(false));
+            task.ContinueWith(t => OnSuspendChanged(false, t));
         }
 
         public void ProcessPreview(int animateStep)
@@ -88,11 +87,16 @@
             CancellationTokenSource = new CancellationTokenSource();
             OnSuspendChanged(true);
             task = Task.Run(() => RenderService.ProcessPreview(CancellationTokenSource.Token, animateStep));
-            task.ContinueWith(t => OnSuspendChanged(false));
+            task.ContinueWith(t => OnSuspendChanged(false, t));
         }
 
-        public bool OnSuspendChanged(bool suspended)
+        public bool OnSuspendChanged(bool suspended, Task task = null)
         {
+            if (task?.IsFaulted ?? false)
+            {
+                OnStatusChanged("Failed: " + task.Exception.InnerExceptions[0]?.Message);
+            }
+
             SleepService.Suspend(suspended);
             KeyboardService.Suspend(suspended);
             SuspendChanged?.Invoke(this, suspended);

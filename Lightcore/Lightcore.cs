@@ -1,8 +1,9 @@
 ﻿namespace Lightcore
 {
     using Lightcore.Common.Models;
+    using Lightcore.Debug;
     using Lightcore.Lighting;
-    using Lightcore.Processors.Models;
+    using Lightcore.Textures;
     using Lightcore.View;
     using Lightcore.Viewer;
     using Lightcore.Worlds;
@@ -35,12 +36,15 @@
             CancelRenderButton.Click += new EventHandler(application.ButtonService.OnCancelRenderButton);
 
             // Enable this processor will render shadows
+            // This processor is slow, and I am working on a different
+            // approach :(
             // application.PreprocessorStack.Add(new LightMapProcessor()); 
 
             application.PreprocessorStack.Add(new LightProcessor());
             
-            // Used for debugging, will render normals
-            // application.PreprocessorStack.Add(new NormalProcessor()); 
+            // Used for debugging, will render normals   
+            // Remember to set debug = true in the settings file
+            //application.PreprocessorStack.Add(new NormalProcessor()); 
 
             application.ProcessorStack.Add(new ShineProcessor());
             application.ProcessorStack.Add(new ProjectProcessor());
@@ -49,6 +53,7 @@
             application.ProcessorStack.Add(new ViewProcessor(ViewPictureBox, 100));
 
             // Used for debugging, will output statistics
+            
             // application.ProcessorStack.Add(new StatisticsProcessor()); 
         }
 
@@ -59,7 +64,8 @@
 
         public WorldBuilder GetWorldBuilder()
         {
-            return new RotatingMarsWorld();
+            // Register your worldbuilder here
+            return new ImageWorld(ImageTextureStore.Get("Cat").ImageTextureType.Image);
         }
 
         void Status(object sender, string status)

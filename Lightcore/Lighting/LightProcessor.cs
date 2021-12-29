@@ -4,13 +4,12 @@
     using Lightcore.Lighting.Models;
     using Lightcore.Processors.Models;
     using Lightcore.Textures.Models;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     public class LightProcessor : Processor
     {
-        public override ProcessorMetadata Metadata => new ProcessorMetadata("Light processor", false, EntityType.Preview, EntityType.World);
+        public override ProcessorMetadata Metadata => new ProcessorMetadata("Light processor", false, EntityType.World);
         private LightMap lightMap;
         private readonly int generation;
         private List<Light> lights;

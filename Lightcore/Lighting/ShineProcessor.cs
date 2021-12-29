@@ -10,7 +10,7 @@
 
     public class ShineProcessor : Processor
     {
-        public override ProcessorMetadata Metadata => new ProcessorMetadata("Shine processor", false, EntityType.Preview, EntityType.World);
+        public override ProcessorMetadata Metadata => new ProcessorMetadata("Shine processor", false, EntityType.World);
         private Vector viewer;
         private Dictionary<Guid, List<Light>> reflections;
 

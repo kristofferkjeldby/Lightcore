@@ -3,7 +3,6 @@
     public enum  EntityType
     {
         World,
-        Preview,
         Debug
     }
 }

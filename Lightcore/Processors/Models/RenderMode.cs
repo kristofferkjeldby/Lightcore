@@ -10,6 +10,8 @@
             EntityTypeFilter = new List<EntityType>();
         }
 
+        public bool Preview { get; set; }
+
         public List<EntityType> EntityTypeFilter { get; }
 
         public bool Debug { get; set; }

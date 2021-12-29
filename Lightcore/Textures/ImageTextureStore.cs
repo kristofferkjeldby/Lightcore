@@ -19,6 +19,7 @@
                 { "Moon", new ImageTextureType(Image.FromFile("./Textures/Images/Moon.png")) },
                 { "MarsColor", new ImageTextureType(Image.FromFile("./Textures/Images/MarsColor.png")) },
                 { "MarsHeight", new ImageTextureType(Image.FromFile("./Textures/Images/MarsHeight.png")) },
+                { "MarsAtmosphere", new ImageTextureType(Image.FromFile("./Textures/Images/MarsAtmosphere.jpg")) },
                 { "Dots", new ImageTextureType(Image.FromFile("./Textures/Images/Dots.jpg")) },
                 { "Leopard", new ImageTextureType(Image.FromFile("./Textures/Images/Leopard.jpg")) },
                 { "Doughnut", new ImageTextureType(Image.FromFile("./Textures/Images/Doughnut.jpg")) },

@@ -17,6 +17,6 @@
             return polygon;
         }
 
-        public override ProcessorMetadata Metadata => new ProcessorMetadata("Dark processor", false, EntityType.Preview, EntityType.World);
+        public override ProcessorMetadata Metadata => new ProcessorMetadata("Dark processor", false, EntityType.World);
     }
 }

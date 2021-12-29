@@ -18,7 +18,7 @@
             var alpha = byte.MaxValue - CommonUtils.Limit(transparency, 0, 1) * byte.MaxValue;
 
             return Color.FromArgb(
-                //CommonUtils.ToInt(alpha),
+                CommonUtils.ToInt(alpha),
                 CommonUtils.ToInt(limited[0]),
                 CommonUtils.ToInt(limited[1]),
                 CommonUtils.ToInt(limited[2])

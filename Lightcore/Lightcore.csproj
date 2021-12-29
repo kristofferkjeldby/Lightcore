@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Common\CommonUtils\Float.cs" />
     <Compile Include="Common\CommonUtils\Trigometry.cs" />
+    <Compile Include="Debug\NormalProcessor.cs" />
+    <Compile Include="Debug\StatisticsProcessor.cs" />
     <Compile Include="Textures\ColorTextureStore.cs" />
     <Compile Include="Textures\Gradient\Models\ColorPoint.cs" />
     <Compile Include="Textures\Gradient\Models\Gradient.cs" />
@@ -79,7 +81,6 @@
     <Compile Include="Common\Models\EntityType.cs" />
     <Compile Include="Common\Models\PolygonType.cs" />
     <Compile Include="Common\Spherical\Models\SphericalTriangle.cs" />
-    <Compile Include="Common\Models\Triangle.cs" />
     <Compile Include="Common\CommonUtils\Transformation.cs" />
     <Compile Include="Common\Spherical\SphericalUtils\Triangulation.cs" />
     <Compile Include="Constants.cs" />
@@ -109,7 +110,6 @@
     <Compile Include="Processors\RenderModeFactory.cs" />
     <Compile Include="Textures\Models\SimpleTexture.cs" />
     <Compile Include="Textures\Models\LightableTexture.cs" />
-    <Compile Include="Textures\TextureProcessor.cs" />
     <Compile Include="Textures\Extensions\ColorExtension.cs" />
     <Compile Include="Common\Models\Axis.cs" />
     <Compile Include="Common\Cartesian\Models\Line.cs" />
@@ -144,27 +144,25 @@
     <Compile Include="Common\Models\Polygon.cs" />
     <Compile Include="Viewer\Models\Drawer.cs" />
     <Compile Include="Viewer\ViewProcessor.cs" />
+    <Compile Include="Worlds\Enumerators\ColorEnumerator.cs" />
     <Compile Include="Worlds\Extensions\MapExtensions.cs" />
     <Compile Include="Worlds\Models\WorldBuilder.cs" />
     <Compile Include="Worlds\RotatingMarsWorld.cs" />
-    <Compile Include="Worlds\SurfaceWorld.cs" />
     <Compile Include="Worlds\ShadowWorld.cs" />
     <Compile Include="Worlds\MoonWorld.cs" />
     <Compile Include="Worlds\SphereWorld.cs" />
     <Compile Include="Worlds\ImageWorld.cs" />
-    <Compile Include="Worlds\FlatWorld.cs" />
-    <Compile Include="Worlds\Enumerators\ColorEnumerator.cs" />
     <Compile Include="Worlds\RotatingTorusWorld.cs" />
-    <Compile Include="Worlds\WorldUtils\SimpleSphere.cs" />
-    <Compile Include="Worlds\WorldUtils\SimplyTorus.cs" />
-    <Compile Include="Worlds\WorldUtils\Torus.cs" />
-    <Compile Include="Worlds\WorldUtils\Sphere.cs" />
-    <Compile Include="Worlds\WorldUtils\Line.cs" />
-    <Compile Include="Worlds\WorldUtils\Box.cs" />
-    <Compile Include="Worlds\WorldUtils\Square.cs" />
-    <Compile Include="Worlds\WorldUtils\SimpleSurface.cs" />
-    <Compile Include="Worlds\WorldUtils\Surface.cs" />
-    <Compile Include="Worlds\WorldUtils\Cylinder.cs" />
+    <Compile Include="Worlds\Shapes\SimpleSphere.cs" />
+    <Compile Include="Worlds\Shapes\SimplyTorus.cs" />
+    <Compile Include="Worlds\Helpers\Map.cs" />
+    <Compile Include="Worlds\Shapes\Torus.cs" />
+    <Compile Include="Worlds\Shapes\Sphere.cs" />
+    <Compile Include="Worlds\Shapes\Box.cs" />
+    <Compile Include="Worlds\Shapes\Square.cs" />
+    <Compile Include="Worlds\Shapes\SimpleSurface.cs" />
+    <Compile Include="Worlds\Shapes\Surface.cs" />
+    <Compile Include="Worlds\Shapes\Cylinder.cs" />
     <EmbeddedResource Include="Lightcore.resx">
       <DependentUpon>Lightcore.cs</DependentUpon>
     </EmbeddedResource>
@@ -219,6 +217,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Images\Marble.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\Images\MarsAtmosphere.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Images\MarsColor.png">

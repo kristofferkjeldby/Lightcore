@@ -7,6 +7,7 @@
     using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
     using Lightcore.Worlds.Extensions;
+    using Lightcore.Worlds.Helper;
     using Lightcore.Worlds.Models;
     using System;
     using System.Collections.Generic;
@@ -14,46 +15,27 @@
 
     public class ImageWorld : WorldBuilder
     {
-        public Bitmap Image { get; set; }
-
-        public int Resolution { get; set; }
-
-        public int PreviewResolution { get; set; }
-
         public Tuple<float, Vector>[,] Map { get; set; }
+        public object MapHelpers { get; }
 
-        public Tuple<float, Vector>[,] PreviewMap { get; set; }
-
-        public ImageWorld(Image image, int previewResolution = 40)
+        public ImageWorld(Image image)
         {
-            Image = new Bitmap(image);
-            Resolution = Math.Min(image.Width, image.Height);
-            PreviewResolution = previewResolution;
+            var bitmap = new Bitmap(image);
 
-            var colorStepSize = (float)byte.MaxValue / Resolution;
+            // As the zero coordinate is in the low bottom of the screen flipping the image is needed.
+            bitmap.RotateFlip(RotateFlipType.Rotate180FlipX);
 
-            Map = new Tuple<float, Vector>[Resolution, Resolution];
-
-            for (int x = 0; x < Map.GetLength(0); x++)
-            {
-                for (int y = 0; y < Map.GetLength(1); y++)
-                {
-                    Map[x, y] =
-                        new Tuple<float, Vector>
-                        (
-                            CommonUtils.Sin(x / 20) * 20,
-                            Image.GetPixel(x, Resolution - y - 1).ToVector()
-                        );
-                }
-            }
-
-            PreviewMap = Map.Reduce(PreviewResolution);
+            Map = MapHelper.CreateMap(
+                bitmap.Width,
+                bitmap.Height,
+                (x, y) => CommonUtils.Sin(x / 30f) * 70,
+                (x, y) => bitmap.GetPixel(x, y).ToVector()
+            );
         }
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            AddFiltered(entities, renderMode, EntityType.Preview, () => WorldUtils.Surface(EntityType.Preview, new Vector(0, 0, 0), 300, 300, PreviewMap, ColorTextureStore.ColorTexture));
-            AddFiltered(entities, renderMode, EntityType.World, () => WorldUtils.Surface(EntityType.World, new Vector(0, 0, 0), 300, 300, Map, ColorTextureStore.ColorTexture));
+            entities.Add(Shapes.Surface(renderMode, new Vector(0, 0, 0), 300, 300, Map, ColorTextureStore.ShinyTexture));
 
             lights.Add(
                 new AngleLight

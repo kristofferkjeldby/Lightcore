@@ -23,8 +23,7 @@
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            AddFiltered(entities, renderMode, EntityType.Preview, () => WorldUtils.SimpleSphere(EntityType.Preview, Color.Red.ToVector(), new Vector(0, 0, 0), 150, PreviewResolution, ColorTextureStore.ShinyTexture));
-            AddFiltered(entities, renderMode, EntityType.World, () => WorldUtils.SimpleSphere(EntityType.World, Color.Red.ToVector(), new Vector(0, 0, 0), 150, Resolution, ColorTextureStore.ShinyTexture));
+            entities.Add(Shapes.SimpleSphere(renderMode, Color.Red.ToVector(), new Vector(0, 0, 0), 150, Resolution, ColorTextureStore.ShinyTexture));
 
             lights.Add
             (

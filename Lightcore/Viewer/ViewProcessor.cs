@@ -17,7 +17,7 @@
         Vector transpose;
         Matrix scale;
 
-        public override ProcessorMetadata Metadata => new ProcessorMetadata("View processor", false, EntityType.Debug, EntityType.Preview, EntityType.World);
+        public override ProcessorMetadata Metadata => new ProcessorMetadata("View processor", false, EntityType.Debug, EntityType.World);
 
         public ViewProcessor(PictureBox pictureBox, float maxX)
         {

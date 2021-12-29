@@ -13,9 +13,9 @@
                 renderMode.Debug = true;
 
             if (preview)
-                renderMode.EntityTypeFilter.Add(EntityType.Preview);
-            else
-                renderMode.EntityTypeFilter.Add(EntityType.World);
+                renderMode.Preview = true;
+
+            renderMode.EntityTypeFilter.Add(EntityType.World);
 
             if (debug)
                 renderMode.EntityTypeFilter.Add(EntityType.Debug);

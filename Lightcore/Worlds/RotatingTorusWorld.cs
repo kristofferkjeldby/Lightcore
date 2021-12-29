@@ -9,6 +9,7 @@
     using Lightcore.Textures.Extensions;
     using Lightcore.Textures.Gradients.Models;
     using Lightcore.Worlds.Extensions;
+    using Lightcore.Worlds.Helper;
     using Lightcore.Worlds.Models;
     using System;
     using System.Collections.Generic;
@@ -16,18 +17,12 @@
 
     public class RotatingTorusWorld : WorldBuilder
     {
-        public int Resolution { get; set; }
-
-        public int PreviewResolution { get; set; }
-
         public Tuple<float, Vector>[,] Map { get; set; }
 
         public Tuple<float, Vector>[,] PreviewMap { get; set; }
 
         public RotatingTorusWorld(int resolution = 200, int previewResolution = 20, int animateStep = 0) : base()
         {
-            Resolution = resolution;
-            PreviewResolution = previewResolution;
 
             // Setup gradient
             var gradient = new Gradient(Color.Blue.ToVector(), Color.Blue.ToVector());
@@ -35,21 +30,14 @@
             gradient.ColorPoints.Add(new ColorPoint(Color.Yellow.ToVector(), 0.50f, true));
             gradient.ColorPoints.Add(new ColorPoint(Color.Green.ToVector(), 0.75f, true));
 
-            Map = new Tuple<float, Vector>[resolution, resolution];
+            Map = MapHelper.CreateMap(
+                resolution,
+                resolution,
+                (x, y) => (float)Math.Sin(((8 * Constants.PI2) / resolution) * x) * 10,
+                (x, y) => gradient.GetColor((float)x / resolution)
+            );
 
-            for (int w = 0; w < resolution; w++)
-            {
-                var displacement = (float)Math.Sin(((8 * Constants.PI2) / resolution) * w) * 10;
-
-                var color = gradient.GetColor((float)w / resolution);
-
-                for (int h = 0; h < resolution; h++)
-                {
-                    Map[w, h] = new Tuple<float, Vector>(displacement, color);
-                }
-            }
-
-            PreviewMap = Map.Reduce(PreviewResolution);
+            PreviewMap = Map.Reduce(previewResolution);
         }
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
@@ -58,8 +46,7 @@
             var angle = (Constants.PI2 / Settings.AnimateMaxSteps) * animateStep;
             var rotate = CartesianUtils.Rotate(new Vector(0, 1, 0).Unit(), angle);
 
-            AddFiltered(entities, renderMode, EntityType.Preview, () => WorldUtils.Torus(EntityType.Preview, new Vector(0, 0, 0), 90, 50, PreviewMap, ColorTextureStore.ShinyTexture).Transform(rotate));
-            AddFiltered(entities, renderMode, EntityType.World, () => WorldUtils.Torus(EntityType.World, new Vector(0, 0, 0), 90, 50, Map, ColorTextureStore.ShinyTexture).Transform(rotate));
+            entities.Add(Shapes.Torus(renderMode, new Vector(0, 0, 0), 90, 50, Map, ColorTextureStore.ShinyTexture).Transform(rotate));
 
             lights.Add
             (

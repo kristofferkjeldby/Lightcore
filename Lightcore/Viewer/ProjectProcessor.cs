@@ -19,7 +19,7 @@
             return transformation(vector);
         }
 
-        public override ProcessorMetadata Metadata => new ProcessorMetadata("Project processor", false, EntityType.Debug, EntityType.Preview, EntityType.World);
+        public override ProcessorMetadata Metadata => new ProcessorMetadata("Project processor", false, EntityType.Debug, EntityType.World);
     }
 }
 

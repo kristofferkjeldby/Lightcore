@@ -6,7 +6,7 @@
 
     public class ScaleProcessor : Processor
     {
-        public override ProcessorMetadata Metadata => new ProcessorMetadata("Scale processor", false, EntityType.Debug, EntityType.Preview, EntityType.World);
+        public override ProcessorMetadata Metadata => new ProcessorMetadata("Scale processor", false, EntityType.Debug, EntityType.World);
 
         public override Vector VectorProcessor(Vector vector, RenderArgs args)
         {
