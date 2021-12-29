@@ -44,7 +44,7 @@ This worldbuilder simply places a red sphere in the middle of the screen.
 
 You will need to register your world in Lightcore.cs and then start the application. The application support a low resolution preview mode. 
 
-![Test world](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/TestWorld.jpg)
+![Test world](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/Testworld.jpg)
 
 **The processor stacks**
 
