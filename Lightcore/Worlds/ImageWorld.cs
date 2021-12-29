@@ -34,7 +34,7 @@
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(Shapes.Surface(new Vector(0, 0, 0), 300, 300, Map, ColorTextureStore.ShinyTexture, renderMode));
+            entities.Add(Shapes.Surface(new Vector(-100, -100, 0), new Vector(200, 0, 0), new Vector(0, 200, 0), Map, ColorTextureStore.ShinyTexture, renderMode));
 
             lights.Add(
                 new AngleLight
@@ -42,7 +42,7 @@
                     Color.White.ToVector(),
                     new Vector(-50f, -50f, 600f),
                     new Vector(1, 1, -5),
-                    400,
+                    500,
                     Constants.PI
                 )
             );
