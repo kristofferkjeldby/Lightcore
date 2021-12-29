@@ -6,7 +6,7 @@
 
     public partial class Shapes
     {
-        public static Entity Square(Vector origin, Vector x, Vector y, Texture texture)
+        public static Entity Square(Vector origin, Vector x, Vector y, Texture texture, RenderMode renderMode = null)
         {
             var diagonal = origin + x + y;
 

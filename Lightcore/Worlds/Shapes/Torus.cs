@@ -10,9 +10,9 @@
 
     public partial class Shapes
     {
-        public static Entity Torus(RenderMode renderMode, Vector origon, float radius1, float radius2, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture)
+        public static Entity Torus(Vector origon, float radius1, float radius2, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture, RenderMode renderMode = null)
         {
-            if (renderMode.Preview)
+            if (renderMode?.Preview ?? false)
                 map = map.Reduce(Settings.PreviewResolution);
 
             var polygons = new Polygon[map.Size() * 2];

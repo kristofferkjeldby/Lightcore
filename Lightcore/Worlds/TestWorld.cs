@@ -9,18 +9,18 @@
     using System.Collections.Generic;
     using System.Drawing;
 
-    public class SphereWorld : WorldBuilder
+    public class TestWorld : WorldBuilder
     {
-        public int Resolution { get; set; }
+        Entity sphere;
 
-        public SphereWorld(int resolution = 200) : base()
+        public TestWorld()
         {
-            Resolution = resolution;
+            sphere = Shapes.SimpleSphere(Color.Red.ToVector(), new Vector(0, 0, 0), 150, 200, ColorTextureStore.ShinyTexture);
         }
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(Shapes.SimpleSphere(Color.Red.ToVector(), new Vector(0, 0, 0), 150, Resolution, ColorTextureStore.ShinyTexture, renderMode));
+            entities.Add(sphere.Clone());
 
             lights.Add
             (
@@ -31,7 +31,6 @@
                     400
                 )
             );
-
         }
     }
 }

@@ -10,9 +10,9 @@
 
     public partial class Shapes
     {
-        public static Entity SimpleTorus(RenderMode renderMode, Vector color, Vector origon, float radius1, float radius2, int segments1, int segments2, Func<Vector, Texture> texture)
+        public static Entity SimpleTorus(Vector color, Vector origon, float radius1, float radius2, int segments1, int segments2, Func<Vector, Texture> texture, RenderMode renderMode = null)
         {
-            if (renderMode.Preview)
+            if (renderMode?.Preview ?? false)
                 segments1 = segments2 = Settings.PreviewResolution;
 
             var polygons = new List<Polygon>();

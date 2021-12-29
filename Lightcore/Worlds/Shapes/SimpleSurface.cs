@@ -8,9 +8,9 @@
 
     public partial class Shapes
     {
-        public static Entity SimpleSurface(RenderMode renderMode, Vector color, Vector origin, float width, float height, int resolution, Func<Vector, Texture> texture)
+        public static Entity SimpleSurface(Vector color, Vector origin, float width, float height, int resolution, Func<Vector, Texture> texture, RenderMode renderMode = null)
         {
-            if (renderMode.Preview)
+            if (renderMode?.Preview ?? false)
                 resolution = Settings.PreviewResolution;
 
             var polygons = new List<Polygon>();

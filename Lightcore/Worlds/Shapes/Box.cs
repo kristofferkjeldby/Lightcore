@@ -7,7 +7,7 @@
 
     public partial class Shapes
     {
-        public static Entity Box(RenderMode renderMode, Vector origin, Vector x, Vector y, Vector z, Texture texture)
+        public static Entity Box(Vector origin, Vector x, Vector y, Vector z, Texture texture, RenderMode renderMode = null)
         {
             var polygons = new List<Polygon>();
 

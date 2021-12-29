@@ -10,9 +10,9 @@
 
     public partial class Shapes
     {
-        public static Entity Sphere(RenderMode renderMode, Vector origon, float radius, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture)
+        public static Entity Sphere(Vector origon, float radius, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture, RenderMode renderMode = null)
         {
-            if (renderMode.Preview)
+            if (renderMode?.Preview ?? false)
                 map = map.Reduce(Settings.PreviewResolution);
 
             var polygons = new List<Polygon>();

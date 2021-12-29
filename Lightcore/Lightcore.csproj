@@ -150,6 +150,7 @@
     <Compile Include="Worlds\RotatingMarsWorld.cs" />
     <Compile Include="Worlds\ShadowWorld.cs" />
     <Compile Include="Worlds\MoonWorld.cs" />
+    <Compile Include="Worlds\TestWorld.cs" />
     <Compile Include="Worlds\SphereWorld.cs" />
     <Compile Include="Worlds\ImageWorld.cs" />
     <Compile Include="Worlds\RotatingTorusWorld.cs" />

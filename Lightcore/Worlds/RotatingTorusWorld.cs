@@ -41,7 +41,7 @@
             var angle = (Constants.PI2 / Settings.AnimateMaxSteps) * animateStep;
             var rotate = CartesianUtils.Rotate(new Vector(0, 1, 0).Unit(), angle);
 
-            entities.Add(Shapes.Torus(renderMode, new Vector(0, 0, 0), 90, 50, Map, ColorTextureStore.ShinyTexture).Transform(rotate));
+            entities.Add(Shapes.Torus(new Vector(0, 0, 0), 90, 50, Map, ColorTextureStore.ShinyTexture, renderMode).Transform(rotate));
 
             lights.Add
             (

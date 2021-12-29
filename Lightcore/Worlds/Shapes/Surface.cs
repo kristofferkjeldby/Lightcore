@@ -9,9 +9,9 @@
 
     public partial class Shapes
     {
-        public static Entity Surface(RenderMode renderMode, Vector origin, float width, float height, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture)
+        public static Entity Surface(Vector origin, float width, float height, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture, RenderMode renderMode = null)
         {
-            if (renderMode.Preview)
+            if (renderMode?.Preview ?? false)
                 map = map.Reduce(Settings.PreviewResolution);
 
             var polygons = new List<Polygon>();

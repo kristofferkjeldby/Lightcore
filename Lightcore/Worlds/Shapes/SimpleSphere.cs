@@ -9,9 +9,9 @@
 
     public partial class Shapes
     {
-        public static Entity SimpleSphere(RenderMode renderMode, Vector color, Vector origon, float radius, int segments, Func<Vector, Texture> texture)
+        public static Entity SimpleSphere(Vector color, Vector origon, float radius, int segments, Func<Vector, Texture> texture, RenderMode renderMode = null)
         {
-            if (renderMode.Preview)
+            if (renderMode?.Preview ?? false)
                 segments = Settings.PreviewResolution;
 
             var polygons = new List<Polygon>();

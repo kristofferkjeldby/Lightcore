@@ -38,7 +38,7 @@
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(Shapes.Sphere(renderMode, new Vector(0, 0, 0), 100, Map, ColorTextureStore.ColorTexture));
+            entities.Add(Shapes.Sphere(new Vector(0, 0, 0), 100, Map, ColorTextureStore.ColorTexture, renderMode));
 
             lights.Add
             (

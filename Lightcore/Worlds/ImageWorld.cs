@@ -6,7 +6,6 @@
     using Lightcore.Processors.Models;
     using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
-    using Lightcore.Worlds.Extensions;
     using Lightcore.Worlds.Helper;
     using Lightcore.Worlds.Models;
     using System;
@@ -35,7 +34,7 @@
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(Shapes.Surface(renderMode, new Vector(0, 0, 0), 300, 300, Map, ColorTextureStore.ShinyTexture));
+            entities.Add(Shapes.Surface(new Vector(0, 0, 0), 300, 300, Map, ColorTextureStore.ShinyTexture, renderMode));
 
             lights.Add(
                 new AngleLight

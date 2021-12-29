@@ -62,7 +62,7 @@
         public WorldBuilder GetWorldBuilder()
         {
             // Register your worldbuilder here
-            return new RotatingTorusWorld();
+            return new TestWorld();
         }
 
         void Status(object sender, string status)

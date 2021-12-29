@@ -56,6 +56,6 @@
 
         public static int PreviewResolution = 40;
 
-        public static bool ShowStatus = false;
+        public static bool ShowStatus = true;
     }
 }

@@ -9,50 +9,42 @@ Please note that Lightcore is *not* a raytracer - initial it started as a game e
 To get started, I suggest downloading the application. You define your world in a WorldBuilder:
 
 ```
-    namespace Lightcore.Worlds
+namespace Lightcore.Worlds
+{
+    using Lightcore.Common.Models;
+    using Lightcore.Lighting.Models;
+    using Lightcore.Processors.Models;
+    using Lightcore.Textures;
+    using Lightcore.Textures.Extensions;
+    using Lightcore.Worlds.Models;
+    using System.Collections.Generic;
+    using System.Drawing;
+
+    public class TestWorld : WorldBuilder
     {
-        using Lightcore.Common.Models;
-        using Lightcore.Lighting.Models;
-        using Lightcore.Processors.Models;
-        using Lightcore.Textures;
-        using Lightcore.Textures.Extensions;
-        using Lightcore.Worlds.Models;
-        using System.Collections.Generic;
-        using System.Drawing;
-    
-        public class TestWorld : WorldBuilder
+        public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            public int Resolution { get; set; }
-    
-            public override void Create(
-	            List<Entity> entities, 
-	            List<Light> lights, 
-	            RenderMode renderMode, 
-	            int animateStep = 0)
-            {
-                entities.Add(
-                Shapes.SimpleSphere(renderMode, 
-                Color.Red.ToVector(), 
-                new Vector(0, 0, 0), 150, 200, 
-                ColorTextureStore.ShinyTexture));
-    
-                lights.Add
+            entities.Add(Shapes.SimpleSphere(Color.Red.ToVector(), new Vector(0, 0, 0), 150, 200, ColorTextureStore.ShinyTexture, renderMode));
+
+            lights.Add
+            (
+                new AmbientLight
                 (
-                    new AmbientLight
-                    (
-                        Color.White.ToVector(),
-                        new Vector(100, 100, 400),
-                        400
-                    )
-                );
-            }
+                    Color.White.ToVector(),
+                    new Vector(100, 100, 400),
+                    400
+                )
+            );
         }
     }
+}
 ```
 
 This worldbuilder simply places a red sphere in the middle of the screen.
 
 You will need to register your world in Lightcore.cs and then start the application. The application support a low resolution preview mode. 
+
+![Test world](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/TestWorld.jpg)
 
 **The processor stacks**
 
@@ -79,4 +71,45 @@ You will now be able to move around in the world using:
  - O - move forward 
  - L - move backwards
 
-The big drawback is that you will now have two worlds in memory, the one being processed and the stored "preview" world containing static lightning.
+The big drawback is that you will now have two worlds in memory, the one being processed and the stored preprocessed world containing static lightning.
+
+Another option is to create the entiries when the world is instantiated, and clone them for each frame:
+
+```
+namespace Lightcore.Worlds
+{
+    using Lightcore.Common.Models;
+    using Lightcore.Lighting.Models;
+    using Lightcore.Processors.Models;
+    using Lightcore.Textures;
+    using Lightcore.Textures.Extensions;
+    using Lightcore.Worlds.Models;
+    using System.Collections.Generic;
+    using System.Drawing;
+
+    public class TestWorld : WorldBuilder
+    {
+        Entity sphere;
+
+        public TestWorld()
+        {
+            sphere = Shapes.SimpleSphere(Color.Red.ToVector(), new Vector(0, 0, 0), 150, 200, ColorTextureStore.ShinyTexture);
+        }
+
+        public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
+        {
+            entities.Add(sphere.Clone());
+
+            lights.Add
+            (
+                new AmbientLight
+                (
+                    Color.White.ToVector(),
+                    new Vector(100, 100, 400),
+                    400
+                )
+            );
+        }
+    }
+}
+```
