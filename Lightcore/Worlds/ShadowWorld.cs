@@ -18,9 +18,7 @@
     {
         public Tuple<float, Vector>[,] Map { get; set; }
 
-        public Tuple<float, Vector>[,] PreviewMap { get; set; }
-
-        public ShadowWorld(int resolution = 400, int previewResolution = 40) : base()
+        public ShadowWorld(int resolution = 400) : base()
         {
             Map = new Tuple<float, Vector>[20, 20];
 
@@ -35,8 +33,6 @@
                 (x, y) => CommonUtils.Sin(x / 10f) * 20,
                 (x, y) => gradient.GetColor((float)y / resolution)
             );
-
-            PreviewMap = Map.Reduce(previewResolution);
         }
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)

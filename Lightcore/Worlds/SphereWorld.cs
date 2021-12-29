@@ -13,12 +13,9 @@
     {
         public int Resolution { get; set; }
 
-        public int PreviewResolution { get; set; }
-
-        public SphereWorld(int resolution = 200, int previewResolution = 40) : base()
+        public SphereWorld(int resolution = 200) : base()
         {
             Resolution = resolution;
-            PreviewResolution = previewResolution;
         }
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)

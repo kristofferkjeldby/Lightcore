@@ -8,7 +8,6 @@
     using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
     using Lightcore.Textures.Gradients.Models;
-    using Lightcore.Worlds.Extensions;
     using Lightcore.Worlds.Helper;
     using Lightcore.Worlds.Models;
     using System;
@@ -19,9 +18,7 @@
     {
         public Tuple<float, Vector>[,] Map { get; set; }
 
-        public Tuple<float, Vector>[,] PreviewMap { get; set; }
-
-        public RotatingTorusWorld(int resolution = 200, int previewResolution = 20, int animateStep = 0) : base()
+        public RotatingTorusWorld(int resolution = 200, int animateStep = 0) : base()
         {
 
             // Setup gradient
@@ -36,8 +33,6 @@
                 (x, y) => (float)Math.Sin(((8 * Constants.PI2) / resolution) * x) * 10,
                 (x, y) => gradient.GetColor((float)x / resolution)
             );
-
-            PreviewMap = Map.Reduce(previewResolution);
         }
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
