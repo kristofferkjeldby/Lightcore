@@ -4,7 +4,7 @@
 
 Lightcore is a 3D engine build with pure C#, without any frameworks. My motivation for writing Lightcore was not to make something usable, as the lack of hardware acceleration makes Lightcore inherently slow. It was however to explore the math behind 3D engines and make it available in a form that most C# developers would understand.
 
-![Mars rendered with transparent atmosphere](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/Transparent.png)
+![Mars rendered with exaggerated heightmap](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/Mars.jpg)
 
 Initial it started as a game engine, and you will find leftovers from this in e.g., the keyboard controls and the options to prerendering static lightning.
 
@@ -23,8 +23,6 @@ To get started, I suggest downloading the application. You define your world in 
     
         public class TestWorld : WorldBuilder
         {
-            public int Resolution { get; set; }
-    
             public override void Create(
 	            List<Entity> entities, 
 	            List<Light> lights, 
@@ -51,7 +49,7 @@ To get started, I suggest downloading the application. You define your world in 
     }
 ```
 
-This worldbuilder simply places a red sphere in the middle of the screen.
+This WorldBuilder simply places a red sphere in the middle of the screen. You can add more advanced shapes using the available library, or define you own. Lightcore supports both Cartesian and Spherical coodinates.
 
 You will need to register your world in Lightcore.cs and then start the application. The application support a low resolution preview mode. It also supports creating animations by calling the Create function increasing the animateStep. In that way, you can move stuff around in your world.
 
