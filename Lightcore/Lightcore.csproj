@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Cartesian\CartesianUtils\Rotate.cs" />
     <Compile Include="Common\CommonUtils\Float.cs" />
     <Compile Include="Common\CommonUtils\Trigometry.cs" />
     <Compile Include="Debug\NormalProcessor.cs" />
@@ -129,7 +130,6 @@
     <Compile Include="Textures\Extensions\ImageExtension.cs" />
     <Compile Include="Textures\Models\ImageTextureType.cs" />
     <Compile Include="Textures\ImageTextureStore.cs" />
-    <Compile Include="Common\Cartesian\CartesianUtils\Rotate.cs" />
     <Compile Include="Common\Cartesian\Extensions\VectorExtensions.cs" />
     <Compile Include="Common\Models\ReferenceFrame.cs" />
     <Compile Include="Common\Models\World.cs" />
@@ -159,11 +159,10 @@
     <Compile Include="Worlds\Helpers\Map.cs" />
     <Compile Include="Worlds\Shapes\Torus.cs" />
     <Compile Include="Worlds\Shapes\Sphere.cs" />
-    <Compile Include="Worlds\Shapes\Box.cs" />
-    <Compile Include="Worlds\Shapes\Square.cs" />
+    <Compile Include="Worlds\Shapes\SimpleBox.cs" />
+    <Compile Include="Worlds\Shapes\SimpleSquare.cs" />
     <Compile Include="Worlds\Shapes\SimpleSurface.cs" />
     <Compile Include="Worlds\Shapes\Surface.cs" />
-    <Compile Include="Worlds\Shapes\Cylinder.cs" />
     <EmbeddedResource Include="Lightcore.resx">
       <DependentUpon>Lightcore.cs</DependentUpon>
     </EmbeddedResource>

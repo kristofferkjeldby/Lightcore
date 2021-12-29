@@ -1,5 +1,7 @@
 ﻿namespace Lightcore.Worlds
 {
+    using Lightcore.Common;
+    using Lightcore.Common.Cartesian;
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
     using Lightcore.Processors.Models;
@@ -11,16 +13,24 @@
 
     public class TestWorld : WorldBuilder
     {
-        Entity sphere;
+        Entity box;
+        Entity surface;
 
         public TestWorld()
         {
-            sphere = Shapes.SimpleSphere(Color.Red.ToVector(), new Vector(0, 0, 0), 150, 200, ColorTextureStore.ShinyTexture);
+            box = Shapes.SimpleSurface(Color.Red.ToVector(), new Vector(-50, -50, 0), new Vector(100, 0, 0), new Vector(0, 100, 0), 2, ColorTextureStore.ShinyTexture);
+
+            // Move box (-50, -50, 0)
+            //box.Transform(v => v + new Vector(-50, -50, -00));
+
+
+
         }
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(sphere.Clone());
+
+            entities.Add(box.Clone());
 
             lights.Add
             (

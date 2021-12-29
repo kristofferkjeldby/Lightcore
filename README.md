@@ -6,7 +6,11 @@ Lightcore is a 3D engine build in pure C#, without any frameworks. My motivation
 
 Please note that Lightcore is *not* a raytracer - initial it started as a game engine, and you will find leftovers from this in e.g., the keyboard controls and the options to prerendering static lightning. It defines a world using polygons, which are processed for light, shadow an perspective and then displayed on the screen.
 
-To get started, I suggest downloading the application. You define your world in a WorldBuilder:
+To get started, I suggest downloading the application. 
+
+**Creating a world**
+
+You define your world via a WorldBuilder:
 
 ```
 namespace Lightcore.Worlds
@@ -45,6 +49,18 @@ This worldbuilder simply places a red sphere in the middle of the screen.
 You will need to register your world in Lightcore.cs and then start the application. The application support a low resolution preview mode. 
 
 ![Test world](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/Testworld.png)
+
+**The coordinate system and perspective settings**
+
+The coordinate system is placed in the center of the screen, with the x axis pointing to the right, the y axis pointing to the top, and the z-axis pointing _out of the screen_. 
+
+The viewer (camera) is placed at (0, 0, 200) looking into the screen (Settings.CameraRererenceFrame). 
+
+The scale is set to 100 (Settings.MaxX). This means that the x axis goes from -100 to 100. To calculate the perspective, another parameter is needed, that is the distance of the viewer to the screen (Settings.DistanceFromScreen). This determines the angle visible "through" the screen, and hence the rate in which objects are getting smaller. This is currently set to 300, estimating that the viewer sits a one and a half screen width from the screen. 
+
+Hence, if you screen is 40 cm wide, and you sit 60 cm from your screen a 100x100x100 box placed in origin would look like a 40 cubic centimeter box, placed 80 cm behind your screen. 
+
+The DistanceFromScreen settings might be a little tricky to understand: If your imaginary viewer is moved closer to the screen, objects in the imaginary world is getting smaller. This is because the angle visible though the screen increases, meaning that objects gets smaller faster with distance.
 
 **The processor stacks**
 
@@ -113,3 +129,5 @@ namespace Lightcore.Worlds
     }
 }
 ```
+
+The benefit here is still speed, the drawback are memory and also that the preview mode will no longer work.

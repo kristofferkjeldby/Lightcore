@@ -57,11 +57,11 @@
             var angle = (Constants.PI2 / Settings.AnimateMaxSteps) * animateStep;
             var rotateMars = CartesianUtils.Rotate(new Vector(0, 1, 0).Unit(), angle);
 
-            entities.Add(Shapes.Sphere(new Vector(0, 0, 0), 150, Map, ColorTextureStore.ColorTexture, renderMode).Transform(rotateMars));
+            entities.Add(Shapes.Sphere(new Vector(0, 0, 0), 100, Map, ColorTextureStore.ColorTexture, renderMode).Transform(rotateMars));
 
             if (Atmosphere)
             {
-                entities.Add(Shapes.Sphere(new Vector(0, 0, 0), 158, AtmosphereMap, color => new ColorTexture(color, 0.1f, 0.7f, 0.0f, 0.3f), renderMode).Transform(rotateMars));
+                entities.Add(Shapes.Sphere(new Vector(0, 0, 0), 100, AtmosphereMap, color => new ColorTexture(color, 0.1f, 0.7f, 0.0f, 0.3f), renderMode).Transform(rotateMars));
             }
 
             lights.Add

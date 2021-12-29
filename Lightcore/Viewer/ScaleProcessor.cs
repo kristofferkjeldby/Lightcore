@@ -2,7 +2,6 @@
 {
     using Lightcore.Common.Models;
     using Lightcore.Processors.Models;
-    using System.Diagnostics;
 
     public class ScaleProcessor : Processor
     {
@@ -10,8 +9,7 @@
 
         public override Vector VectorProcessor(Vector vector, RenderArgs args)
         {
-            var distanceFromViewer = Settings.DistanceFromScreen + vector[2];
-            var scale = Settings.DistanceFromScreen / distanceFromViewer;
+            var scale = Settings.DistanceFromScreen / (Settings.DistanceFromScreen + vector[2]);
             return new Vector(vector[0] * scale, vector[1] * scale, vector[2]);
         }
     }

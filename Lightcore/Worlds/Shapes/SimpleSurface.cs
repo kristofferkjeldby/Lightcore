@@ -8,19 +8,15 @@
 
     public partial class Shapes
     {
-        public static Entity SimpleSurface(Vector color, Vector origin, float width, float height, int resolution, Func<Vector, Texture> texture, RenderMode renderMode = null)
+        public static Entity SimpleSurface(Vector color, Vector origin, Vector axis1, Vector axis2, int resolution, Func<Vector, Texture> texture, RenderMode renderMode = null)
         {
             if (renderMode?.Preview ?? false)
                 resolution = Settings.PreviewResolution;
 
             var polygons = new List<Polygon>();
 
-            var xStepSize = width / resolution;
-            var yStepSize = height / resolution;
-
-            var xOffset = origin[0] - width / 2;
-            var yOffset = origin[1] - height / 2;
-            var zOffset = origin[2];
+            var xStep = axis1 / resolution;
+            var yStep = axis2 / resolution;
 
             for (int x = 0; x < resolution - 1; x++)
             {
@@ -28,14 +24,16 @@
                 {
                     var guid = Guid.NewGuid();
 
+                    var start = origin + xStep * x + yStep * y;
+
                     polygons.Add(
                         new Polygon
                         (
                             texture(color),
                             new Vector[] {
-                            new Vector(xOffset + xStepSize * x, yOffset + yStepSize * y, zOffset),
-                            new Vector(xOffset + xStepSize * (x+1), yOffset + yStepSize * y, zOffset),
-                            new Vector(xOffset + xStepSize * x, yOffset + yStepSize * (y+1), zOffset)
+                                start,
+                                start + xStep,
+                                start + yStep,
                             }
                             ,
                             guid
@@ -48,9 +46,9 @@
                             texture(color),
                             new Vector[]
                             {
-                                new Vector(xOffset + xStepSize * (x+1), yOffset + yStepSize * (y+1), zOffset),
-                                new Vector(xOffset + xStepSize * x, yOffset + yStepSize * (y+1), zOffset),
-                                new Vector(xOffset + xStepSize * (x+1), yOffset + yStepSize * y, zOffset)
+                                start + xStep + yStep,
+                                start + yStep,
+                                start + xStep,
                             },
                             guid
                          )

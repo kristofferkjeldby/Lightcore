@@ -7,7 +7,6 @@
     using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
     using Lightcore.Textures.Gradients.Models;
-    using Lightcore.Worlds.Extensions;
     using Lightcore.Worlds.Helper;
     using Lightcore.Worlds.Models;
     using System;

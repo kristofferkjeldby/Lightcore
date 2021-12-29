@@ -34,7 +34,7 @@
 
         public static float R = Constants.PI / 100f;
 
-        public static float DistanceFromScreen => 100;
+        public static float DistanceFromScreen => 300;
 
         public static float ViewDistance => 500;
 
@@ -57,5 +57,7 @@
         public static int PreviewResolution = 40;
 
         public static bool ShowStatus = true;
+
+        public static int MaxX = 100;
     }
 }

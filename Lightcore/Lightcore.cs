@@ -48,7 +48,7 @@
             application.ProcessorStack.Add(new ProjectProcessor());
             application.ProcessorStack.Add(new ScaleProcessor());
             application.ProcessorStack.Add(new DarkProcessor());
-            application.ProcessorStack.Add(new ViewProcessor(ViewPictureBox, 100));
+            application.ProcessorStack.Add(new ViewProcessor(ViewPictureBox, Settings.MaxX));
 
             // Used for debugging, will output statistics           
             // application.ProcessorStack.Add(new StatisticsProcessor()); 
@@ -62,7 +62,7 @@
         public WorldBuilder GetWorldBuilder()
         {
             // Register your worldbuilder here
-            return new TestWorld();
+            return new RotatingTorusWorld();
         }
 
         void Status(object sender, string status)
