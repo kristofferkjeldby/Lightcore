@@ -83,7 +83,7 @@
             // 
             this.StripStatusLabel.Name = "StripStatusLabel";
             this.StripStatusLabel.Size = new System.Drawing.Size(91, 17);
-            this.StripStatusLabel.Text = "StripStatusLabel";
+            this.StripStatusLabel.Text = "";
             // 
             // AnimateButton
             // 

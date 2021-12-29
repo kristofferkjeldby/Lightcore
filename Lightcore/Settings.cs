@@ -55,5 +55,7 @@
         public static string AnimateFilename = "animate_";
 
         public static int PreviewResolution = 40;
+
+        public static bool ShowStatus = false;
     }
 }

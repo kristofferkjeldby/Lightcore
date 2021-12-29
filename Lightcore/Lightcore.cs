@@ -67,7 +67,8 @@
 
         void Status(object sender, string status)
         {
-            TryInvoke(() => StripStatusLabel.Text = status);
+            if (Settings.ShowStatus)
+                TryInvoke(() => StripStatusLabel.Text = status);
         }
 
         void Suspend(object sender, bool suspended)

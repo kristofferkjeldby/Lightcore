@@ -62,7 +62,7 @@ Lightcore contains two processor stacks - a preprocessor stack and a processor s
 
 Lightcore offers several options to optimize this process. Imagine we would create some kind of game, allowing the player to move around in this simple world. 
 
-Surely the perspective would change, but light and shadows would be static. As the light and shadows are processed in the preprocessor stack, Lightcore offers an option to reuse the preprocessed world, and only call Create world for the first frame. To turn on this option, change StorePreprocessed to true in Settings.cs.
+Surely the perspective would change, but light and shadows would be static. As the light and shadows are processed in the preprocessor stack, Lightcore offers an option to reuse the preprocessed world, and only call Create world for the first frame. To turn on this option, change StorePreprocessed to true in Settings.cs - you might also want to turn ShowStatus off in the same file.
 
 You will now be able to move around in the world using:
 
