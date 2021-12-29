@@ -4,7 +4,7 @@
 
 Lightcore is a 3D engine build with pure C#, without any frameworks. My motivation for writing Lightcore was not to make something usable, as the lack of hardware acceleration makes Lightcore inherently slow. It was however to explore the math behind 3D engines and make it available in a form that most C# developers would understand.
 
-![Mars rendered with transparent atmosphere](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Transparent.png)
+![Mars rendered with transparent atmosphere](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/Transparent.png)
 
 Initial it started as a game engine, and you will find leftovers from this in e.g., the keyboard controls and the options to prerendering static lightning.
 
