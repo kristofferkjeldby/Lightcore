@@ -10,7 +10,7 @@
 
     public partial class Shapes
     {
-        public static Entity Surface(Vector origin, Vector axis1, Vector axis2, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture, RenderMode renderMode = null)
+        public static Entity MapSurface(Vector origin, Vector axis1, Vector axis2, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture, RenderMode renderMode = null)
         {
             if (renderMode?.Preview ?? false)
                 map = map.Reduce(Settings.PreviewResolution);
@@ -22,9 +22,9 @@
             var xStep = axis1 / map.GetLength(0);
             var yStep = axis2 / map.GetLength(1);
 
-            for (int x = 0; x < map.GetLength(0) - 1; x++)
+            for (int y = 0; y < map.GetLength(1) - 1; y++)
             {
-                for (int y = 0; y < map.GetLength(1) - 1; y++)
+                for (int x = 0; x < map.GetLength(1) - 1; x++)
                 {
                     var guid = Guid.NewGuid();
 

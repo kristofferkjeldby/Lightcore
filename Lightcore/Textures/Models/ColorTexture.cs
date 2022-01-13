@@ -16,10 +16,10 @@
 
         public float Shiny { get; set; }
 
-        public ColorTexture(Vector color, float reflection, float transparency, float metallicity, float shiny, Vector processedColor = null) : base(reflection)
+        public ColorTexture(Vector color, float reflectance, float transparency, float metallicity, float shiny, Vector processedColor = null) : base(reflectance)
         {
             Color = color;
-            Reflection = reflection;
+            Reflectance = reflectance;
             Transparency = transparency;
             Metallicity = metallicity;
             Shiny = shiny;
@@ -30,7 +30,7 @@
                 ProcessedColor = new Vector(0, 0, 0);
         }
 
-        public override Brush GetBrush()
+        public override Brush GetBrush(Polygon polygon, PointF[] points)
         {
             return new SolidBrush(ProcessedColor.ToColor(Transparency));
         }
@@ -52,7 +52,7 @@
 
         public override Texture Clone()
         {
-            return new ColorTexture(Color, Reflection, Transparency, Metallicity, Shiny, ProcessedColor);
+            return new ColorTexture(Color, Reflectance, Transparency, Metallicity, Shiny, ProcessedColor);
         }
     }
 }

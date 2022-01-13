@@ -27,8 +27,8 @@
         {
             Atmosphere = atmosphere;
 
-            var colorBitmap = ImageTextureStore.Get("MarsColor").ImageTextureType.Bitmap;
-            var heightBitmap = ImageTextureStore.Get("MarsHeight").ImageTextureType.Bitmap;
+            var colorBitmap = ImageTextureStore.GetImage("MarsColor");
+            var heightBitmap = ImageTextureStore.GetImage("MarsHeight");
 
 
             Map = MapHelper.CreateMap(
@@ -41,7 +41,7 @@
             if (atmosphere)
             {
 
-                var atmosphereBitmap = ImageTextureStore.Get("MarsAtmosphere").ImageTextureType.Bitmap;
+                var atmosphereBitmap = ImageTextureStore.GetImage("MarsAtmosphere");
 
                 AtmosphereMap = MapHelper.CreateMap(
                     atmosphereBitmap.Width,
@@ -57,11 +57,11 @@
             var angle = (Constants.PI2 / Settings.AnimateMaxSteps) * animateStep;
             var rotateMars = CartesianUtils.Rotate(new Vector(0, 1, 0).Unit(), angle);
 
-            entities.Add(Shapes.Sphere(new Vector(0, 0, 0), 100, Map, ColorTextureStore.ColorTexture, renderMode).Transform(rotateMars));
+            entities.Add(Shapes.MapSphere(new Vector(0, 0, 0), 100, Map, ColorTextureStore.NormalTexture, renderMode).Transform(rotateMars));
 
             if (Atmosphere)
             {
-                entities.Add(Shapes.Sphere(new Vector(0, 0, 0), 100, AtmosphereMap, color => new ColorTexture(color, 0.1f, 0.7f, 0.0f, 0.3f), renderMode).Transform(rotateMars));
+                entities.Add(Shapes.MapSphere(new Vector(0, 0, 0), 100, AtmosphereMap, color => new ColorTexture(color, 0.1f, 0.7f, 0.0f, 0.3f), renderMode).Transform(rotateMars));
             }
 
             lights.Add

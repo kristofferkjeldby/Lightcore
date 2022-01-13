@@ -20,13 +20,13 @@
             {
                 var light = args.World.Lights[i];
                 var lightMapElements = new LightMapSearchList();
-                var transformation = CommonUtils.Transformation(args.World.ReferenceFrame, new ReferenceFrame(Settings.Unit, light.Position, ReferenceFrameType.Spherical));
+                var transformation = CommonUtils.ReferenceFrameTransformation(args.World.ReferenceFrame, new ReferenceFrame(Settings.Unit, light.Position, ReferenceFrameType.Spherical));
 
                 var polygons =
                     args.World.Entities.
                     Where(entity => EntityPredicate(entity, args)).
                     SelectMany(entity => entity.Elements).
-                    Where(polygon => polygon.PolygonType == PolygonType.Triangle).
+                    Where(polygon => polygon.PolygonType != PolygonType.Line).
                     Where(polygon => LightUtils.GetFactor(polygon, light) > 0).
                     Select(polygon => polygon.Clone()).
                     Select(polygon => { polygon.Transform(transformation); return polygon; }).

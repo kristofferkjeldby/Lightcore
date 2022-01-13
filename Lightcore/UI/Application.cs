@@ -95,6 +95,8 @@
             if (task?.IsFaulted ?? false)
             {
                 OnStatusChanged("Failed: " + task.Exception.InnerExceptions[0]?.Message);
+                System.Diagnostics.Debug.WriteLine(task.Exception.InnerExceptions[0]?.Message);
+                System.Diagnostics.Debug.WriteLine(task.Exception.InnerExceptions[0]?.StackTrace);
             }
 
             SleepService.Suspend(suspended);

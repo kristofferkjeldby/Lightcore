@@ -10,7 +10,7 @@
 
     public partial class Shapes
     {
-        public static Entity Torus(Vector origon, float radius1, float radius2, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture, RenderMode renderMode = null)
+        public static Entity MapTorus(Vector origon, float radius1, float radius2, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture, RenderMode renderMode = null)
         {
             if (renderMode?.Preview ?? false)
                 map = map.Reduce(Settings.PreviewResolution);

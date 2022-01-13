@@ -1,6 +1,5 @@
 ﻿namespace Lightcore.Common.Cartesian.Models
 {
-    using Lightcore.Common.Cartesian.Extensions;
     using Lightcore.Common.Models;
 
     public class Line : IClonable<Line>
@@ -17,6 +16,11 @@
             return new Line(origin, origin + direction);
         }
 
+        public static Line Create2D(Vector origin, float slope)
+        {
+            return new Line(origin, origin + new Vector(1, slope));
+        }
+
         public Vector[] Vectors { get; set; }
 
         public Vector Origin => Vectors[0];
@@ -24,21 +28,6 @@
         public Vector End => Vectors[1];
 
         public Vector Direction => Vectors[1] - Vectors[0];
-
-        public Line Unit()
-        {
-            return new Line(Origin, Origin + Direction.Unit());
-        }
-
-        public float Length
-        {
-            get {
-                return Direction.Length();
-            }
-            set {
-                Vectors[1] = Vectors[0] + Direction.Unit() * value;
-            }
-        }
 
         public Line Clone()
         {

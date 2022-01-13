@@ -20,17 +20,17 @@
 
         private static float t(float angle)
         {
-            return 1 - (float)Math.Cos(angle);
+            return 1 - CommonUtils.Cos(angle);
         }
 
         private static float c(float angle)
         {
-            return (float)Math.Cos(angle);
+            return CommonUtils.Cos(angle);
         }
 
         private static float s(float angle)
         {
-            return (float)Math.Sin(angle);
+            return CommonUtils.Sin(angle);
         }
 
         private static float a1(float angle, Vector axis, float tr, float cos)

@@ -4,10 +4,7 @@
     using Lightcore.Common.Cartesian.Models;
     using Lightcore.Common.Models;
     using Lightcore.Processors.Models;
-    using Lightcore.Textures.Extensions;
-    using Lightcore.Textures.Models;
     using System.Collections.Generic;
-    using System.Drawing;
     using System.Linq;
 
     public class NormalProcessor : Processor
@@ -22,17 +19,20 @@
 
             foreach (var entity in entities)
             {
-                foreach (var polygon in entity.Elements.Where(polygon => polygon.PolygonType == PolygonType.Triangle))
+                foreach (var polygon in entity.Elements.Where(polygon => polygon.PolygonType != PolygonType.Line))
                 {
-                    var normal = Line.Create(polygon.Midpoint(), polygon.Normal());
-                    normal.Length = 10;
+                    var origin = polygon.Midpoint();
+                    var end = origin + (polygon.Normal().Unit() * 10);
 
                     normals.Add
                     (
                         new Entity
                         (
                             EntityType.Debug,
-                            normal.ToPolygon(new SimpleTexture(Color.Gray.ToVector()))
+                            new Polygon(
+                                Settings.DebugTexture,
+                                new[] { origin, end }
+                            )
                         )
                     );
                 }

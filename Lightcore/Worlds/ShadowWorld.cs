@@ -36,9 +36,9 @@
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(Shapes.Surface(new Vector(-350, -350, -170), new Vector(700, 0, 0), new Vector(0, 700, 0), Map, ColorTextureStore.ShinyTexture, renderMode));
+            entities.Add(Shapes.MapSurface(new Vector(-350, -350, -170), new Vector(700, 0, 0), new Vector(0, 700, 0), Map, ColorTextureStore.ShinyTexture, renderMode));
             entities.Add(Shapes.SimpleSphere(Color.Red.ToVector(), new Vector(0, 0, -100), 50, 200, ColorTextureStore.ShinyTexture, renderMode));
-            entities.Add(Shapes.SimpleSphere(Color.Green.ToVector(), new Vector(100, 100, -100), 70, 200, ColorTextureStore.ColorTexture, renderMode));
+            entities.Add(Shapes.SimpleSphere(Color.Green.ToVector(), new Vector(100, 100, -100), 70, 200, ColorTextureStore.NormalTexture, renderMode));
             entities.Add(Shapes.SimpleSphere(Color.Blue.ToVector(), new Vector(-100, -100, -100), 40, 200, ColorTextureStore.MetallicTexture, renderMode));
 
             lights.Add

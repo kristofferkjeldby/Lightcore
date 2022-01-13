@@ -4,9 +4,9 @@
     using Lightcore.Common.Models;
     using Lightcore.Textures.Extensions;
 
-    public class SimpleTexture : Texture
+    public class SimpleColorTexture : Texture
     {
-        public SimpleTexture(Vector color, float transparency = 0)
+        public SimpleColorTexture(Vector color, float transparency = 0)
         {
             Color = color;
             Transparency = transparency;
@@ -16,10 +16,10 @@
 
         public override Texture Clone()
         {
-            return new SimpleTexture(Color, Transparency);
+            return new SimpleColorTexture(Color, Transparency);
         }
 
-        public override Brush GetBrush()
+        public override Brush GetBrush(Polygon polygon, PointF[] points)
         {
             return new SolidBrush(Color.ToColor(Transparency));
         }

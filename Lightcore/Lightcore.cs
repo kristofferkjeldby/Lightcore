@@ -1,6 +1,7 @@
 ﻿namespace Lightcore
 {
     using Lightcore.Common.Models;
+    using Lightcore.Debug;
     using Lightcore.Lighting;
     using Lightcore.Textures;
     using Lightcore.View;
@@ -43,7 +44,7 @@
             
             // Used for debugging, will render normals   
             // Remember to set debug = true in the settings file
-            //application.PreprocessorStack.Add(new NormalProcessor()); 
+            application.PreprocessorStack.Add(new NormalProcessor()); 
 
             application.ProcessorStack.Add(new ShineProcessor());
             application.ProcessorStack.Add(new ProjectProcessor());
@@ -63,7 +64,7 @@
         public WorldBuilder GetWorldBuilder()
         {
             // Register your worldbuilder here
-            return new RotatingTorusWorld();
+            return new TextureWorld();
         }
 
         void Status(object sender, string status)

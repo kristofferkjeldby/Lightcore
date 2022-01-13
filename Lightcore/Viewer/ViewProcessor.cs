@@ -8,6 +8,7 @@
     using Matrix = Common.Models.Matrix;
     using Lightcore.Processors.Models;
     using Lightcore.Common.Cartesian.Extensions;
+    using Lightcore.Textures.Models;
 
     public class ViewProcessor : Processor
     {
@@ -64,21 +65,32 @@
 
             using (Drawer d = new Drawer(pictureBox, args.RenderMetadata.Filename))
             {
-                foreach (var polygon in args.World.Entities.
+                var polygons = args.World.Entities.
                     Where(entity => EntityPredicate(entity, args)).
                     SelectMany(entity => entity.Elements).
-                    OrderByDescending(polygon => polygon.Distance()).ThenByDescending(polygon => polygon.Midpoint().Length()))
-                {
-                    var points = polygon.Elements.Select(v => Transform(v)).Where(point => IsInMargin(point, Settings.ViewMargin))?.ToArray();
+                    OrderByDescending(polygon => polygon.Distance()).ThenByDescending(polygon => polygon.Midpoint().Length()).
+                    ToArray();
 
-                    switch (points.Length)
+                var texturePolygonsCount = polygons.Where(polygon => polygon.Texture is IImageTexture).Count();
+                var k = 1;
+
+                for (int i = 0; i < polygons.Count(); i++)
+                { 
                     {
-                        case 2:
-                            d.Graphics.DrawLine(new Pen(polygon.Texture.GetBrush()), points[0], points[1]);
-                            break;
-                        case 3:
-                            d.Graphics.FillPolygon(polygon.Texture.GetBrush(), points);
-                            break;
+                        var points = polygons[i].Elements.Select(v => Transform(v)).Where(point => IsInMargin(point, Settings.ViewMargin))?.ToArray();
+
+                        switch (points.Length)
+                        {
+                            case 2:
+                                d.Graphics.DrawLine(new Pen(polygons[i].Texture.GetBrush(polygons[i], points)), points[0], points[1]);
+                                break;
+                            case 3:
+                            case 4:
+                                if (polygons[i].Texture is IImageTexture)
+                                    args.Status($"{Metadata.Name}: Applying texture to polygon {k++} of {texturePolygonsCount} ...");
+                                d.Graphics.FillPolygon(polygons[i].Texture.GetBrush(polygons[i], points), points);
+                                break;
+                        }
                     }
                 }
             }

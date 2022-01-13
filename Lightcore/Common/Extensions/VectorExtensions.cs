@@ -10,25 +10,29 @@
     {
         public static Vector Average(this IEnumerable<Vector> vectors)
         {
-            return new Vector(
-                vectors.Average(vector => vector[0]),
-                vectors.Average(vector => vector[1]),
-                vectors.Average(vector => vector[2])
-                );
+            return new Vector(Enumerable.Range(0, vectors.First().N).Select(n => vectors.Average(vector => vector[n])));
         }
 
         public static Vector Limit(this Vector vector, float min, float max)
         {
-            return new Vector(
-                CommonUtils.Limit(vector[0], min, max),
-                CommonUtils.Limit(vector[1], min, max),
-                CommonUtils.Limit(vector[2], min, max)
-            );
+            return new Vector(vector.Elements.Select(element => CommonUtils.Limit(element, min, max)));
         }
 
         public static float Average(this Vector vector)
         {
             return (vector[0] + vector[1] + vector[2]) / 3;
+        }
+
+        public static float LeadCoefficient(this Vector vector, out int? index)
+        {
+            for (index = 0; index < vector.Elements.Length; index++)
+            {
+                if (vector[index] != 0)
+                    return vector[index];
+            }
+
+            index = null;
+            return float.NaN;
         }
 
         public static Vector ToCartesian(this Vector vector)

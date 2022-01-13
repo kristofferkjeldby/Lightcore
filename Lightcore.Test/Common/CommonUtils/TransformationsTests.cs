@@ -3,10 +3,9 @@
     using Lightcore.Common.Models;
     using Lightcore.Common;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System;
 
     [TestClass]
-    public class TransformationTests
+    public class TransformationsTests
     {
         [TestMethod]
         public void CartesianToCartesian()
@@ -35,7 +34,7 @@
                 ReferenceFrameType.Cartesian
             );
 
-            var transformation = CommonUtils.Transformation(source, destination);
+            var transformation = CommonUtils.ReferenceFrameTransformation(source, destination);
 
             Assert.AreEqual(new Vector(1, 2, 37), transformation(new Vector(1, 2, 3)));
         }
@@ -67,7 +66,7 @@
                 ReferenceFrameType.Spherical
             );
 
-            var transformation = CommonUtils.Transformation(source, destination);
+            var transformation = CommonUtils.ReferenceFrameTransformation(source, destination);
 
             Assert.AreEqual(new Vector(1, Constants.PI / 2, 0), transformation(new Vector(1, 0, 1)));
             Assert.AreEqual(new Vector(1, Constants.PI, 0), transformation(new Vector(0, 0, 0)));

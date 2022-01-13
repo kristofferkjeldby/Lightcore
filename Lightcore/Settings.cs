@@ -40,11 +40,9 @@
 
         public static float ReflectionTreadshold => 0f;
 
-        public static float ReflectionAngle => Constants.PI / 6f;
-
         public static int ViewMargin => 5000;
 
-        public static Texture DebugTexture => new SimpleTexture(Color.Gray.ToVector());
+        public static Texture DebugTexture => new SimpleColorTexture(Color.Gray.ToVector());
 
         public static bool Debug = false;
 
@@ -59,5 +57,7 @@
         public static bool ShowStatus = true;
 
         public static int MaxX = 100;
+
+        public static int TextureInterpolation = 2;
     }
 }

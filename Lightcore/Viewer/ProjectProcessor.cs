@@ -11,7 +11,7 @@
 
         public override void PreProcessor(RenderArgs args)
         {
-            transformation = CommonUtils.Transformation(args.World.ReferenceFrame, args.Camera.ReferenceFrame);
+            transformation = CommonUtils.ReferenceFrameTransformation(args.World.ReferenceFrame, args.Camera.ReferenceFrame);
         }
 
         public override Vector VectorProcessor(Vector vector, RenderArgs args)

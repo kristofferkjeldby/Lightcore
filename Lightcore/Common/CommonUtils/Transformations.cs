@@ -6,7 +6,7 @@
 
     public static partial class CommonUtils
     {
-        public static Func<Vector, Vector> Transformation(ReferenceFrame source, ReferenceFrame destination)
+        public static Func<Vector, Vector> ReferenceFrameTransformation(ReferenceFrame source, ReferenceFrame destination)
         {
             if (source.ReferenceFrameType == ReferenceFrameType.Cartesian && destination.ReferenceFrameType == ReferenceFrameType.Cartesian)
                 return (Vector vector) =>

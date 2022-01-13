@@ -3,6 +3,7 @@
     public enum PolygonType
     {
         Line,
-        Triangle
+        Triangle,
+        Rhombus
     }
 }

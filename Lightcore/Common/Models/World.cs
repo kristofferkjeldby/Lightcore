@@ -25,7 +25,7 @@
 
         public void Transform(ReferenceFrame destinationReferenceFrame)
         {
-            var transformation = CommonUtils.Transformation(ReferenceFrame, destinationReferenceFrame);
+            var transformation = CommonUtils.ReferenceFrameTransformation(ReferenceFrame, destinationReferenceFrame);
 
             foreach (var entity in Entities)
             {

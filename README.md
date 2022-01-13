@@ -131,3 +131,24 @@ namespace Lightcore.Worlds
 ```
 
 The benefit here is still speed, the drawback are memory and also that the preview mode will no longer work.
+
+**Transformations**
+
+Lightcore has helper methods for all the standard linear transformations you will need to move objects around:
+
+```
+	var box = Shapes.SimpleBox(Color.Red.ToVector(), new Vector(0, 0, 0), new Vector(100, 0, 0), new Vector(0, 100, 0), new Vector(0, 0, 100), 40, ColorTextureStore.ShinyTexture);
+
+	// Move box
+	box.Transform(v => v += new Vector(-50, -50, 0));
+
+	// Scale box to 0.8 size
+	box.Transform(v => v * 0.8f);
+
+	// Rotate box PI/4 around the axis 1, 1, 1
+	box.Transform(CartesianUtils.Rotate(new Vector(1, 1, 1).Unit(), Constants.PI / 4));
+```
+
+**Textures**
+
+

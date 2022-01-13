@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,10 +52,14 @@
   <ItemGroup>
     <Compile Include="Common\Cartesian\CartesianUtils\Rotate.cs" />
     <Compile Include="Common\CommonUtils\Float.cs" />
-    <Compile Include="Common\CommonUtils\Trigometry.cs" />
+    <Compile Include="Common\CommonUtils\Math.cs" />
+    <Compile Include="Common\Extensions\MatrixExtensions.cs" />
     <Compile Include="Debug\NormalProcessor.cs" />
     <Compile Include="Debug\StatisticsProcessor.cs" />
     <Compile Include="Textures\ColorTextureStore.cs" />
+    <Compile Include="Textures\Extensions\VectorExtensions.cs" />
+    <Compile Include="Textures\Extensions\LineExtensions.cs" />
+    <Compile Include="Textures\Extensions\PointExtensions.cs" />
     <Compile Include="Textures\Gradient\Models\ColorPoint.cs" />
     <Compile Include="Textures\Gradient\Models\Gradient.cs" />
     <Compile Include="Common\Cartesian\Extensions\PolygonExtensions.cs" />
@@ -73,7 +78,6 @@
     <Compile Include="Common\Spherical\Models\Orthodrome.cs" />
     <Compile Include="Common\Cartesian\CartesianUtils\Distance.cs" />
     <Compile Include="Common\Extensions\EnumeratorExtensions.cs" />
-    <Compile Include="Common\Cartesian\Extensions\LineExtensions.cs" />
     <Compile Include="Common\Extensions\VectorExtensions.cs" />
     <Compile Include="Common\Cartesian\CartesianUtils\Reflect.cs" />
     <Compile Include="Common\CommonUtils\Double.cs" />
@@ -82,7 +86,7 @@
     <Compile Include="Common\Models\EntityType.cs" />
     <Compile Include="Common\Models\PolygonType.cs" />
     <Compile Include="Common\Spherical\Models\SphericalTriangle.cs" />
-    <Compile Include="Common\CommonUtils\Transformation.cs" />
+    <Compile Include="Common\CommonUtils\Transformations.cs" />
     <Compile Include="Common\Spherical\SphericalUtils\Triangulation.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -91,6 +95,11 @@
     <Compile Include="Lighting\LightMapProcessor.cs" />
     <Compile Include="Lighting\Models\LightMapSearchList.cs" />
     <Compile Include="Lighting\Models\LightMapElement.cs" />
+    <Compile Include="Textures\ImageUtils\Transformations.cs" />
+    <Compile Include="Textures\Models\IImageTexture.cs" />
+    <Compile Include="Textures\Models\UnsafeImageWrapper.cs" />
+    <Compile Include="Textures\Models\SimpleImageTexture.cs" />
+    <Compile Include="Textures\Models\ImageTextureBuilder.cs" />
     <Compile Include="UI\ButtonService.cs" />
     <Compile Include="UI\KeyboardService.cs" />
     <Compile Include="UI\Application.cs" />
@@ -109,7 +118,7 @@
     <Compile Include="Processors\Models\RenderMode.cs" />
     <Compile Include="Processors\Models\RenderStatistic.cs" />
     <Compile Include="Processors\RenderModeFactory.cs" />
-    <Compile Include="Textures\Models\SimpleTexture.cs" />
+    <Compile Include="Textures\Models\SimpleColorTexture.cs" />
     <Compile Include="Textures\Models\LightableTexture.cs" />
     <Compile Include="Textures\Extensions\ColorExtension.cs" />
     <Compile Include="Common\Models\Axis.cs" />
@@ -127,8 +136,7 @@
     <Compile Include="Common\Models\Entity.cs" />
     <Compile Include="Common\Models\IClonable.cs" />
     <Compile Include="Common\Models\Matrix.cs" />
-    <Compile Include="Textures\Extensions\ImageExtension.cs" />
-    <Compile Include="Textures\Models\ImageTextureType.cs" />
+    <Compile Include="Textures\Extensions\BitmapExtension.cs" />
     <Compile Include="Textures\ImageTextureStore.cs" />
     <Compile Include="Common\Cartesian\Extensions\VectorExtensions.cs" />
     <Compile Include="Common\Models\ReferenceFrame.cs" />
@@ -150,19 +158,22 @@
     <Compile Include="Worlds\RotatingMarsWorld.cs" />
     <Compile Include="Worlds\ShadowWorld.cs" />
     <Compile Include="Worlds\MoonWorld.cs" />
-    <Compile Include="Worlds\TestWorld.cs" />
+    <Compile Include="Worlds\Shapes\MapBox.cs" />
+    <Compile Include="Worlds\Shapes\TextureSurface.cs" />
+    <Compile Include="Worlds\Shapes\TextureBox.cs" />
+    <Compile Include="Worlds\TextureWorld.cs" />
     <Compile Include="Worlds\SphereWorld.cs" />
     <Compile Include="Worlds\ImageWorld.cs" />
     <Compile Include="Worlds\RotatingTorusWorld.cs" />
     <Compile Include="Worlds\Shapes\SimpleSphere.cs" />
     <Compile Include="Worlds\Shapes\SimplyTorus.cs" />
     <Compile Include="Worlds\Helpers\Map.cs" />
-    <Compile Include="Worlds\Shapes\Torus.cs" />
-    <Compile Include="Worlds\Shapes\Sphere.cs" />
+    <Compile Include="Worlds\Shapes\MapTorus.cs" />
+    <Compile Include="Worlds\Shapes\MapSphere.cs" />
     <Compile Include="Worlds\Shapes\SimpleBox.cs" />
     <Compile Include="Worlds\Shapes\SimpleSquare.cs" />
     <Compile Include="Worlds\Shapes\SimpleSurface.cs" />
-    <Compile Include="Worlds\Shapes\Surface.cs" />
+    <Compile Include="Worlds\Shapes\MapSurface.cs" />
     <EmbeddedResource Include="Lightcore.resx">
       <DependentUpon>Lightcore.cs</DependentUpon>
     </EmbeddedResource>

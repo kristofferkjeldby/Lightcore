@@ -8,22 +8,25 @@
 
     public partial class Shapes
     {
-        public static Entity SimpleBox(Vector color, Vector origin, Vector x, Vector y, Vector z, int resolution, Func<Vector, Texture> texture, RenderMode renderMode = null)
+        public static Entity SimpleBox(Vector color, Vector origin, Vector axis1, Vector axis2, Vector axis3, int resolution, Func<Vector, Texture> texture, RenderMode renderMode = null)
         {
             var polygons = new List<Polygon>();
 
-            var diagonal = origin + x + y + z;
+            var frontButtonLeft = origin;
+            var frontButtonRight = origin + axis1;
+            var backButtonRight = origin + axis1 + axis3;
+            var backButtonLeft = origin + axis3;
+            var frontTopRight = origin + axis2;
 
-            polygons.AddRange(SimpleSurface(color, origin, y, x, resolution, texture).Elements);
-            polygons.AddRange(SimpleSurface(color, origin, x, z, resolution, texture).Elements);
-            polygons.AddRange(SimpleSurface(color, diagonal, -z, -x, resolution, texture).Elements);
-            polygons.AddRange(SimpleSurface(color, diagonal, -x, -y, resolution, texture).Elements);
-            polygons.AddRange(SimpleSurface(color, origin, z, y, resolution, texture).Elements);
-            polygons.AddRange(SimpleSurface(color, diagonal, -y, -z, resolution, texture).Elements);
+            polygons.AddRange(SimpleSurface(color, frontButtonLeft, axis1, axis2, resolution, texture).Elements);
+            polygons.AddRange(SimpleSurface(color, frontButtonRight, axis3, axis2, resolution, texture).Elements);
+            polygons.AddRange(SimpleSurface(color, backButtonRight, -axis1, axis2, resolution, texture).Elements);
+            polygons.AddRange(SimpleSurface(color, backButtonLeft, -axis3, axis2, resolution, texture).Elements);
+            polygons.AddRange(SimpleSurface(color, frontTopRight, axis1, axis3, resolution, texture).Elements);
+            polygons.AddRange(SimpleSurface(color, frontButtonRight, -axis1, axis3, resolution, texture).Elements);
 
             var box = new Entity(EntityType.World, polygons.ToArray());
             return box;
-
         }
     }
 }

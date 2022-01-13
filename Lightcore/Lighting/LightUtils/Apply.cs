@@ -23,14 +23,14 @@
 
             texture.Light(light.Color, factor);
 
-            if (texture.Reflection > 0 && visibility >= 1 && factor * texture.Reflection > reflectionThreadshold)
+            if (texture.Reflectance > 0 && visibility >= 1 && factor * texture.Reflectance > reflectionThreadshold)
             {
                 return new AngleLight
                 (
                     light.Color,
                     polygon.Midpoint(),
                     CartesianUtils.Reflect(direction, polygon.Normal()),
-                    factor * texture.Reflection,
+                    factor * texture.Reflectance,
                     Constants.PI / 6f,
                     polygon.Id,
                     null,

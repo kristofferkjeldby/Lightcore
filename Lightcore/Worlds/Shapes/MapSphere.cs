@@ -10,7 +10,7 @@
 
     public partial class Shapes
     {
-        public static Entity Sphere(Vector origon, float radius, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture, RenderMode renderMode = null)
+        public static Entity MapSphere(Vector origon, float radius, Tuple<float, Vector>[,] map, Func<Vector, Texture> texture, RenderMode renderMode = null)
         {
             if (renderMode?.Preview ?? false)
                 map = map.Reduce(Settings.PreviewResolution);
@@ -73,7 +73,7 @@
                 Settings.Origon,
                 ReferenceFrameType.Spherical);
             var destination = new ReferenceFrame(Settings.Unit, -origon, ReferenceFrameType.Cartesian);
-            var transformation = CommonUtils.Transformation(source, destination);
+            var transformation = CommonUtils.ReferenceFrameTransformation(source, destination);
 
             polygons.ForEach(polygon => polygon.Transform(transformation));
 

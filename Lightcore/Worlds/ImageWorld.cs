@@ -21,9 +21,6 @@
         {
             var bitmap = new Bitmap(image);
 
-            // As the zero coordinate is in the low bottom of the screen flipping the image is needed.
-            bitmap.RotateFlip(RotateFlipType.Rotate180FlipX);
-
             Map = MapHelper.CreateMap(
                 bitmap.Width,
                 bitmap.Height,
@@ -34,7 +31,7 @@
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(Shapes.Surface(new Vector(-100, -100, 0), new Vector(200, 0, 0), new Vector(0, 200, 0), Map, ColorTextureStore.ShinyTexture, renderMode));
+            entities.Add(Shapes.MapSurface(new Vector(-100, -100, 0), new Vector(200, 0, 0), new Vector(0, 200, 0), Map, ColorTextureStore.ShinyTexture, renderMode));
 
             lights.Add(
                 new AngleLight

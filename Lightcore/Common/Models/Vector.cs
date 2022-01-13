@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Vector : Indexable<float>, IClonable<Vector>, ITransformable<Vector>, IIdentifiable, IEquatable<Vector>
     {
@@ -10,25 +11,47 @@
             Id = id.GetValueOrDefault(Guid.NewGuid());
         }
 
-        public Vector(float a, float b, float c, Guid? id = null) : base(a, b, c)
+        public Vector(IEnumerable<float> elements, Guid? id = null) : this(elements.ToArray(), id)
         {
-            Id = id.GetValueOrDefault(Guid.NewGuid());
+
         }
 
-        public static Vector operator +(Vector a, Vector b) => new Vector(a[0] + b[0], a[1] + b[1], a[2] + b[2]);
-        public static Vector operator -(Vector a, Vector b) => new Vector(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
-        public static Vector operator -(Vector a) => new Vector(-a[0], -a[1], -a[2]);
-        public static Vector operator *(float a, Vector b) => new Vector(a * b[0], a * b[1], a * b[2]);
+        public Vector(int rows, Guid? id = null) : this(Enumerable.Repeat(default(float), rows).ToArray(), id)
+        {
+
+        }
+
+        public Vector(params float[] elements) : base(elements)
+        {
+
+        }
+
+        public int N => Elements.Length;
+
+        // Vector addition
+        public static Vector operator +(Vector a, Vector b) => new Vector(a.Elements.Select((e, row) => e + b[row]));
+        public static Vector operator -(Vector a, Vector b) => new Vector(a.Elements.Select((e, row) => e - b[row]));
+
+        public static Vector operator -(Vector a) => -1f * a;
+
+        // Scalar multiplication (commutative)
+        public static Vector operator *(float a, Vector b) => new Vector(b.Elements.Select((e, row) => a * e));
         public static Vector operator *(Vector a, float b) => b * a;
-        public static Vector operator /(Vector a, float b) => new Vector(a[0] / b, a[1] / b, a[2] / b);
-        public static float operator *(Vector a, Vector b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+
+        // Scalar division (commutative)
+        public static Vector operator /(float a, Vector b) => (1f / a) * b;
+        public static Vector operator /(Vector a, float b) => a * (1f / b);
+
+        // Dot product
+        public static float operator *(Vector a, Vector b) => a.Elements.Select((e, row) => e * b[row]).Sum();
+
+        // Weight one vector with another (dot product of vectors as a row and a column matrix)
         public static Vector operator &(Vector a, Vector b) => new Vector(a[0] * b[0], a[1] * b[1], a[2] * b[2]);
+
+        // Cross product (only defined in tree dimensions)
         public static Vector operator %(Vector a, Vector b) => new Vector((a[1] * b[2]) - (b[1] * a[2]), (a[2] * b[0]) - (b[2] * a[0]), (a[0] * b[1]) - (b[0] * a[1]));
 
-        public override string ToString()
-        {
-            return $"({Elements[0].ToString(Constants.DeltaFormat)}, {Elements[1].ToString(Constants.DeltaFormat)}, {Elements[2].ToString(Constants.DeltaFormat)})";
-        }
+        public override string ToString() => $"({string.Join(", ", Elements.Select(element => element.ToString(Constants.DeltaFormat)))})";
 
         public Guid Id { get; set; }
 
@@ -64,9 +87,9 @@
 
         public bool Equals(Vector other)
         {
-            for (int i = 0; i < this.Count(); i++)
+            for (int row = 0; row < this.N; row++)
             {
-                if (Math.Abs(this[i] - other[i]) >= Constants.Delta)
+                if (Math.Abs(this[row] - other[row]) >= Constants.Delta)
                     return false;
             }
 

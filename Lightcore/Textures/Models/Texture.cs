@@ -7,6 +7,6 @@
     {
         public abstract Texture Clone();
 
-        public abstract Brush GetBrush();
+        public virtual Brush GetBrush(Polygon polygon, PointF[] points) { return null; }
     }
 }

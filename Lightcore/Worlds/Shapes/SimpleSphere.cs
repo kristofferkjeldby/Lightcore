@@ -72,7 +72,7 @@
                 Settings.Origon,
                 ReferenceFrameType.Spherical);
             var destination = new ReferenceFrame(Settings.Unit, -origon, ReferenceFrameType.Cartesian);
-            var transformation = CommonUtils.Transformation(source, destination);
+            var transformation = CommonUtils.ReferenceFrameTransformation(source, destination);
 
             polygons.ForEach(polygon => polygon.Transform(transformation));
 

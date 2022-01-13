@@ -1,7 +1,7 @@
 ﻿namespace Lightcore.Worlds
 {
-    using Lightcore.Common;
     using Lightcore.Common.Cartesian;
+    using Lightcore.Common.Cartesian.Extensions;
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
     using Lightcore.Processors.Models;
@@ -11,24 +11,14 @@
     using System.Collections.Generic;
     using System.Drawing;
 
-    public class TestWorld : WorldBuilder
+    public class TextureWorld : WorldBuilder
     {
-        Entity box;
-        Entity surface;
-
-        public TestWorld()
-        {
-            box = Shapes.SimpleSurface(Color.Red.ToVector(), new Vector(-50, -50, 0), new Vector(100, 0, 0), new Vector(0, 100, 0), 2, ColorTextureStore.ShinyTexture);
-
-            // Move box (-50, -50, 0)
-            //box.Transform(v => v + new Vector(-50, -50, -00));
-
-
-
-        }
-
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
+            var box = Shapes.TextureBox(Color.White.ToVector(), new Vector(-50, -50, 50), new Vector(100, 0, 0), new Vector(0, 100, 0), new Vector(0, 0, -100), 1, ImageTextureStore.TextureBuilder("Checkerboard"));
+
+            box.Transform(CartesianUtils.Rotate(new Vector(1, 0, 0).Unit(), Constants.PIfouth));
+            box.Transform(CartesianUtils.Rotate(new Vector(1, 1, 0).Unit(), -Constants.PIfouth / 2));
 
             entities.Add(box.Clone());
 
@@ -37,7 +27,7 @@
                 new AmbientLight
                 (
                     Color.White.ToVector(),
-                    new Vector(100, 100, 400),
+                    new Vector(0, 0, 400),
                     400
                 )
             );

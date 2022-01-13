@@ -24,7 +24,7 @@
         {
             PreviewResolution = previewResolution;
 
-            var bitmap = ImageTextureStore.Get("Moon").ImageTextureType.Bitmap;
+            var bitmap = ImageTextureStore.GetImage("Moon");
 
             Map = MapHelper.CreateMap(
                 bitmap.Width,
@@ -38,7 +38,7 @@
 
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(Shapes.Sphere(new Vector(0, 0, 0), 100, Map, ColorTextureStore.ColorTexture, renderMode));
+            entities.Add(Shapes.MapSphere(new Vector(0, 0, 0), 100, Map, ColorTextureStore.NormalTexture, renderMode));
 
             lights.Add
             (

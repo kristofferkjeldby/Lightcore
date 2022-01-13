@@ -4,12 +4,12 @@
 
     public abstract class LightableTexture : Texture
     {
-        public LightableTexture(float reflection)
+        public LightableTexture(float reflectance)
         {
-            Reflection = reflection;
+            Reflectance = reflectance;
         }
 
-        public float Reflection { get; set; }
+        public float Reflectance { get; set; }
 
         public abstract void Light(Vector otherColor, float factor);
 

@@ -24,6 +24,8 @@
                     return PolygonType.Line;
                 if (Elements.Length == 3)
                     return PolygonType.Triangle;
+                if (Elements.Length == 4)
+                    return PolygonType.Rhombus;
                 throw new Exception();
             }
         }

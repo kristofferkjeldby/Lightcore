@@ -14,7 +14,8 @@
             statistic.Name = Metadata.Name;
             statistic.Started = DateTime.Now;
 
-            var entityCount = args.World.Entities.Where(e => EntityPredicate(e, args)).Count();
+            var entities = args.World.Entities.Where(e => EntityPredicate(e, args)).ToArray();
+            var entitiesCount = entities.Count();
 
             args.Status($"{Metadata.Name}: Preprocessing ...");
 
@@ -24,15 +25,18 @@
 
             if (RunProcessors())
             { 
-                for (int i = 0; i < args.World.Entities.Count; i++)
+                for (int i = 0; i < entitiesCount; i++)
                 {
                     if (!EntityPredicate(args.World.Entities[i], args))
                         continue;
 
-                    for (int j = 0; j < args.World.Entities[i].Elements.Count(); j++)
+                    var polygons = args.World.Entities[i].Elements.ToArray();
+                    var polygonsCount = args.World.Entities[i].Elements.Count();
+
+                    for (int j = 0; j < polygons.Count(); j++)
                     {
                         if ((j + 1) % 1000 == 0)
-                            args.Status($"{Metadata.Name}: Processing entity {entityCount - i} of {entityCount}, polygon {j + 1} of {args.World.Entities[i].Elements.Count()} ...");
+                            args.Status($"{Metadata.Name}: Processing entity {i + 1} of {entitiesCount}, polygon {j + 1} of {polygonsCount} ...");
 
                         for (int k = 0; k < args.World.Entities[i].Elements[j].Elements.Length; k++)
                         {
