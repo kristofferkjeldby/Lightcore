@@ -64,7 +64,7 @@
         public WorldBuilder GetWorldBuilder()
         {
             // Register your worldbuilder here
-            return new TextureWorld();
+            return new SphereWorld();
         }
 
         void Status(object sender, string status)

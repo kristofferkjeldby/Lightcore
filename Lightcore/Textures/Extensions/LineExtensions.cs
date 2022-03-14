@@ -1,6 +1,5 @@
 ﻿namespace Lightcore.Textures.Extensions
 {
-    using Lightcore.Common.Cartesian.Models;
     using Lightcore.Common.Models;
 
     public static class LineExtensions

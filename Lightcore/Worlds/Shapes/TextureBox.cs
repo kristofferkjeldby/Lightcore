@@ -2,11 +2,8 @@
 {
     using Lightcore.Common.Models;
     using Lightcore.Processors.Models;
-    using Lightcore.Textures.Extensions;
     using Lightcore.Textures.Models;
-    using System;
     using System.Collections.Generic;
-    using System.Drawing;
 
     public partial class Shapes
     {

@@ -71,6 +71,7 @@
                     ),
                 Settings.Origon,
                 ReferenceFrameType.Spherical);
+
             var destination = new ReferenceFrame(Settings.Unit, -origon, ReferenceFrameType.Cartesian);
             var transformation = CommonUtils.ReferenceFrameTransformation(source, destination);
 

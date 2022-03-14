@@ -55,7 +55,7 @@
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
             var angle = (Constants.PI2 / Settings.AnimateMaxSteps) * animateStep;
-            var rotateMars = CartesianUtils.Rotate(new Vector(0, 1, 0).Unit(), angle);
+            var rotateMars = CartesianUtils.RotateTransformation(new Vector(0, 1, 0).Unit(), angle);
 
             entities.Add(Shapes.MapSphere(new Vector(0, 0, 0), 100, Map, ColorTextureStore.NormalTexture, renderMode).Transform(rotateMars));
 

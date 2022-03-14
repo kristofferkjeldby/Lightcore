@@ -1,7 +1,6 @@
 ﻿namespace Lightcore.Common.Cartesian
 {
     using Lightcore.Common.Cartesian.Extensions;
-    using Lightcore.Common.Cartesian.Models;
     using Lightcore.Common.Models;
 
     public static partial class CartesianUtils

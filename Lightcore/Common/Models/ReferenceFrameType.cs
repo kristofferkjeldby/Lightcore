@@ -3,6 +3,6 @@
     public enum ReferenceFrameType
     {
         Cartesian = 0,
-        Spherical = 1
+        Spherical = 1,   
     }
 }

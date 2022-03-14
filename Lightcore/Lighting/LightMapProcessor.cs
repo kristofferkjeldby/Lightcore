@@ -4,8 +4,6 @@
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
     using Lightcore.Processors.Models;
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
 
     public class LightMapProcessor : Processor

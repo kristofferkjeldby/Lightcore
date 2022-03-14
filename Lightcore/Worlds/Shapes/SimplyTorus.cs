@@ -27,8 +27,8 @@
                 var cc0 = new Vector((float)Math.Cos(c0 * cStepSize), (float)Math.Sin(c0 * cStepSize), 0);
                 var cc1 = new Vector((float)Math.Cos(c1 * cStepSize), (float)Math.Sin(c1 * cStepSize), 0);
 
-                var cc0r = CartesianUtils.Rotate(cc0 % Settings.Unit[Axis.Z], pStepSize);
-                var cc1r = CartesianUtils.Rotate(cc1 % Settings.Unit[Axis.Z], pStepSize);
+                var cc0r = CartesianUtils.RotateTransformation(cc0 % Settings.Unit[Axis.Z], pStepSize);
+                var cc1r = CartesianUtils.RotateTransformation(cc1 % Settings.Unit[Axis.Z], pStepSize);
 
                 var cc0pp0 = cc0 * radius2;
                 var cc1pp0 = cc1 * radius2;
@@ -37,8 +37,8 @@
                 {
                     var p1 = (p0 == segments2 - 1) ? 0 : p0 + 1;
 
-                    var cc0pp1 = cc0r * cc0pp0;
-                    var cc1pp1 = cc1r * cc1pp0;
+                    var cc0pp1 = cc0r.Transform(cc0pp0);
+                    var cc1pp1 = cc1r.Transform(cc1pp0);
 
                     var vectorcc0pp0 = (cc0 * radius1) + cc0pp0 + (cc0pp0.Unit());
                     var vectorcc1pp1 = (cc1 * radius1) + cc1pp1 + (cc1pp1.Unit());

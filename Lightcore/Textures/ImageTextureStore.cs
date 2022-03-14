@@ -16,7 +16,7 @@
                 { "Oxygen", Image.FromFile("./Textures/Images/Oxygen.jpg") as Bitmap},
                 { "Earth", Image.FromFile("./Textures/Images/Earth.jpg") as Bitmap},
                 { "Cat", Image.FromFile("./Textures/Images/Cat.jpg") as Bitmap},
-                { "Marble", Image.FromFile("./Textures/Images/Marble.jpg")as Bitmap },
+                { "Marble", Image.FromFile("./Textures/Images/Marble.jpg") as Bitmap },
                 { "Abstract", Image.FromFile("./Textures/Images/Abstract.jpg") as Bitmap},
                 { "Moon", Image.FromFile("./Textures/Images/Moon.png") as Bitmap },
                 { "MarsColor", Image.FromFile("./Textures/Images/MarsColor.png") as Bitmap },
@@ -24,7 +24,8 @@
                 { "MarsAtmosphere", Image.FromFile("./Textures/Images/MarsAtmosphere.jpg") as Bitmap},
                 { "Dots", Image.FromFile("./Textures/Images/Dots.jpg") as Bitmap},
                 { "Leopard", Image.FromFile("./Textures/Images/Leopard.jpg") as Bitmap },
-                { "Doughnut", Image.FromFile("./Textures/Images/Doughnut.jpg")as Bitmap },
+                { "Doughnut", Image.FromFile("./Textures/Images/Doughnut.jpg") as Bitmap },
+                { "Test", Image.FromFile("./Textures/Images/Test.png")as Bitmap },
             };
 
 

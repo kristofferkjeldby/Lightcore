@@ -15,6 +15,21 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,10 +65,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Cartesian\CartesianUtils\Rotate.cs" />
+    <Compile Include="Common\Cartesian\CartesianUtils\Transformations.cs" />
+    <Compile Include="Common\Models\Transformations\PerspectiveTransformation.cs" />
+    <Compile Include="Common\Models\Transformations\LinearTransformation.cs" />
     <Compile Include="Common\CommonUtils\Float.cs" />
     <Compile Include="Common\CommonUtils\Math.cs" />
     <Compile Include="Common\Extensions\MatrixExtensions.cs" />
+    <Compile Include="Common\Models\Transformations\FuncTransformation.cs" />
+    <Compile Include="Common\Models\Transformations\Transformation.cs" />
     <Compile Include="Debug\NormalProcessor.cs" />
     <Compile Include="Debug\StatisticsProcessor.cs" />
     <Compile Include="Textures\ColorTextureStore.cs" />
@@ -67,7 +86,7 @@
     <Compile Include="Common\Models\IIdentifiable.cs" />
     <Compile Include="Common\Models\Indexable.cs" />
     <Compile Include="Common\Models\ReferenceFrameType.cs" />
-    <Compile Include="Common\Models\ITransformable.cs" />
+    <Compile Include="Common\Models\Transformations\ITransformable.cs" />
     <Compile Include="Common\Spherical\Extensions\PolygonExtensions.cs" />
     <Compile Include="Common\Spherical\Extensions\SphericalTriangleExtensions.cs" />
     <Compile Include="Common\Spherical\Extensions\OrthodromeExtensions.cs" />
@@ -97,7 +116,7 @@
     <Compile Include="Lighting\Models\LightMapElement.cs" />
     <Compile Include="Textures\ImageUtils\Transformations.cs" />
     <Compile Include="Textures\Models\IImageTexture.cs" />
-    <Compile Include="Textures\Models\UnsafeImageWrapper.cs" />
+    <Compile Include="Textures\Models\ImageTextureBuilderStartPosition.cs" />
     <Compile Include="Textures\Models\SimpleImageTexture.cs" />
     <Compile Include="Textures\Models\ImageTextureBuilder.cs" />
     <Compile Include="UI\ButtonService.cs" />
@@ -122,7 +141,7 @@
     <Compile Include="Textures\Models\LightableTexture.cs" />
     <Compile Include="Textures\Extensions\ColorExtension.cs" />
     <Compile Include="Common\Models\Axis.cs" />
-    <Compile Include="Common\Cartesian\Models\Line.cs" />
+    <Compile Include="Common\Models\Line.cs" />
     <Compile Include="Textures\Models\ColorTexture.cs" />
     <Compile Include="Textures\Models\ImageTexture.cs" />
     <Compile Include="Textures\Models\Texture.cs" />
@@ -155,12 +174,15 @@
     <Compile Include="Worlds\Enumerators\ColorEnumerator.cs" />
     <Compile Include="Worlds\Extensions\MapExtensions.cs" />
     <Compile Include="Worlds\Models\WorldBuilder.cs" />
+    <Compile Include="Worlds\EarthWorld.cs" />
     <Compile Include="Worlds\RotatingMarsWorld.cs" />
     <Compile Include="Worlds\ShadowWorld.cs" />
     <Compile Include="Worlds\MoonWorld.cs" />
     <Compile Include="Worlds\Shapes\MapBox.cs" />
+    <Compile Include="Worlds\Shapes\TextureSphere.cs" />
     <Compile Include="Worlds\Shapes\TextureSurface.cs" />
     <Compile Include="Worlds\Shapes\TextureBox.cs" />
+    <Compile Include="Worlds\SurfaceWorld.cs" />
     <Compile Include="Worlds\TextureWorld.cs" />
     <Compile Include="Worlds\SphereWorld.cs" />
     <Compile Include="Worlds\ImageWorld.cs" />
@@ -248,8 +270,22 @@
     <Content Include="Textures\Images\Reacher.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Textures\Images\Test.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

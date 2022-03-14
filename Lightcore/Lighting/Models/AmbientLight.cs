@@ -1,6 +1,7 @@
 ﻿namespace Lightcore.Lighting.Models
 {
     using Lightcore.Common.Models;
+    using Lightcore.Common.Models.Transformations;
     using System;
 
     public class AmbientLight : Light
@@ -14,16 +15,11 @@
             return new AmbientLight(Color, Position.Clone(), Strength, PolygonId, Id, Generation);
         }
 
-        public override Light Transform(Func<Vector, Vector> transformation)
+        public override Light Transform(Transformation transformation)
         {
-            Position = transformation(Position);
+            Position = transformation.Transform(Position);
 
             return this;
-        }
-
-        public override Light Transform(Matrix transformation)
-        {
-            return Transform(a => transformation * a);
         }
     }
 }

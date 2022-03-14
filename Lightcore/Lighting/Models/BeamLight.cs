@@ -1,6 +1,7 @@
 ﻿namespace Lightcore.Lighting.Models
 {
     using Lightcore.Common.Models;
+    using Lightcore.Common.Models.Transformations;
     using System;
 
     public class BeamLight : DirectLight
@@ -18,17 +19,12 @@
             return new BeamLight(Color, Position.Clone(), Direction.Clone(), Strength, Width, PolygonId, Id, Generation);
         }
 
-        public override Light Transform(Func<Vector, Vector> transformation)
+        public override Light Transform(Transformation transformation)
         {
-            Position = transformation(Position);
-            Direction = transformation(Direction);
+            Position = transformation.Transform(Position);
+            Direction = transformation.Transform(Direction);
 
             return this;
-        }
-
-        public override Light Transform(Matrix transformation)
-        {
-            return Transform(b => transformation * b);
         }
     }
 }

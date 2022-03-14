@@ -1,5 +1,6 @@
 ﻿namespace Lightcore.Common.Models
 {
+    using Lightcore.Common.Models.Transformations;
     using Lightcore.Textures.Models;
     using System;
     using System.Linq;
@@ -45,9 +46,14 @@
             return this;
         }
 
-        public Polygon Transform(Matrix transformation)
+        public Polygon Transform(Transformation transformation)
         {
-            return Transform(p => transformation * p);
+            for (int i = 0; i < Elements.Count(); i++)
+            {
+                Elements[i] = Elements[i].Transform(transformation);
+            }
+
+            return this;
         }
     }
 }

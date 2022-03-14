@@ -1,10 +1,8 @@
 ﻿namespace Lightcore.Worlds
 {
-    using Lightcore.Common.Cartesian.Extensions;
     using Lightcore.Common.Models;
     using Lightcore.Processors.Models;
     using Lightcore.Textures.Models;
-    using Lightcore.Worlds.Extensions;
     using System;
     using System.Collections.Generic;
 

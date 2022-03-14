@@ -15,7 +15,7 @@
             Image = image;
         }
 
-        public override Brush GetBrush(Polygon polygon, PointF[] points)
+        public override Brush GetBrush(Polygon polygon, ref PointF[] points)
         {
             if (points.Length != 4)
                 return new TextureBrush(Image);

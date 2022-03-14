@@ -48,7 +48,7 @@
 
         public void Rotate(int axis, int direction)
         {
-            Camera.ReferenceFrame.Passive = CartesianUtils.Rotate(Camera.ReferenceFrame.Passive[axis], direction * Settings.R) * Camera.ReferenceFrame.Passive;
+            Camera.ReferenceFrame.Passive = CartesianUtils.RotateTransformation(Camera.ReferenceFrame.Passive[axis], direction * Settings.R).Matrix * Camera.ReferenceFrame.Passive;
             ProcessPreview(0);
         }
 
@@ -72,7 +72,7 @@
             task = Task.Run(() =>
             {
                 var result = false;
-                for (int animateStep = 258; animateStep < Settings.AnimateMaxSteps; animateStep++)
+                for (int animateStep = 0; animateStep < Settings.AnimateMaxSteps; animateStep++)
                 {
                     var filename = string.Concat(Settings.AnimateFilename, animateStep, ".jpg");
                     result = RenderService.Process(CancellationTokenSource.Token, animateStep, filename);

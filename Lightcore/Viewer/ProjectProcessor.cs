@@ -2,12 +2,12 @@
 {
     using Lightcore.Common;
     using Lightcore.Common.Models;
+    using Lightcore.Common.Models.Transformations;
     using Lightcore.Processors.Models;
-    using System;
 
     public class ProjectProcessor : Processor
     {
-        private Func<Vector, Vector> transformation;
+        private Transformation transformation;
 
         public override void PreProcessor(RenderArgs args)
         {
@@ -16,7 +16,7 @@
 
         public override Vector VectorProcessor(Vector vector, RenderArgs args)
         {
-            return transformation(vector);
+            return transformation.Transform(vector);
         }
 
         public override ProcessorMetadata Metadata => new ProcessorMetadata("Project processor", false, EntityType.Debug, EntityType.World);

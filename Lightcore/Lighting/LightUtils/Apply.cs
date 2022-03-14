@@ -5,7 +5,6 @@
     using Lightcore.Textures.Models;
     using Lightcore.Common.Cartesian.Extensions;
     using Lightcore.Common.Cartesian;
-    using Lightcore.Common.Cartesian.Models;
     using Lightcore.Lighting.Models;
 
     public static partial class LightUtils

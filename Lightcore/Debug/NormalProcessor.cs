@@ -1,7 +1,6 @@
 ﻿namespace Lightcore.Debug
 {
     using Lightcore.Common.Cartesian.Extensions;
-    using Lightcore.Common.Cartesian.Models;
     using Lightcore.Common.Models;
     using Lightcore.Processors.Models;
     using System.Collections.Generic;

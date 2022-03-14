@@ -39,7 +39,7 @@
         {
             // Setup rotation
             var angle = (Constants.PI2 / Settings.AnimateMaxSteps) * animateStep;
-            var rotate = CartesianUtils.Rotate(new Vector(0, 1, 0).Unit(), angle);
+            var rotate = CartesianUtils.RotateTransformation(new Vector(0, 1, 0).Unit(), angle);
 
             entities.Add(Shapes.MapTorus(new Vector(0, 0, 0), 50, 30, Map, ColorTextureStore.ShinyTexture, renderMode).Transform(rotate));
 

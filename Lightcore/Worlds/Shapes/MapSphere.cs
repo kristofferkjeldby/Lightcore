@@ -19,7 +19,6 @@
 
             var tStepSize = Constants.PI / map.GetLength(1); 
             var pStepSize = Constants.PI2 / map.GetLength(0);
-            var splitedMap = map.Split();
 
             for (int t = 0; t < map.GetLength(1); t++)
             {
@@ -29,16 +28,16 @@
                 {
                     var p1 = (p == map.GetLength(0) - 1) ? 0 : p + 1;
 
-                    var vector00 = new Vector(radius + splitedMap[p, t].Item1, t * tStepSize, p * pStepSize);
-                    var vector11 = new Vector(radius + splitedMap[p1, t1].Item1, (t + 1) * tStepSize, (p + 1) * pStepSize);
-                    var vector01 = new Vector(radius + splitedMap[p1, t].Item1, t * tStepSize, (p + 1) * pStepSize) ;
-                    var vector10 = new Vector(radius + splitedMap[p, t1].Item1, (t + 1) * tStepSize, p * pStepSize);
+                    var vector00 = new Vector(radius + map[p, t].Item1, t * tStepSize, p * pStepSize);
+                    var vector11 = new Vector(radius + map[p1, t1].Item1, (t + 1) * tStepSize, (p + 1) * pStepSize);
+                    var vector01 = new Vector(radius + map[p1, t].Item1, t * tStepSize, (p + 1) * pStepSize) ;
+                    var vector10 = new Vector(radius + map[p, t1].Item1, (t + 1) * tStepSize, p * pStepSize);
 
                     polygons.Add
                     (
                         new Polygon
                         (
-                            texture(splitedMap[p, t].Item2),
+                            texture(map[p, map.GetLength(1) - 1 - t].Item2),
                             new Vector[]
                             {
                                 vector00,
@@ -52,7 +51,7 @@
                     (
                         new Polygon
                         (
-                            texture(splitedMap[p, t].Item2),
+                            texture(map[p, map.GetLength(1) - 1 - t].Item2),
                             new Vector[]
                             {
                                 vector11,
@@ -72,6 +71,7 @@
                     ),
                 Settings.Origon,
                 ReferenceFrameType.Spherical);
+
             var destination = new ReferenceFrame(Settings.Unit, -origon, ReferenceFrameType.Cartesian);
             var transformation = CommonUtils.ReferenceFrameTransformation(source, destination);
 

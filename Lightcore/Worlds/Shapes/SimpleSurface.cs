@@ -20,7 +20,7 @@
 
             for (int y = 0; y < resolution; y++)
             {
-                for (int x = 0; x < resolution; y++)
+                for (int x = 0; x < resolution; x++)
                 {
                     var guid = Guid.NewGuid();
 

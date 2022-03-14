@@ -19,7 +19,7 @@
             return new SimpleColorTexture(Color, Transparency);
         }
 
-        public override Brush GetBrush(Polygon polygon, PointF[] points)
+        public override Brush GetBrush(Polygon polygon, ref PointF[] points)
         {
             return new SolidBrush(Color.ToColor(Transparency));
         }

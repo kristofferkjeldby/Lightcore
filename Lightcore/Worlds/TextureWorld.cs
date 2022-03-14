@@ -15,12 +15,14 @@
     {
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            var box = Shapes.TextureBox(Color.White.ToVector(), new Vector(-50, -50, 50), new Vector(100, 0, 0), new Vector(0, 100, 0), new Vector(0, 0, -100), 1, ImageTextureStore.TextureBuilder("Checkerboard"));
+            var surface = Shapes.TextureSurface(Color.White.ToVector(), new Vector(-50, -50, 0), new Vector(100, 0, 0), new Vector(0, 100, 0), 10, ImageTextureStore.TextureBuilder("Test"));
 
-            box.Transform(CartesianUtils.Rotate(new Vector(1, 0, 0).Unit(), Constants.PIfouth));
-            box.Transform(CartesianUtils.Rotate(new Vector(1, 1, 0).Unit(), -Constants.PIfouth / 2));
+            //var box = Shapes.TextureBox(Color.White.ToVector(), new Vector(-50, -50, 50), new Vector(100, 0, 0), new Vector(0, 100, 0), new Vector(0, 0, -100), 10, ImageTextureStore.TextureBuilder("Cat"));
 
-            entities.Add(box.Clone());
+            //box.Transform(CartesianUtils.Rotate(new Vector(1, 0, 0).Unit(), Constants.PIfouth / 2));
+            //box.Transform(CartesianUtils.Rotate(new Vector(1, 1, 0).Unit(), (Constants.PI2 / Settings.AnimateMaxSteps) * animateStep));
+
+            entities.Add(surface);
 
             lights.Add
             (

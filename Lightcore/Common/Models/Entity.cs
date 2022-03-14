@@ -1,5 +1,6 @@
 ﻿namespace Lightcore.Common.Models
 {
+    using Lightcore.Common.Models.Transformations;
     using System;
     using System.Linq;
 
@@ -29,9 +30,11 @@
             return this;
         }
 
-        public Entity Transform(Matrix transformation)
+        public Entity Transform(Transformation transformation)
         {
-            return Transform(e => transformation * e);
+            foreach (var polygon in Elements)
+                polygon.Transform(transformation);
+            return this;
         }
 
         public EntityType EntityType { get; set; }

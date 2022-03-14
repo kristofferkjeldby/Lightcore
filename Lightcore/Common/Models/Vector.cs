@@ -1,5 +1,6 @@
 ﻿namespace Lightcore.Common.Models
 {
+    using Lightcore.Common.Models.Transformations;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -65,9 +66,9 @@
             return transformation(this);
         }
 
-        public Vector Transform(Matrix transformation)
+        public Vector Transform(Transformation transformation)
         {
-            return Transform(v => transformation * v);
+            return transformation.Transform(this);
         }
 
         public override bool Equals(object obj)

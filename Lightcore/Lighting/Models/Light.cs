@@ -1,6 +1,7 @@
 ﻿namespace Lightcore.Lighting.Models
 {
     using Lightcore.Common.Models;
+    using Lightcore.Common.Models.Transformations;
     using System;
     using System.Collections.Generic;
 
@@ -22,9 +23,7 @@
 
         public abstract Light Clone();
 
-        public abstract Light Transform(Func<Vector, Vector> transformation);
-
-        public abstract Light Transform(Matrix transformation);
+        public abstract Light Transform(Transformation transformation);
 
         public virtual Vector Position { get; set; }
 

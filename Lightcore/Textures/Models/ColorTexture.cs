@@ -30,7 +30,7 @@
                 ProcessedColor = new Vector(0, 0, 0);
         }
 
-        public override Brush GetBrush(Polygon polygon, PointF[] points)
+        public override Brush GetBrush(Polygon polygon, ref PointF[] points)
         {
             return new SolidBrush(ProcessedColor.ToColor(Transparency));
         }

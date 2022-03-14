@@ -58,6 +58,8 @@
 
         public static int MaxX = 100;
 
-        public static int TextureInterpolation = 2;
+        public static int TextureOverscan = 1;
+
+        public static float TextureOversampling = 0.3f;
     }
 }

@@ -1,37 +1,65 @@
 ﻿namespace Lightcore.Worlds
 {
+    using Lightcore.Common.Cartesian;
     using Lightcore.Common.Models;
     using Lightcore.Lighting.Models;
     using Lightcore.Processors.Models;
     using Lightcore.Textures;
     using Lightcore.Textures.Extensions;
+    using Lightcore.Worlds.Helper;
     using Lightcore.Worlds.Models;
     using System.Collections.Generic;
     using System.Drawing;
 
     public class SphereWorld : WorldBuilder
     {
-        public int Resolution { get; set; }
-
-        public SphereWorld(int resolution = 200) : base()
-        {
-            Resolution = resolution;
-        }
-
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(Shapes.SimpleSphere(Color.Red.ToVector(), new Vector(0, 0, 0), 150, Resolution, ColorTextureStore.ShinyTexture, renderMode));
+            entities.Add(Shapes.SimpleSphere(
+                Color.White.ToVector(),
+                new Vector(-110, 0, 0),
+                50,
+                12,
+                ColorTextureStore.NormalTexture
+            ));
+
+            entities.Add(Shapes.TextureSphere(
+                Color.White.ToVector(),
+                new Vector(0, 0, 0),
+                50,
+                12,
+                ImageTextureStore.TextureBuilder("Earth")
+            ));
+
+            var bitmap = ImageTextureStore.GetImage("Earth");
+
+            var map = MapHelper.CreateMap(
+                bitmap.Width,
+                bitmap.Height,
+                (x, y) => 0,
+                (x, y) => bitmap.GetPixel(x, y).ToVector()
+            );
+
+            entities.Add(Shapes.MapSphere(
+                new Vector(110, 0, 0),
+                50,
+                map,
+                ColorTextureStore.NormalTexture
+            ));
+
+            var transformation = CartesianUtils.RotateTransformation(new Vector(0, 1, 0), Constants.PI);
+
+            entities.ForEach(p => p.Transform(transformation));
 
             lights.Add
             (
                 new AmbientLight
                 (
                     Color.White.ToVector(),
-                    new Vector(100, 100, 400),
+                    new Vector(0, 0, 400),
                     400
                 )
             );
-
         }
     }
 }

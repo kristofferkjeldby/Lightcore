@@ -82,13 +82,13 @@
                         switch (points.Length)
                         {
                             case 2:
-                                d.Graphics.DrawLine(new Pen(polygons[i].Texture.GetBrush(polygons[i], points)), points[0], points[1]);
+                                d.Graphics.DrawLine(new Pen(polygons[i].Texture.GetBrush(polygons[i], ref points)), points[0], points[1]);
                                 break;
                             case 3:
                             case 4:
                                 if (polygons[i].Texture is IImageTexture)
                                     args.Status($"{Metadata.Name}: Applying texture to polygon {k++} of {texturePolygonsCount} ...");
-                                d.Graphics.FillPolygon(polygons[i].Texture.GetBrush(polygons[i], points), points);
+                                d.Graphics.FillPolygon(polygons[i].Texture.GetBrush(polygons[i], ref points), points);
                                 break;
                         }
                     }

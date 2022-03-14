@@ -52,5 +52,19 @@
                 CommonUtils.Limit(Angle.ToCyclicAngle((float)Math.Atan2(vector[Axis.Y], vector[Axis.X])), 0, Constants.PI2)
             );
         }
+
+        public static Vector ToHomogeneous(this Vector vector, float plane)
+        {
+            var elements = vector.Elements.ToList();
+            elements.Add(1);
+            return new Vector(elements, vector.Id);
+        }
+
+        public static Vector FromHomogeneous(this Vector vector)
+        {
+            var elements = vector.Elements.Take(vector.N - 1).ToList();
+            var plane = vector.Elements.Last();
+            return new Vector(elements.Select(e => e / plane), vector.Id);
+        }
     }
 }
