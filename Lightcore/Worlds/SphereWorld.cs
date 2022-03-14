@@ -19,7 +19,7 @@
                 Color.White.ToVector(),
                 new Vector(-110, 0, 0),
                 50,
-                12,
+                50,
                 ColorTextureStore.NormalTexture
             ));
 
@@ -27,7 +27,7 @@
                 Color.White.ToVector(),
                 new Vector(0, 0, 0),
                 50,
-                12,
+                50,
                 ImageTextureStore.TextureBuilder("Earth")
             ));
 

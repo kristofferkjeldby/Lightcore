@@ -1,3 +1,4 @@
+
 ## Lightcore
 
 Lightcore is a 3D engine build in pure C#, without any frameworks. My motivation for writing Lightcore was not to make something strictly usable, as the lack of hardware acceleration makes Lightcore inherently slow. It was however to explore the math behind 3D engines and make it available in a form that most C# developers would understand.
@@ -150,5 +151,8 @@ Lightcore has helper methods for all the standard linear transformations you wil
 ```
 
 **Textures**
+Lightcore support simple forward texture mapping as well as combined color and displacement maps:
 
+![Textures](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/Texture.png)
 
+The color/displacement maps (left) produces better results, but texture mapping is way faster to render.
