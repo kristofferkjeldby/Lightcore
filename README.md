@@ -151,6 +151,7 @@ Lightcore has helper methods for all the standard linear transformations you wil
 ```
 
 **Textures**
+
 Lightcore support simple forward texture mapping as well as combined color and displacement maps:
 
 ![Textures](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/Texture.png)
