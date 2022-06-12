@@ -15,19 +15,12 @@
     {
         public override void Create(List<Entity> entities, List<Light> lights, RenderMode renderMode, int animateStep = 0)
         {
-            entities.Add(Shapes.SimpleSphere(
-                Color.White.ToVector(),
-                new Vector(-110, 0, 0),
-                50,
-                50,
-                ColorTextureStore.NormalTexture
-            ));
 
             entities.Add(Shapes.TextureSphere(
                 Color.White.ToVector(),
-                new Vector(0, 0, 0),
+                new Vector(-55, 0, 0),
                 50,
-                50,
+                20,
                 ImageTextureStore.TextureBuilder("Earth")
             ));
 
@@ -41,7 +34,7 @@
             );
 
             entities.Add(Shapes.MapSphere(
-                new Vector(110, 0, 0),
+                new Vector(55, 0, 0),
                 50,
                 map,
                 ColorTextureStore.NormalTexture

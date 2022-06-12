@@ -3,7 +3,6 @@
     using Lightcore.Common.Models;
     using Lightcore.Debug;
     using Lightcore.Lighting;
-    using Lightcore.Textures;
     using Lightcore.View;
     using Lightcore.Viewer;
     using Lightcore.Worlds;

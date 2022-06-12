@@ -135,12 +135,12 @@ The benefit here is still speed, the drawback are memory and also that the previ
 
 **Transformations**
 
-Lightcore has helper methods for all the standard linear transformations you will need to move objects around:
+Lightcore has helper methods for all the standard affine transformations you will need to move objects around, scale and rotate. Ligthcore also support perspective transformation using homogenous coordinates (see Lightcore.Common.Models.Transformations for the different type of supported transformations):
 
 ```
 	var box = Shapes.SimpleBox(Color.Red.ToVector(), new Vector(0, 0, 0), new Vector(100, 0, 0), new Vector(0, 100, 0), new Vector(0, 0, 100), 40, ColorTextureStore.ShinyTexture);
 
-	// Move box
+	// Move box (translate transformation)
 	box.Transform(v => v += new Vector(-50, -50, 0));
 
 	// Scale box to 0.8 size
@@ -156,4 +156,4 @@ Lightcore support simple forward texture mapping as well as combined color and d
 
 ![Textures](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/Texture.png)
 
-The color/displacement maps (left) produces better results, but texture mapping is way faster to render.
+The color/displacement maps (left) can produce beautiful results for round objects, but texture mapping is way faster to render for flat surfaces.
