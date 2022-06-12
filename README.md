@@ -154,6 +154,6 @@ Lightcore has helper methods for all the standard affine transformations you wil
 
 Lightcore support simple forward texture mapping as well as combined color and displacement maps:
 
-![Textures](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/Texture.png)
+![Textures](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/Earth.png)
 
 The color/displacement maps (left) can produce beautiful results for round objects, but texture mapping is way faster to render for flat surfaces.
