@@ -51,9 +51,9 @@ You will need to register your world in Lightcore.cs and then start the applicat
 
 ![Test world](https://raw.githubusercontent.com/kristofferkjeldby/Lightcore/master/Examples/Testworld.png)
 
-**The coordinate system and perspective settings**
+**The main coordinate system and perspective settings**
 
-The coordinate system is placed in the center of the screen, with the x axis pointing to the right, the y axis pointing to the top, and the z-axis pointing _out of the screen_. 
+The main coordinate system (Settings.WorldReferenceFrame) is placed in the center of the screen, with the x axis pointing to the right, the y axis pointing to the top, and the z-axis pointing _out of the screen_. 
 
 The viewer (camera) is placed at (0, 0, 200) looking into the screen (Settings.CameraRererenceFrame). 
 
@@ -62,6 +62,91 @@ The scale is set to 100 (Settings.MaxX). This means that the x axis goes from -1
 Hence, if you screen is 40 cm wide, and you sit 60 cm from your screen a 100x100x100 box placed in origin would look like a 40 cubic centimeter box, placed 80 cm behind your screen. 
 
 The DistanceFromScreen settings might be a little tricky to understand: If your imaginary viewer is moved closer to the screen, objects in the imaginary world is getting smaller. This is because the angle visible though the screen increases, meaning that objects gets smaller faster with distance.
+
+**Other coordinate systems**
+
+Internally, Lightcore users ordinary three dimensional Cartesian coordinates, and both the WorldReferenceFrame and the CameraRererenceFrame are three dimensional Cartesian coordinate systems. However, for some operations, it might be helpful to use other coordinate systems (spherical and homogenous), and then transform the coordinates into the WorldReferenceFrame. An example is when defining a entity like a sphere:
+
+```
+
+    public partial class Shapes
+    {
+        public static Entity SimpleSphere(Vector color, Vector origon, float radius, int segments, Func<Vector, Texture> texture, RenderMode renderMode = null)
+        {
+            if (renderMode?.Preview ?? false)
+                segments = Settings.PreviewResolution;
+
+            var polygons = new List<Polygon>();
+
+            var tStepSize = Constants.PI / segments; 
+            var pStepSize = Constants.PI2 / segments;
+
+            for (int t = 0; t < segments; t++)
+            {
+                var t1 = t + 1;
+
+                for (int p = 0; p < segments; p++)
+                {
+                    var p1 = p + 1;
+
+                    var vector00 = new Vector(radius, t * tStepSize, p * pStepSize);
+                    var vector11 = new Vector(radius, t1 * tStepSize, p1 * pStepSize);
+                    var vector01 = new Vector(radius, t * tStepSize, p1 * pStepSize) ;
+                    var vector10 = new Vector(radius, t1 * tStepSize, p * pStepSize);
+
+                    polygons.Add
+                    (
+                        new Polygon
+                        (
+                            texture(color),
+                            new Vector[]
+                            {
+                                vector00,
+                                vector10,
+                                vector01
+                            }
+                        )
+                    );
+
+                    polygons.Add
+                    (
+                        new Polygon
+                        (
+                            texture(color),
+                            new Vector[]
+                            {
+                                vector11,
+                                vector01,
+                                vector10
+
+                            }
+                        )
+                    );
+                }
+            }
+
+            var source = new ReferenceFrame(
+                new Matrix(
+                    new Vector(0, 0, 1),
+                    new Vector(1, 0, 0),
+                    new Vector(0, 1, 0)
+                    ),
+                Settings.Origon,
+                ReferenceFrameType.Spherical);
+
+            var destination = new ReferenceFrame(Settings.Unit, -origon, ReferenceFrameType.Cartesian);
+            var transformation = CommonUtils.ReferenceFrameTransformation(source, destination);
+
+            polygons.ForEach(polygon => polygon.Transform(transformation));
+
+            return new Entity(EntityType.World, polygons.ToArray());
+        }
+    }
+}
+```
+
+The sphere is defined in a spherical coordinate system (r, θ, φ). You will notice that the unit vectors of this reference frame has been swapped (z, x, y), so that the the top of the sphere (r, 0, 0), which for a unit-sphere would normally correspond to (0, 0, 1) is aligned with the y-axis (to avoid having the top of the sphere facing the viewer), and the front-facing side of the sphere (r, pi/2, 0), which would normally be (1, 0, 0) for a unit-sphere, is pointing in the z direction, towards the viewer. The reference frame is simply place in origon (0, 0, 0), and then transformed to a Cartesian reference frame with the origon oppositite the center of the sphere (-center), effectively transposing the sphere to the desired center. 
+
 
 **The processor stacks**
 
