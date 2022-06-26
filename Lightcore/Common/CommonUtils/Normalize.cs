@@ -9,10 +9,10 @@
         public static Vector Normalize(ReferenceFrame source, Vector vector)
         {
             if (source.ReferenceFrameType == ReferenceFrameType.Cartesian)
-                return (vector * source.Active) + source.Origon;
+                return (vector * source.Base.Transpose()) + source.Origon;
 
             if (source.ReferenceFrameType == ReferenceFrameType.Spherical)
-                    return ((vector.ToCartesian() * source.Active) + source.Origon).ToSpherical();
+                    return ((vector.ToCartesian() * source.Base.Transpose()) + source.Origon).ToSpherical();
 
             throw new Exception();
         }

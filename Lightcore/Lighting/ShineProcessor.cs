@@ -16,7 +16,7 @@
 
         public override void PreProcessor(RenderArgs args)
         {
-            viewer = args.Camera.ReferenceFrame.Origon - Settings.ViewDistance * args.Camera.ReferenceFrame.Passive[Axis.Z];
+            viewer = args.Camera.ReferenceFrame.Origon - Settings.ViewDistance * args.Camera.ReferenceFrame.Base[Axis.Z];
             reflections = args.World.Lights.Where(light => light.Generation != 0).GroupBy(light => light.PolygonId).ToDictionary(group => group.Key, group => group.ToList());
         }
 

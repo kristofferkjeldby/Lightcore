@@ -14,25 +14,25 @@
             if (source.ReferenceFrameType == ReferenceFrameType.Cartesian && destination.ReferenceFrameType == ReferenceFrameType.Cartesian)
                 return new FuncTransformation((Vector vector) =>
                 {
-                    return (Normalize(source, vector) - destination.Origon) * destination.Passive;
+                    return (Normalize(source, vector) - destination.Origon) * destination.Base;
                 });
 
             if (source.ReferenceFrameType == ReferenceFrameType.Cartesian && destination.ReferenceFrameType == ReferenceFrameType.Spherical)
                 return new FuncTransformation((Vector vector) =>
                 {
-                    return (Normalize(source, vector) - destination.Origon * destination.Passive).ToSpherical();
+                    return ((Normalize(source, vector) - destination.Origon) * destination.Base).ToSpherical();
                 });
 
             if (source.ReferenceFrameType == ReferenceFrameType.Spherical && destination.ReferenceFrameType == ReferenceFrameType.Cartesian)
                 return new FuncTransformation((Vector vector) =>
                 {
-                    return (Normalize(source, vector).ToCartesian() - destination.Origon * destination.Passive);
+                    return (Normalize(source, vector).ToCartesian() - destination.Origon) * destination.Base;
                 });
 
             if (source.ReferenceFrameType == ReferenceFrameType.Spherical && destination.ReferenceFrameType == ReferenceFrameType.Spherical)
                 return new FuncTransformation((Vector vector) =>
                 {
-                    return (Normalize(source, vector).ToCartesian() - destination.Origon * destination.Passive).ToSpherical();
+                    return ((Normalize(source, vector).ToCartesian() - destination.Origon) * destination.Base).ToSpherical();
                 });
 
             throw new Exception();

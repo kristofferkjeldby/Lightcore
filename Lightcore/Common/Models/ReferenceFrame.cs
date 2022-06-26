@@ -2,18 +2,16 @@
 {
     public class ReferenceFrame
     {
-        public ReferenceFrame(Matrix unit, Vector origon, ReferenceFrameType referenceFrameType = ReferenceFrameType.Cartesian)
+        public ReferenceFrame(Matrix @base, Vector origon, ReferenceFrameType referenceFrameType = ReferenceFrameType.Cartesian)
         {
             ReferenceFrameType = referenceFrameType;
-            Passive = unit;
+            Base = @base;
             Origon = origon;
         }
 
         public ReferenceFrameType ReferenceFrameType { get; }
 
-        public Matrix Passive { get; set; }
-
-        public Matrix Active => Passive.Transpose();
+        public Matrix Base { get; set; }
 
         public Vector Origon { get; set; }
     }

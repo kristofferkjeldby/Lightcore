@@ -42,13 +42,13 @@
 
         public void Move(int axis, int direction)
         {
-            Camera.ReferenceFrame.Origon = Camera.ReferenceFrame.Origon + direction * Camera.ReferenceFrame.Active[axis];
+            Camera.ReferenceFrame.Origon = Camera.ReferenceFrame.Origon + direction * Camera.ReferenceFrame.Base.Transpose()[axis];
             ProcessPreview(0);
         }
 
         public void Rotate(int axis, int direction)
         {
-            Camera.ReferenceFrame.Passive = CartesianUtils.RotateTransformation(Camera.ReferenceFrame.Passive[axis], direction * Settings.R).Matrix * Camera.ReferenceFrame.Passive;
+            Camera.ReferenceFrame.Base = CartesianUtils.RotateTransformation(Camera.ReferenceFrame.Base[axis], direction * Settings.R).Matrix * Camera.ReferenceFrame.Base;
             ProcessPreview(0);
         }
 
